@@ -46,7 +46,7 @@ function HeaderPublic() {
           </ul>
           <div className="col-span-3 flex justify-end items-center text-[1.4rem]">
             <div className="hidden justify-between items-center gap-5 mx-8 lg:flex">
-              <Link className="text-sm font-bold" to="/login-account">
+              <Link className="text-sm font-bold" to="/login">
                 Login
               </Link>
               <Link

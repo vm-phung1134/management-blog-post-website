@@ -3,15 +3,20 @@ import { memo } from "react";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 
+interface ILogin{
+  email: string,
+  password: string
+}
+
 function Login() {
   // DEFINE
-  const initialValues = {
+  const initialValues: ILogin = {
     email: "",
     password: "",
   };
-  const submitForm = (values) => {};
-  const validate = (values) => {
-    let errors = {};
+  const submitForm = () => {};
+  const validate = (values: ILogin) => {
+    let errors: any = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     // email
     if (!values.email) {
@@ -69,6 +74,7 @@ function Login() {
               <form className="mt-6 text-sm" onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label htmlFor="email">
+                    Email address
                     <input
                       type="email"
                       name="email"
@@ -77,8 +83,7 @@ function Login() {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       className="block w-full px-4 py-2 mt-3 text-black bg-white border rounded-md  focus:outline-none "
-                    />
-                    Email address
+                    /> 
                   </label>
                   {errors.email && touched.email && (
                     <span className="text-red-500 text-[13px]">
@@ -88,6 +93,7 @@ function Login() {
                 </div>
                 <div className="mb-4">
                   <label htmlFor="password">
+                    Password
                     <input
                       name="password"
                       type="password"
@@ -97,7 +103,6 @@ function Login() {
                       onBlur={handleBlur}
                       className="block w-full px-4 py-2 mt-3 text-black bg-white border rounded-md  focus:outline-none"
                     />
-                    Password
                   </label>
                   {errors.password && touched.password && (
                     <span className="text-red-500 text-[13px]">
@@ -119,7 +124,7 @@ function Login() {
                       Show password
                     </label>
                   </div>
-                  <Link className="text-[13px] text-green-500 hover:underline">
+                  <Link to="/" className="text-[13px] text-green-500 hover:underline">
                     Forget password?
                   </Link>
                 </div>
