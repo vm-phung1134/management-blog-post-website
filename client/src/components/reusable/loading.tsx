@@ -1,7 +1,7 @@
 function Loading() {
   return (
     <>
-      <div className="loading flex flex-col">
+      <div className="loadingx flex flex-col">
         <img
           src="https://blog.hubspot.com/hubfs/assets/hubspot.com/web-team/WBZ/Blog%202021/Images/Logos/HubSpot%20Logo.svg"
           className="py-2"

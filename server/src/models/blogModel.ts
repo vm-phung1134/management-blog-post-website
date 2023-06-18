@@ -1,14 +1,5 @@
 import * as admin from 'firebase-admin'
-interface IBlog {
-    id: string,
-    title: string,
-    //description: string,
-    //image: string,
-    //release: Date,
-    //author: User,
-    //tags: string[],
-    //isFavorite: boolean,
-}
+import { IBlog } from './interface';
 
 export class BlogModel{
     private static db = admin.firestore();

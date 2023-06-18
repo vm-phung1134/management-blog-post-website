@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderPublic from "../layout/header";
 import FooterPublic from "../layout/footer";
 import Carousel from "../layout/carousel";
@@ -7,12 +7,26 @@ import Loading from "../reusable/loading";
 import LineTitle from "../reusable/line_title";
 import CardBlog from "../reusable/card_blog";
 import { MOCK_BLOG } from "../../data/mockData";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { getBlogs } from "../../redux/reducers/blogReducer";
 
 function HomePage() {
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
-  setTimeout(() => {
-    setLoading(false);
-  }, 3000);
+  const { blogs, isLoading, error } = useAppSelector(
+    (state) => state.blogReducer
+  );
+  useEffect(() => {
+    dispatch(getBlogs());
+    const timeoutLoading = setTimeout(() => {
+      setLoading(false);
+    }, 1300);
+    return () => {
+      clearTimeout(timeoutLoading);
+    };
+  }, [dispatch]);
+
+  console.log(blogs, isLoading, error);
   return (
     <>
       {loading === true ? (

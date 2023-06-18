@@ -1,5 +1,5 @@
 export class Blog {
-  id: number | undefined;
+  id: string | undefined;
   title: string = "";
   typeBlog: string = "";
   srcImg: string = "";
