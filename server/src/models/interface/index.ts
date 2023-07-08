@@ -2,6 +2,7 @@ export interface IUser {
     id: string,
     email: string,
     name: string,
+    position?: string,
     profilePic: string
 }
 
@@ -14,7 +15,7 @@ export interface IBlog {
     author: IUser,
     typeBlog: string[],
     isFavorite?: boolean,
-    like: number,
+    like?: number,
     comments?: object[]
 }
 

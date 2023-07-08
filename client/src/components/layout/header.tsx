@@ -104,7 +104,7 @@ function HeaderPublic() {
                   className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                 >
                   <li>
-                    <Link to="#">Your Dashboard</Link>
+                    <Link to="/personal-dashboard">Dashboard</Link>
                   </li>
                   <li>
                     <Link to="#">Manager</Link>
