@@ -2,6 +2,7 @@ import { IUser } from "./interface_user";
 
 export interface IBlog {
   title: string;
+  img: string;
   releaseDate: string;
   author: IUser;  
   description: string;
@@ -16,5 +17,5 @@ export interface IBlog {
 interface IBlogContent {
   topic: string;
   plot: string;
-  srcImg: { url: string }[];
+  srcImg: string;
 }
