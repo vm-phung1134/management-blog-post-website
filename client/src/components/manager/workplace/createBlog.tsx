@@ -9,6 +9,8 @@ import React from "react";
 import { IBlog } from "../../../data/Interface/interface_blog";
 import { IUser } from "../../../data/Interface/interface_user";
 import Cookies from "js-cookie";
+import { useAppDispatch } from "../../../redux/store";
+import { createBlog } from "../../../redux/reducers/blogReducer";
 
 interface IInputProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -78,6 +80,7 @@ export const AreaForm = ({
 };
 
 function CreateBlog() {
+  const dispatch = useAppDispatch();
   const user: IUser = {
     email: Cookies.get("email"),
     name: Cookies.get("userName"),
@@ -111,7 +114,8 @@ function CreateBlog() {
     comments: 0,
   };
   const submitForm = (values: IBlog) => {
-    console.log(values);
+    dispatch(createBlog(values));
+    console.log("submit thành công")
   };
   const validate = () => {};
 
@@ -162,8 +166,8 @@ function CreateBlog() {
                     values={values}
                   />
                 </div>
-                <div className="col-span-1">
-                  <div className="flex max-h-full text-justify py-[150px] lg:py-[80px] flex-col justify-start items-center text-sm">
+                <div className="col-span-1 h-screen px-3 bg-white rounded-lg shadow-lg overflow-y-scroll my-[150px] lg:my-[80px]">
+                  <div className="flex max-h-full text-justify  flex-col justify-start items-center text-sm">
                     <div className="relative mb-5">
                       <figure>
                         <img
@@ -174,6 +178,14 @@ function CreateBlog() {
                       </figure>
                       <div className="absolute top-0 left-0 right-1/4 bottom-0 text-white bg-black/60">
                         <div className="flex flex-col items-start gap-3 relative top-1/3 px-5">
+                          <div className="flex gap-3 text-[12px]">
+                            <p>
+                              <i className="fas fa-calendar-days"></i> July 18,
+                              2023
+                            </p>
+                            -<p>3 Hours before</p>
+                          </div>
+
                           <p className="text-3xl font-bold w-full">
                             {values.title}
                           </p>

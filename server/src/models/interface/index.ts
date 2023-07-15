@@ -8,21 +8,20 @@ export interface IUser {
 
 export interface IBlog {
     id: string,
-    title: string,
-    plot: string,
-    srcImg: string,
-    release: Date,
-    author: IUser,
-    typeBlog: string[],
-    isFavorite?: boolean,
-    like?: number,
-    comments?: object[]
-}
-
-export interface IComment{
-    author: IUser,
-    date: Date,
-    content: string,
-    like?: number,
-    dislike?: number,
-}
+    title: string;
+    img: string;
+    releaseDate: string;
+    author: IUser;  
+    description: string;
+    contents: IBlogContent[];
+    tags: string[];
+    likes: number;
+    views: number;
+    comments: number;
+  }
+  
+  interface IBlogContent {
+    topic: string;
+    plot: string;
+    srcImg: string;
+  }

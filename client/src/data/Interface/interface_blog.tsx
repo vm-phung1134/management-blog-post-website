@@ -13,7 +13,6 @@ export interface IBlog {
   comments: number;
 }
 
-
 interface IBlogContent {
   topic: string;
   plot: string;
