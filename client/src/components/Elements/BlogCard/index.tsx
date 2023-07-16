@@ -1,10 +1,6 @@
-import { Blog } from "../../data/model/blogModel";
+import { IBlogCardProps } from "./type";
 
-interface ICard {
-  card: Blog
-}
-
-function CardBlog({card}: ICard) {
+function CardBlog({ card }: IBlogCardProps) {
   return (
     <>
       <div key={card.id} className="flex flex-col gap-y-[10px] items-center ">

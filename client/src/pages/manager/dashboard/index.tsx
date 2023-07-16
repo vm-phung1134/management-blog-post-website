@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
-import HeaderPublic from "../../layout/header";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Dashboard() {
   return (
     <>
-      <HeaderPublic />
       <div className="mt-[80px] p-10 bg-slate-100 h-screen">
         <div className="flex justify-center w-full">
           <ul className="flex gap-10 text-sm font-medium">
@@ -250,7 +248,9 @@ function Dashboard() {
                   </button>
                 </div>
               </div>
-              <button className="text-center font-medium py-2 text-sm">More ...</button>
+              <button className="text-center font-medium py-2 text-sm">
+                More ...
+              </button>
             </div>
           </div>
           <div className="col-span-1">
@@ -261,16 +261,27 @@ function Dashboard() {
               </div>
 
               <div className="flex justify-between p-4 text-sm">
-                  <div className="flex flex-col">
-                    <h3 className="font-medium truncate">The Creative Exchange</h3>
-                    <small className="font-medium">Travel, Experience</small>
-                    <small>Published: May 25, 2023</small>
-                  </div>
+                <div className="flex flex-col">
+                  <h3 className="font-medium truncate">
+                    The Creative Exchange
+                  </h3>
+                  <small className="font-medium">Travel, Experience</small>
+                  <small>Published: May 25, 2023</small>
+                </div>
                 <div className="flex flex-col justify-between">
                   <ul className="flex gap-2 text-[12px]">
-                    <li><FontAwesomeIcon icon={["far", "heart"]} /> <span className="font-medium">1.034</span></li>
-                    <li><FontAwesomeIcon icon={["far", "comment"]} /> <span className="font-medium">10</span></li>
-                    <li><FontAwesomeIcon icon={["far", "share-square"]} /> <span className="font-medium">3</span></li>
+                    <li>
+                      <FontAwesomeIcon icon={["far", "heart"]} />{" "}
+                      <span className="font-medium">1.034</span>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={["far", "comment"]} />{" "}
+                      <span className="font-medium">10</span>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={["far", "share-square"]} />{" "}
+                      <span className="font-medium">3</span>
+                    </li>
                   </ul>
                   <button className="text-[#f05129] text-[13px] text-end">
                     View
@@ -278,16 +289,27 @@ function Dashboard() {
                 </div>
               </div>
               <div className="flex justify-between p-4 text-sm">
-                  <div className="flex flex-col">
-                    <h3 className="font-medium truncate">The Creative Exchange</h3>
-                    <small className="font-medium">Travel, Experience</small>
-                    <small>Published: May 25, 2023</small>
-                  </div>
+                <div className="flex flex-col">
+                  <h3 className="font-medium truncate">
+                    The Creative Exchange
+                  </h3>
+                  <small className="font-medium">Travel, Experience</small>
+                  <small>Published: May 25, 2023</small>
+                </div>
                 <div className="flex flex-col justify-between">
                   <ul className="flex gap-2 text-[12px]">
-                    <li><FontAwesomeIcon icon={["far", "heart"]} /> <span className="font-medium">1.034</span></li>
-                    <li><FontAwesomeIcon icon={["far", "comment"]} /> <span className="font-medium">10</span></li>
-                    <li><FontAwesomeIcon icon={["far", "share-square"]} /> <span className="font-medium">3</span></li>
+                    <li>
+                      <FontAwesomeIcon icon={["far", "heart"]} />{" "}
+                      <span className="font-medium">1.034</span>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={["far", "comment"]} />{" "}
+                      <span className="font-medium">10</span>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={["far", "share-square"]} />{" "}
+                      <span className="font-medium">3</span>
+                    </li>
                   </ul>
                   <button className="text-[#f05129] text-[13px] text-end">
                     View
@@ -295,16 +317,27 @@ function Dashboard() {
                 </div>
               </div>
               <div className="flex justify-between p-4 text-sm">
-                  <div className="flex flex-col">
-                    <h3 className="font-medium truncate">The Creative Exchange</h3>
-                    <small className="font-medium">Travel, Experience</small>
-                    <small>Published: May 25, 2023</small>
-                  </div>
+                <div className="flex flex-col">
+                  <h3 className="font-medium truncate">
+                    The Creative Exchange
+                  </h3>
+                  <small className="font-medium">Travel, Experience</small>
+                  <small>Published: May 25, 2023</small>
+                </div>
                 <div className="flex flex-col justify-between">
                   <ul className="flex gap-2 text-[12px]">
-                    <li><FontAwesomeIcon icon={["far", "heart"]} /> <span className="font-medium">1.034</span></li>
-                    <li><FontAwesomeIcon icon={["far", "comment"]} /> <span className="font-medium">10</span></li>
-                    <li><FontAwesomeIcon icon={["far", "share-square"]} /> <span className="font-medium">3</span></li>
+                    <li>
+                      <FontAwesomeIcon icon={["far", "heart"]} />{" "}
+                      <span className="font-medium">1.034</span>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={["far", "comment"]} />{" "}
+                      <span className="font-medium">10</span>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={["far", "share-square"]} />{" "}
+                      <span className="font-medium">3</span>
+                    </li>
                   </ul>
                   <button className="text-[#f05129] text-[13px] text-end">
                     View
@@ -312,23 +345,36 @@ function Dashboard() {
                 </div>
               </div>
               <div className="flex justify-between p-4 text-sm">
-                  <div className="flex flex-col">
-                    <h3 className="font-medium truncate">The Creative Exchange</h3>
-                    <small className="font-medium">Travel, Experience</small>
-                    <small>Published: May 25, 2023</small>
-                  </div>
+                <div className="flex flex-col">
+                  <h3 className="font-medium truncate">
+                    The Creative Exchange
+                  </h3>
+                  <small className="font-medium">Travel, Experience</small>
+                  <small>Published: May 25, 2023</small>
+                </div>
                 <div className="flex flex-col justify-between">
                   <ul className="flex gap-2 text-[12px]">
-                    <li><FontAwesomeIcon icon={["far", "heart"]} /> <span className="font-medium">1.034</span></li>
-                    <li><FontAwesomeIcon icon={["far", "comment"]} /> <span className="font-medium">10</span></li>
-                    <li><FontAwesomeIcon icon={["far", "share-square"]} /> <span className="font-medium">3</span></li>
+                    <li>
+                      <FontAwesomeIcon icon={["far", "heart"]} />{" "}
+                      <span className="font-medium">1.034</span>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={["far", "comment"]} />{" "}
+                      <span className="font-medium">10</span>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={["far", "share-square"]} />{" "}
+                      <span className="font-medium">3</span>
+                    </li>
                   </ul>
                   <button className="text-[#f05129] text-[13px] text-end">
                     View
                   </button>
                 </div>
               </div>
-               <button className="text-center font-medium py-2 text-sm">More ...</button>
+              <button className="text-center font-medium py-2 text-sm">
+                More ...
+              </button>
             </div>
           </div>
         </div>

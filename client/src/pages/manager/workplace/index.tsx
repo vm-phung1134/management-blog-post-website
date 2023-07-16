@@ -1,11 +1,8 @@
-import { Link} from "react-router-dom";
-import HeaderPublic from "../../layout/header";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 function UserBlogs() {
   return (
     <>
-      <HeaderPublic />
       <div className="mt-[80px] p-10 bg-slate-100 min-h-screen max-h-full">
         <div className="flex justify-center w-full">
           <ul className="flex gap-10 text-sm font-medium">
@@ -55,10 +52,10 @@ function UserBlogs() {
               </li>
             </ul>
             <Link to="create-new-blog">
-            <button className="font-medium text-sm px-5 flex gap-3 items-center py-2 bg-orange-600 rounded-lg text-white">
-              <FontAwesomeIcon icon={["fas", "check"]} />
-              <p>Create New Blog</p>
-            </button>
+              <button className="font-medium text-sm px-5 flex gap-3 items-center py-2 bg-orange-600 rounded-lg text-white">
+                <FontAwesomeIcon icon={["fas", "check"]} />
+                <p>Create New Blog</p>
+              </button>
             </Link>
           </div>
         </div>

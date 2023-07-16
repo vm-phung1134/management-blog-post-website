@@ -1,5 +1,5 @@
 import * as admin from 'firebase-admin'
-import { IBlog } from './interface';
+import { IBlog } from '../interface';
 
 export class BlogModel{
     private static db = admin.firestore();

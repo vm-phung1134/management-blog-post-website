@@ -1,17 +1,9 @@
 import { Link } from "react-router-dom";
-import { AreaForm, InputForm } from "./createBlog";
+import { AreaForm, InputForm } from "../../../pages/manager/workplace/create-blog";
 import {memo} from "react"
-import { IBlog } from "../../../data/Interface/interface_blog";
+import { ICreateBlogFormProps } from "./type";
 
-
-interface ICreateBlogForm{
-  values: IBlog,
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
-  handleSubmit: () => void;
-}
-
-function CreateBlogForm(props: ICreateBlogForm) {
+function CreateBlogForm(props: ICreateBlogFormProps) {
   const {handleBlur, handleSubmit, handleChange, values} = props;
   return (
     <>

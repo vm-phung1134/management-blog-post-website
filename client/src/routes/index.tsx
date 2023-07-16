@@ -1,15 +1,10 @@
-import InfoBlog from "../components/post";
-import HomePage from "../components/home";
-import Login from "../components/login";
-import Dashboard from "../components/manager/dashboard";
-import UserBlogs from "../components/manager/workplace/userBlogs";
-import CreateBlog from "../components/manager/workplace/createBlog";
+import InfoBlog from "../pages/blog-detail";
+import HomePage from "../pages/home";
+import Dashboard from "../pages/manager/dashboard";
+import UserBlogs from "../pages/manager/workplace";
+import CreateBlog from "../pages/manager/workplace/create-blog";
 
 const publicRoutes = [
-  {
-    path: `/login`,
-    component: Login,
-  },
   {
     path: `/`,
     component: HomePage,

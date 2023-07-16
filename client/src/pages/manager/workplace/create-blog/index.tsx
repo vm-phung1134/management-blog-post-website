@@ -1,34 +1,15 @@
 import { Link } from "react-router-dom";
-import HeaderPublic from "../../layout/header";
-import LineTitle from "../../reusable/line_title";
-import CreateBlogForm from "./createBlogForm";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CreateBlogForm from "../../../../components/Form/CreateBlog";
 import { Formik } from "formik";
 import "react-toastify/dist/ReactToastify.css";
 import React from "react";
-import { IBlog } from "../../../data/Interface/interface_blog";
-import { IUser } from "../../../data/Interface/interface_user";
+import { IBlog } from "../../../../Interface/blog";
+import { IUser } from "../../../../Interface/auth";
 import Cookies from "js-cookie";
-import { useAppDispatch } from "../../../redux/store";
-import { createBlog } from "../../../redux/reducers/blogReducer";
-
-interface IInputProps {
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
-  values: string;
-  label: string;
-  name: string;
-  disabled?: boolean | undefined;
-}
-
-interface IAreaProps {
-  handleChange: any;
-  handleBlur: any;
-  values: string;
-  label: string;
-  name: string;
-  rows: string;
-}
+import { useAppDispatch } from "../../../../redux/stores";
+import LineTitle from "../../../../components/Elements/LineUnderTitle";
+import { createBlog } from "../../../../redux/reducers/blog/api";
+import { IAreaProps, IInputProps } from "./type";
 
 export const InputForm = ({
   handleChange,
@@ -136,7 +117,6 @@ function CreateBlog() {
         } = formik;
         return (
           <>
-            <HeaderPublic />
             <div className="mt-[80px] p-10 bg-slate-100 min-h-screen max-h-full">
               <div className="flex justify-center w-full">
                 <ul className="flex gap-10 text-sm font-medium">

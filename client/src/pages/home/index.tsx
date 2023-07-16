@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import HeaderPublic from "../layout/header";
-import FooterPublic from "../layout/footer";
-import Carousel from "../layout/carousel";
-import ButtonViewMore from "../reusable/btn_more";
-import Loading from "../reusable/loading";
-import LineTitle from "../reusable/line_title";
-import CardBlog from "../reusable/card_blog";
 import { MOCK_BLOG } from "../../data/mockData";
-import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { getBlogs } from "../../redux/reducers/blogReducer";
+import { useAppDispatch, useAppSelector } from "../../redux/stores";
+import { getBlogs } from "../../redux/reducers/blog/api";
+import LineTitle from "../../components/Elements/LineUnderTitle";
+import ButtonViewMore from "../../components/Elements/ButtonViewMore";
+import CardBlog from "../../components/Elements/BlogCard";
+import Spinner from "../../components/Elements/Spinner";
+import Carousel from "../../components/Layout/Carousel";
 
 function HomePage() {
   const dispatch = useAppDispatch();
@@ -30,10 +28,9 @@ function HomePage() {
   return (
     <>
       {loading === true ? (
-        <Loading />
+        <Spinner />
       ) : (
         <div>
-          <HeaderPublic />
           <div className="lg:mt-[100px] my-3 md:my-8 px-5 lg:mx-20">
             <div className="text-center pt-10 flex flex-col justify-center">
               <h1 className="text-black font-bold text-[30px] lg:text-[40px]">
@@ -151,7 +148,6 @@ function HomePage() {
               <ButtonViewMore />
             </div>
           </div>
-          <FooterPublic />
         </div>
       )}
     </>

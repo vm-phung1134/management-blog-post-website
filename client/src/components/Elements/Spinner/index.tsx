@@ -1,4 +1,4 @@
-function Loading() {
+function Spinner() {
   return (
     <>
       <div className="loadingx flex flex-col">
@@ -19,4 +19,4 @@ function Loading() {
   );
 }
 
-export default Loading;
+export default Spinner;

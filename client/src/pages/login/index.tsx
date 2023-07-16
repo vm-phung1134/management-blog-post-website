@@ -5,12 +5,8 @@ import { Formik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../config/firebase-config";
-import Loading from "../reusable/loading";
-
-interface ILogin {
-  email: string;
-  password: string;
-}
+import Spinner from "../../components/Elements/Spinner";
+import { ILogin } from "./type";
 
 function Login() {
   // DEFINE
@@ -87,7 +83,7 @@ function Login() {
         return (
           <>
             {loading === true ? (
-              <Loading />
+              <Spinner />
             ) : (
               <section className="flex justify-center absolute top-0 left-0 right-0 bottom-0 z-10 items-center h-screen bg-[url('https://www.honorofkings.com/img/bg1.jpg')] bg-cover bg-bottom">
                 <div className="lg:w-[30%] md:w-[70%] w-full lg:p-0 p-10 flex flex-col gap-y-5">

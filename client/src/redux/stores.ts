@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch } from 'react-redux';
 import logger from 'redux-logger';
-import blogSlice from './reducers/blogReducer';
+import blogSlice from './reducers/blog';
 import { useSelector } from 'react-redux';
 
 // Import reducers
