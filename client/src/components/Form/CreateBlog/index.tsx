@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
-import { AreaForm, InputForm } from "../../../pages/manager/workplace/create-blog";
-import {memo} from "react"
+import {
+  AreaForm,
+  InputForm,
+} from "../../../pages/manager/workplace/create-blog";
+import { memo} from "react";
 import { ICreateBlogFormProps } from "./type";
 
 function CreateBlogForm(props: ICreateBlogFormProps) {
-  const {handleBlur, handleSubmit, handleChange, values} = props;
+  const { handleBlur, handleSubmit, handleChange, values } = props;
   return (
     <>
       <form

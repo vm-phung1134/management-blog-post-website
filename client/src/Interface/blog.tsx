@@ -13,7 +13,7 @@ export interface IBlog {
   comments: number;
 }
 
-interface IBlogContent {
+export interface IBlogContent {
   topic: string;
   plot: string;
   srcImg: string;

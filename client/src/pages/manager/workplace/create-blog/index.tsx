@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import CreateBlogForm from "../../../../components/Form/CreateBlog";
 import { Formik } from "formik";
-import "react-toastify/dist/ReactToastify.css";
-import React from "react";
+import { ToastContainer} from "react-toastify";
+import React, { useState } from "react";
 import { IBlog } from "../../../../Interface/blog";
 import { IUser } from "../../../../Interface/auth";
 import Cookies from "js-cookie";
-import { useAppDispatch } from "../../../../redux/stores";
 import LineTitle from "../../../../components/Elements/LineUnderTitle";
 import { createBlog } from "../../../../redux/reducers/blog/api";
 import { IAreaProps, IInputProps } from "./type";
+import ModalConfirm from "../../../../components/Elements/ModalAction";
 
 export const InputForm = ({
   handleChange,
@@ -61,7 +61,8 @@ export const AreaForm = ({
 };
 
 function CreateBlog() {
-  const dispatch = useAppDispatch();
+  const [open, setOpen] = useState(false);
+  const handleToggle = () => setOpen((prev) => !prev);
   const user: IUser = {
     email: Cookies.get("email"),
     name: Cookies.get("userName"),
@@ -94,9 +95,8 @@ function CreateBlog() {
     views: 0,
     comments: 0,
   };
-  const submitForm = (values: IBlog) => {
-    dispatch(createBlog(values));
-    console.log("submit thành công")
+  const submitForm = () => {
+    handleToggle()
   };
   const validate = () => {};
 
@@ -144,6 +144,15 @@ function CreateBlog() {
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
                     values={values}
+                  />
+                  <ModalConfirm
+                    open={open}
+                    action={createBlog(values)}
+                    setOpen={setOpen}
+                    title="Message"
+                    message="Are you sure you want to create this new blog post ?"
+                    successMessage="New blog has been created"
+                    errorMessage="Blog has been cancel"
                   />
                 </div>
                 <div className="col-span-1 h-screen px-3 bg-white rounded-lg shadow-lg overflow-y-scroll my-[150px] lg:my-[80px]">
@@ -252,6 +261,7 @@ function CreateBlog() {
                   </div>
                 </div>
               </div>
+              <ToastContainer className="font-sans" toastStyle={{ color: "black"}} />
             </div>
           </>
         );

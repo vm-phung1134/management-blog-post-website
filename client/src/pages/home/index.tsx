@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MOCK_BLOG } from "../../data/mockData";
-import { useAppDispatch, useAppSelector } from "../../redux/stores";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { getBlogs } from "../../redux/reducers/blog/api";
 import LineTitle from "../../components/Elements/LineUnderTitle";
 import ButtonViewMore from "../../components/Elements/ButtonViewMore";
