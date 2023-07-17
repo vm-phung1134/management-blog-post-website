@@ -1,64 +1,14 @@
 import { Link } from "react-router-dom";
 import CreateBlogForm from "../../../../components/Form/CreateBlog";
 import { Formik } from "formik";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import React, { useState } from "react";
 import { IBlog } from "../../../../Interface/blog";
 import { IUser } from "../../../../Interface/auth";
 import Cookies from "js-cookie";
 import LineTitle from "../../../../components/Elements/LineUnderTitle";
 import { createBlog } from "../../../../redux/reducers/blog/api";
-import { IAreaProps, IInputProps } from "./type";
 import ModalConfirm from "../../../../components/Elements/ModalAction";
-
-export const InputForm = ({
-  handleChange,
-  handleBlur,
-  values,
-  label,
-  disabled,
-  name,
-}: IInputProps) => {
-  return (
-    <label htmlFor={label} className="font-bold">
-      {name}
-      <input
-        type="text"
-        name={label}
-        id={label}
-        value={values}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        disabled={disabled}
-        className="block font-thin w-full px-4 py-2 mt-3 text-black bg-white border rounded-md  focus:outline-none "
-      />
-    </label>
-  );
-};
-
-export const AreaForm = ({
-  handleChange,
-  handleBlur,
-  values,
-  label,
-  name,
-  rows,
-}: IAreaProps) => {
-  return (
-    <label htmlFor={label} className="font-bold">
-      {name}
-      <textarea
-        name={label}
-        id={label}
-        value={values}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        className="block font-thin w-full px-4 py-2 mt-3 text-black bg-white border rounded-md  focus:outline-none "
-        rows={parseInt(rows)}
-      ></textarea>
-    </label>
-  );
-};
 
 function CreateBlog() {
   const [open, setOpen] = useState(false);
@@ -95,8 +45,11 @@ function CreateBlog() {
     views: 0,
     comments: 0,
   };
+  const handleBreakDownString = (str: string) => {
+    return str.split("./");
+  };
   const submitForm = () => {
-    handleToggle()
+    handleToggle();
   };
   const validate = () => {};
 
@@ -155,7 +108,7 @@ function CreateBlog() {
                     errorMessage="Blog has been cancel"
                   />
                 </div>
-                <div className="col-span-1 h-screen px-3 bg-white rounded-lg shadow-lg overflow-y-scroll my-[150px] lg:my-[80px]">
+                <div className="col-span-1 h-screen bg-white rounded-lg shadow-lg overflow-y-scroll my-[150px] lg:my-[80px]">
                   <div className="flex max-h-full text-justify  flex-col justify-start items-center text-sm">
                     <div className="relative mb-5">
                       <figure>
@@ -212,9 +165,20 @@ function CreateBlog() {
                       {values.title}
                     </h2>
                     <LineTitle />
-                    <p className="mt-2 px-5 lg:px-10 leading-6 indent-7">
-                      {values.description}
-                    </p>
+                    {/* <p
+                      dangerouslySetInnerHTML={{
+                        __html: values.description.replace("./", "<br>"),
+                      }}
+                      className="mt-2 px-5 lg:px-10 leading-6 indent-7"
+                    ></p> */}
+                    {handleBreakDownString(values.description).map((str) => (
+                      <p
+                        key={str}
+                        className="mt-2 px-5 lg:px-10 leading-6 indent-7"
+                      >
+                        {str}
+                      </p>
+                    ))}
                     <div className="flex justify-start w-full">
                       <div className="mt-3 mx-5 lg:mx-10 w-full">
                         <ul className="border p-5 border-orange-600 w-fit">
@@ -261,7 +225,10 @@ function CreateBlog() {
                   </div>
                 </div>
               </div>
-              <ToastContainer className="font-sans" toastStyle={{ color: "black"}} />
+              <ToastContainer
+                className="font-sans"
+                toastStyle={{ color: "black" }}
+              />
             </div>
           </>
         );

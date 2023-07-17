@@ -2,11 +2,12 @@
 import { memo, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Formik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../config/firebase-config";
 import Spinner from "../../components/Elements/Spinner";
-import { ILogin } from "./type";
+import { IAuth } from "../../Interface/auth";
+import LoginForm from "../../components/Form/LoginForm";
 
 function Login() {
   // DEFINE
@@ -20,7 +21,7 @@ function Login() {
       clearTimeout(timeoutLoading);
     };
   }, []);
-  const initialValues: ILogin = {
+  const initialValues: IAuth = {
     email: "",
     password: "",
   };
@@ -28,14 +29,10 @@ function Login() {
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        console.log(result.user);
-        const userName: string = result.user.displayName as string;
-        const email: string = result.user.email as string;
-        const profilePic: string = result.user.photoURL as string;
-        Cookies.set("userName", userName);
-        Cookies.set("email", email);
-        Cookies.set("profilePic", profilePic);
-        // Lưu token vào cookie
+        Cookies.set("userName", result.user.displayName ?? "");
+        Cookies.set("email", result.user.email ?? "");
+        Cookies.set("profilePic", result.user.photoURL ?? "");
+        // Save token
         result.user.getIdToken().then((token) => {
           Cookies.set("token", token);
         });
@@ -45,7 +42,7 @@ function Login() {
         console.error(error);
       });
   };
-  const validate = (values: ILogin) => {
+  const validate = (values: IAuth) => {
     let errors: any = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     // email
@@ -105,92 +102,14 @@ function Login() {
                       Sign up
                     </a>
                   </p>
-                  <form className="mt-6 text-sm" onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                      <label htmlFor="email">
-                        Email address
-                        <input
-                          type="email"
-                          name="email"
-                          id="email"
-                          value={values.email}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          className="block w-full px-4 py-2 mt-3 text-black bg-white border rounded-md  focus:outline-none "
-                        />
-                      </label>
-                      {errors.email && touched.email && (
-                        <span
-                          data-testid="email-error"
-                          className="text-red-500 text-[13px]"
-                        >
-                          {errors.email}
-                        </span>
-                      )}
-                    </div>
-                    <div className="mb-4">
-                      <label htmlFor="password">
-                        Password
-                        <input
-                          name="password"
-                          type="password"
-                          id="password"
-                          data-testid="password"
-                          value={values.password}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          className="block w-full px-4 py-2 mt-3 text-black bg-white border rounded-md  focus:outline-none"
-                        />
-                      </label>
-                      {errors.password && touched.password && (
-                        <span
-                          data-testid="password-error"
-                          className="text-red-500 text-[13px]"
-                        >
-                          {errors.password}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex justify-between">
-                      <div>
-                        <label
-                          className="text-gray-700 cursor-pointer text-[13px]"
-                          htmlFor="showPassword"
-                        >
-                          <input
-                            id="showPassword"
-                            type="checkbox"
-                            className="w-[12px] cursor-pointer h-[12px] accent-transparent mr-3"
-                          />
-                          Show password
-                        </label>
-                      </div>
-                      <Link
-                        to=""
-                        className="text-[13px] text-green-500 hover:underline"
-                      >
-                        Forget password?
-                      </Link>
-                    </div>
-                    <div className="mt-6">
-                      <button
-                        type="submit"
-                        className="w-full px-4 py-2 text-sm tracking-wide text-black transition-colors duration-200
-                      transform bg-[#ee541c] rounded-md hover:bg-[#ee541c] focus:outline-none focus:bg-[#ee541c]"
-                      >
-                        <svg
-                          className="animate-spin h-0 w-5 mr-3 text-black"
-                          viewBox="0 0 24 24"
-                        ></svg>
-                        <p
-                          className="text-white font-medium"
-                          data-testid="btn-login"
-                        >
-                          Login
-                        </p>
-                      </button>
-                    </div>
-                  </form>
+                  <LoginForm
+                    handleBlur={handleBlur}
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                  />
                   <div className="flex mt-4 gap-x-2 text-sm">
                     <button
                       type="button"

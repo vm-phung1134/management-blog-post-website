@@ -4,3 +4,8 @@ export interface IUser {
   token: string | undefined;
   avt: string | undefined;
 }
+
+export interface IAuth {
+  email: string,
+  password: string
+}
