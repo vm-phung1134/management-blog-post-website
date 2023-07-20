@@ -28,19 +28,28 @@ function CreateBlog() {
       "Here is your description about your topic which are you want to share!",
     contents: [
       {
+        id: "1",
         topic: "Epic title one",
         plot: "Epic description about your epic one",
         srcImg:
           "https://images.pexels.com/photos/2563681/pexels-photo-2563681.jpeg?auto=compress&cs=tinysrgb&w=600",
       },
       {
+        id: "2",
+        topic: "Epic title two",
+        plot: "Epic description about your epic one",
+        srcImg:
+          "https://images.pexels.com/photos/2563681/pexels-photo-2563681.jpeg?auto=compress&cs=tinysrgb&w=600",
+      },
+      {
+        id: "3",
         topic: "Epic title two",
         plot: "Epic description about your epic one",
         srcImg:
           "https://images.pexels.com/photos/2563681/pexels-photo-2563681.jpeg?auto=compress&cs=tinysrgb&w=600",
       },
     ],
-    tags: ["Business", "travel", "technology"],
+    tags: ["Business", "Travel", "Technology"],
     likes: 0,
     views: 0,
     comments: 0,
@@ -90,7 +99,64 @@ function CreateBlog() {
                   </li>
                 </ul>
               </div>
-              <div className="grid grid-cols-2 gap-5">
+              <div className="text-[13px] breadcrumbs">
+                <ul>
+                  <li>
+                    <a href="/">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        className="w-4 h-4 mr-2 stroke-current"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                        ></path>
+                      </svg>
+                      Dashboard
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        className="w-4 h-4 mr-2 stroke-current"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                        ></path>
+                      </svg>
+                      Your blogs
+                    </a>
+                  </li>
+                  <li className="text-orange-600">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      className="w-4 h-4 mr-2 stroke-current"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      ></path>
+                    </svg>
+                    Create your blog
+                  </li>
+                </ul>
+              </div>
+              <hr />
+              <div className="grid grid-cols-2 gap-5 mb-20">
                 <div className="col-span-1">
                   <CreateBlogForm
                     handleBlur={handleBlur}
@@ -108,7 +174,7 @@ function CreateBlog() {
                     errorMessage="Blog has been cancel"
                   />
                 </div>
-                <div className="col-span-1 h-screen bg-white rounded-lg shadow-lg overflow-y-scroll my-[150px] lg:my-[80px]">
+                <div className="col-span-1 h-[131vh] bg-white rounded-lg shadow-lg overflow-y-scroll my-[150px] lg:my-[40px]">
                   <div className="flex max-h-full text-justify  flex-col justify-start items-center text-sm">
                     <div className="relative mb-5">
                       <figure>
@@ -161,16 +227,10 @@ function CreateBlog() {
                         <i className="fas fa-comment"></i> 0 Comments
                       </p>
                     </div>
-                    <h2 className="font-bold leading-[3rem] text-[30px] text-center">
+                    <h2 className="font-bold px-5 leading-[3rem] text-[30px] text-center">
                       {values.title}
                     </h2>
                     <LineTitle />
-                    {/* <p
-                      dangerouslySetInnerHTML={{
-                        __html: values.description.replace("./", "<br>"),
-                      }}
-                      className="mt-2 px-5 lg:px-10 leading-6 indent-7"
-                    ></p> */}
                     {handleBreakDownString(values.description).map((str) => (
                       <p
                         key={str}
@@ -184,20 +244,27 @@ function CreateBlog() {
                         <ul className="border p-5 border-orange-600 w-fit">
                           <p className="font-bold">Table of contents</p>
                           {values.contents.map((epic, index) => (
-                            <li key={epic.topic}>{`${(index += 1)}. ${
+                            <li key={epic.id}>{`${(index += 1)}. ${
                               epic.topic
                             }`}</li>
                           ))}
                         </ul>
                         <div className="w-full">
                           {values.contents.map((epic, index) => (
-                            <section key={epic.topic} className="w-full">
+                            <section key={epic.id} className="w-full">
                               <h3 className="font-bold my-3 text-[18px]">
                                 {(index += 1)}. {epic.topic}
                               </h3>
-                              <p className="leading-6 pb-3 indent-7">
-                                {epic.plot}
-                              </p>
+                              {handleBreakDownString(epic.plot).map(
+                                (str, index) => (
+                                  <p
+                                    key={index}
+                                    className="leading-6 pb-3 indent-7"
+                                  >
+                                    {str}
+                                  </p>
+                                )
+                              )}
                               <figure className="w-full h-64">
                                 <img
                                   src={epic.srcImg}
@@ -210,17 +277,24 @@ function CreateBlog() {
                         </div>
                       </div>
                     </div>
-                    <div className="h-1 w-full border-b py-5 border-orange-400"></div>
-                    <div className="flex flex-col items-start w-full">
-                      <div className="text-black text-sm py-5">
-                        <div className=" flex gap-2">
-                          <span className="font-medium">Topics:</span>
-                          {values.tags.map((tag, index) => (
-                            <p key={index}>{tag}</p>
-                          ))}
+                    <div className="w-full p-10">
+                      <div className="h-1 w-full border-b py-5 border-orange-400"></div>
+                      <div className="flex flex-col items-start w-full">
+                        <div className="text-black text-sm py-5">
+                          <div className=" flex gap-2 items-center">
+                            <span className="font-medium">Topics:</span>
+                            {values.tags.map((tag, index) => (
+                              <button
+                                className="btn-sx border text-[12px] py-1 px-2 bg-orange-600 text-white flex items-center shadow-md rounded-md"
+                                key={index}
+                              >
+                                {tag}
+                              </button>
+                            ))}
+                          </div>
                         </div>
+                        <div className="w-20 border border-orange-600"></div>
                       </div>
-                      <div className="w-20 border border-orange-600"></div>
                     </div>
                   </div>
                 </div>
