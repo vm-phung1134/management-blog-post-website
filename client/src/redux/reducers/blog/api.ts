@@ -3,7 +3,7 @@ import { IBlog } from "../../../Interface/blog";
 import axios from "axios";
 import { user } from "./type";
 
-// GET ALL BLOGS 
+// GET ALL BLOGS
 const getBlogs = createAsyncThunk("blog/getBlogs", async () => {
   const response = await axios.get("http://localhost:5000/blogs/");
   if (response.status === 200) {
@@ -11,6 +11,17 @@ const getBlogs = createAsyncThunk("blog/getBlogs", async () => {
   }
   throw new Error("Failed to create blog post");
 });
+
+const getBlog = createAsyncThunk(
+  "blog/getBlog",
+  async (id: string) => {
+    const response = await axios.get(`http://localhost:5000/blogs/${id}`);
+    if (response.status === 200) {
+      return response.data;
+    }
+    throw new Error("Failed to create blog post");
+  }
+);
 
 // CREATE BLOG
 const createBlog = createAsyncThunk(
@@ -32,4 +43,4 @@ const createBlog = createAsyncThunk(
   }
 );
 
-export { getBlogs, createBlog };
+export { getBlogs, createBlog, getBlog };

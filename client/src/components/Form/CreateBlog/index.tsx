@@ -30,7 +30,7 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
           handleChange={handleChange}
           values={values.img}
           name="Image Topic"
-          label="title"
+          label="img"
         />
         <div>
           <AreaForm

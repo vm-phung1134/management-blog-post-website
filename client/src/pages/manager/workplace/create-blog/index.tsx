@@ -185,7 +185,7 @@ function CreateBlog() {
                         />
                       </figure>
                       <div className="absolute top-0 left-0 right-1/4 bottom-0 text-white bg-black/60">
-                        <div className="flex flex-col items-start gap-3 relative top-1/3 px-5">
+                        <div className="flex flex-col items-start gap-3 relative top-1/2 -translate-y-1/2 px-5">
                           <div className="flex gap-3 text-[12px]">
                             <p>
                               <i className="fas fa-calendar-days"></i> July 18,

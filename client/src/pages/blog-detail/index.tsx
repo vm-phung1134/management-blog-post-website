@@ -1,121 +1,151 @@
+import { useParams } from "react-router-dom";
 import LineTitle from "../../components/Elements/LineUnderTitle";
+import { getBlog } from "../../redux/reducers/blog/api";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import React, { useEffect } from "react";
+import ButtonViewMore from "../../components/Elements/ButtonViewMore";
 
 function InfoBlog() {
+  const blog_id = useParams();
+  const id = blog_id.id;
+  const dispatch = useAppDispatch();
+  const { blog } = useAppSelector((state) => state.blogReducer);
+  useEffect(() => {
+    dispatch(getBlog(id as string));
+  }, [dispatch, id]);
+  const handleBreakDownString = (str: string) => {
+    return str.split("./");
+  };
   return (
     <div className="bg-[url('https://support.honorofkings.com/assets/home_intro_bg.4b1332d7.png')] lg:bg-cover bg-contain bg-no-repeat">
-      <div className="flex max-h-full mx-[18%] text-justify py-[150px] lg:py-[85px] flex-col justify-start items-center text-sm">
-        <div className="mt-10">
-          <img
-            className="rounded-[50%] w-[30px] lg:w-[45px]"
-            src="https://preview.colorlib.com/theme/magdesign/images/person_1.jpg.webp"
-            alt=""
-          />
-        </div>
-        <div className="text-center">
-          <h4 className="font-bold lg:text-base text-[13px]">Sergy Campell</h4>
-          <p className="text-gray-600 text-[13px]">CEO and Founder</p>
-        </div>
-        <div className="flex text-gray-500 justify-between my-3">
-          <p className="pr-3">
-            <i className="fas fa-calendar-days"></i> July 18, 2023
-          </p>
-          <p className="pl-3">
-            <i className="fas fa-comment"></i> 0 Comments
-          </p>
-        </div>
-        <h2 className="font-bold leading-[3rem] text-[40px] text-center">
-          Top 25 Free & Premium Headless
-        </h2>
-        <LineTitle />
-        <p className="mt-10 px-5 lg:px-20 leading-6">
-          The development of the World Wide Web is a huge step forward in making
-          information sharing globalized, fast and cost-effective. Smartphones
-          allow us to capture information on the go, and the Internet of Things
-          (IoT) is connecting us even more, creating demand for new media
-          management systems in the form of headless content management systems
-          (headless CMS).
-        </p>
-        <div className="flex justify-start w-full">
-          <div className="mt-5 mx-5 lg:mx-20 ">
-            <ul className="border p-5 border-orange-600 w-fit">
-              <p className="font-bold">Table of contents</p>
-              <li>1. What is the Internet of Things</li>
-              <li>2. Explaination of Headless CMS</li>
-              <li>3. Top 25 Top Headless CMS</li>
-            </ul>
-            <h3 className="font-bold my-5 text-[18px]">
-              1. What is the Internet of Things
-            </h3>
-            <p className="leading-6">
-              Internet of Things(IoT) is commonly used in internet-connected
-              smart devices. Examples of IoT include smart home devices, like
-              the Nest thermostat, virtual assistants like Amazon Alexa or
-              Google Home, and smart wearable accessories, like Fitbit. Business
-              IoT is also common, with bot-based warehouse management
-              capabilities, traffic analysis sensors, smart weighing shelves and
-              more. According toStatesman, by 2021, there will be more than 11
-              billion IoT devices in use globally. By 2030, experts predict this
-              number will reach more than 29 billion. Neil Patel, founder of
-              KISSmetrics and former Forbes contributor, wrote that the internet
-              is on its way to becoming "an indispensable thing". That is, for
-              people living in developed cities, the internet will always play a
-              role in society and home life through multiple devices, screens,
-              speakers and touch points. Brands that want to reach consumers
-              through these smart devices will need to find new ways to deliver
-              content. That's when the headless CMS was born.
-            </p>
-            <h3 className="font-bold my-5 text-[18px]">
-              2. Explaination of Headless CMS
-            </h3>
-            <p className="leading-6">
-              Internet of Things(IoT) is commonly used in internet-connected
-              smart devices. Examples of IoT include smart home devices, like
-              the Nest thermostat, virtual assistants like Amazon Alexa or
-              Google Home, and smart wearable accessories, like Fitbit. Business
-              IoT is also common, with bot-based warehouse management
-              capabilities, traffic analysis sensors, smart weighing shelves and
-              more. According toStatesman, by 2021, there will be more than 11
-              billion IoT devices in use globally. By 2030, experts predict this
-              number will reach more than 29 billion. Neil Patel, founder of
-              KISSmetrics and former Forbes contributor, wrote that the internet
-              is on its way to becoming "an indispensable thing". That is, for
-              people living in developed cities, the internet will always play a
-              role in society and home life through multiple devices, screens,
-              speakers and touch points. Brands that want to reach consumers
-              through these smart devices will need to find new ways to deliver
-              content. That's when the headless CMS was born.
-            </p>
-            <h3 className="font-bold my-5 text-[18px]">
-              3. Top 25 Top Headless CMS
-            </h3>
-            <p className="leading-6">
-              Internet of Things(IoT) is commonly used in internet-connected
-              smart devices. Examples of IoT include smart home devices, like
-              the Nest thermostat, virtual assistants like Amazon Alexa or
-              Google Home, and smart wearable accessories, like Fitbit. Business
-              IoT is also common, with bot-based warehouse management
-              capabilities, traffic analysis sensors, smart weighing shelves and
-              more. According toStatesman, by 2021, there will be more than 11
-              billion IoT devices in use globally. By 2030, experts predict this
-              number will reach more than 29 billion. Neil Patel, founder of
-              KISSmetrics and former Forbes contributor, wrote that the internet
-              is on its way to becoming "an indispensable thing". That is, for
-              people living in developed cities, the internet will always play a
-              role in society and home life through multiple devices, screens,
-              speakers and touch points. Brands that want to reach consumers
-              through these smart devices will need to find new ways to deliver
-              content. That's when the headless CMS was born.
-            </p>
+      <div className="grid grid-cols-12">
+        <div className="col-span-8">
+          <div className="flex max-h-full text-justify mx-20 py-[150px] lg:py-[85px] flex-col justify-start items-center text-sm">
+            <div className="relative my-10 w-[90%]">
+              <figure>
+                <img
+                  src={blog.img}
+                  alt=""
+                  className="w-full object-cover overflow-hidden"
+                />
+              </figure>
+              <div className="absolute top-0 left-0 right-1/4 bottom-0 text-white bg-black/60">
+                <div className="flex flex-col items-start gap-3 relative top-1/2 -translate-y-1/2 px-5">
+                  <div className="flex gap-3 text-[12px]">
+                    <p>
+                      <i className="fas fa-calendar-days"></i> July 18, 2023
+                    </p>
+                    -<p>3 Hours before</p>
+                  </div>
+                  <p className="text-3xl font-bold w-full text-orange-400">
+                    {blog.title}
+                  </p>
+                  <ButtonViewMore />
+                </div>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0">
+                <p className="w-full h-10 bg-orange-600"></p>
+              </div>
+            </div>
+            <div className="flex justify-between px-10 w-full">
+              <div className="flex gap-3">
+                <figure>
+                  <img
+                    className="rounded-[50%] w-[30px] lg:w-[45px]"
+                    src={`${blog.author.avt}`}
+                    alt=""
+                  />
+                </figure>
+                <div className="text-start">
+                  <h4 className="font-bold lg:text-base text-[13px]">
+                    {blog.author.name}
+                  </h4>
+                  <p className="text-gray-600 text-[13px]">
+                    {blog.author.email}
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-5">
+                <button className="text-green-600">+ Follow</button>
+                <button>
+                  <i className="fas fa-id-card"></i> View profile
+                </button>
+                <button className="text-red-700">
+                  <i className="fas fa-exclamation"></i> Report
+                </button>
+              </div>
+            </div>
+
+            <div className="flex text-gray-500 justify-between my-3">
+              <p className="pr-3">
+                <i className="fas fa-calendar-days"></i> July 18, 2023
+              </p>
+              <p className="pl-3">
+                <i className="fas fa-comment"></i> 0 Comments
+              </p>
+            </div>
+            <h2 className="font-bold px-5 leading-[3rem] text-[30px] text-center">
+              {blog.title}
+            </h2>
+            <LineTitle />
+            {handleBreakDownString(blog.description).map((str) => (
+              <p key={str} className="mt-2 px-5 lg:px-10 leading-6 indent-7">
+                {str}
+              </p>
+            ))}
+            <div className="flex justify-start w-full">
+              <div className="mt-3 mx-5 lg:mx-10 w-full">
+                <ul className="border p-5 border-orange-600 w-fit">
+                  <p className="font-bold">Table of contents</p>
+                  {blog.contents.map((epic, index) => (
+                    <li key={epic.id}>{`${(index += 1)}. ${epic.topic}`}</li>
+                  ))}
+                </ul>
+                <div className="w-full">
+                  {blog.contents.map((epic, index) => (
+                    <section key={epic.id} className="w-full">
+                      <h3 className="font-bold my-3 text-[18px]">
+                        {(index += 1)}. {epic.topic}
+                      </h3>
+                      {handleBreakDownString(epic.plot).map((str, index) => (
+                        <p key={index} className="leading-6 pb-3 indent-7">
+                          {str}
+                        </p>
+                      ))}
+                      <figure className="w-full h-80">
+                        <img
+                          src={epic.srcImg}
+                          alt=""
+                          className="w-full h-full object-contain"
+                        />
+                      </figure>
+                    </section>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="w-full p-10">
+              <div className="h-1 w-full border-b py-5 border-orange-400"></div>
+              <div className="flex flex-col items-start w-full">
+                <div className="text-black text-sm py-5">
+                  <div className=" flex gap-2 items-center">
+                    <span className="font-medium">Topics:</span>
+                    {blog.tags.map((tag, index) => (
+                      <button
+                        className="btn-sx text-[12px] py-1 px-2 bg-orange-600 text-white flex items-center shadow-md rounded-md"
+                        key={index}
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="w-20 border border-orange-600"></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="h-1 w-full border-b py-5 border-orange-400"></div>
-        <div className="flex flex-col items-start w-full">
-          <p className="text-black text-sm py-5">
-            <span className="font-medium">Topics:</span> Business, Marketing
-          </p>
-          <p className="font-medium text-lg">Featured Posts</p>
-          <div className="w-20 border border-orange-600"></div>
-        </div>
+        <div className="col-span-5"></div>
       </div>
     </div>
   );

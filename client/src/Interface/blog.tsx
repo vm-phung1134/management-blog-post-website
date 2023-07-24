@@ -1,6 +1,7 @@
 import { IUser } from "./auth";
 
 export interface IBlog {
+  id?: string,
   title: string;
   img: string;
   releaseDate: string;

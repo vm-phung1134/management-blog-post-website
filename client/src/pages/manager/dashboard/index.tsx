@@ -212,7 +212,7 @@ function Dashboard() {
                   </div>
                   <div>
                     <h3 className="font-medium">Elizabeth</h3>
-                    <small>Blogger, bussiness</small>
+                    <small>Blogger, business</small>
                   </div>
                 </div>
                 <div className="flex flex-col">

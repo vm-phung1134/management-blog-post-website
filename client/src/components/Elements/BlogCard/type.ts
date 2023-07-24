@@ -1,5 +1,5 @@
-import { Blog } from "../../../data/model/blogModel";
+import { IBlog } from "../../../Interface/blog";
 
 export interface IBlogCardProps {
-  card: Blog;
+  blog: IBlog;
 }

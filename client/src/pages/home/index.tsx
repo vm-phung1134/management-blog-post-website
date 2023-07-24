@@ -11,9 +11,7 @@ import Carousel from "../../components/Layout/Carousel";
 function HomePage() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
-  const { blogs, isLoading, error } = useAppSelector(
-    (state) => state.blogReducer
-  );
+  const { blogs } = useAppSelector((state) => state.blogReducer);
   useEffect(() => {
     dispatch(getBlogs());
     const timeoutLoading = setTimeout(() => {
@@ -23,8 +21,6 @@ function HomePage() {
       clearTimeout(timeoutLoading);
     };
   }, [dispatch]);
-
-  console.log(blogs, isLoading, error);
   return (
     <>
       {loading === true ? (
@@ -141,8 +137,8 @@ function HomePage() {
               <h3 className="font-bold py-3 text-lg">All blog posts</h3>
               <LineTitle />
               <div className="grid lg:grid-cols-3 grid-cols-2 gap-x-5 gap-y-16">
-                {MOCK_BLOG.map((card) => (
-                  <CardBlog key={card.id} card={card} />
+                {blogs.map((blog) => (
+                  <CardBlog key={blog.id} blog={blog} />
                 ))}
               </div>
               <ButtonViewMore />
