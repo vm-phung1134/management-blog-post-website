@@ -9,7 +9,7 @@ function InputForm({
   name,
 }: IInputProps) {
   return (
-    <label htmlFor={label} className="font-bold">
+    <label htmlFor={label} className="font-medium">
       {name}
       <input
         type="text"

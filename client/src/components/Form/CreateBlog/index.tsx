@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { memo } from "react";
 import { ICreateBlogFormProps } from "./type";
 import InputForm from "../../Elements/InputForm";
-import AreaForm from "../../Elements/AreaForm";
+import CkEditorField from "../../Elements/CKEditorArea";
 
 function CreateBlogForm(props: ICreateBlogFormProps) {
   const { handleBlur, handleSubmit, handleChange, values } = props;
@@ -22,25 +22,18 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
           handleBlur={handleBlur}
           handleChange={handleChange}
           values={values.title}
-          name="Blog Title"
+          name="Blog title"
           label="title"
         />
         <InputForm
           handleBlur={handleBlur}
           handleChange={handleChange}
           values={values.img}
-          name="Image Topic"
+          name="Image topic"
           label="img"
         />
         <div>
-          <AreaForm
-            rows="5"
-            values={values.description}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            label="description"
-            name="Top Description"
-          />
+          <CkEditorField label="description" name="Blog description" />
         </div>
         <p className="text-[12px] font-thin text-orange-600">
           * Here your content{" "}
@@ -53,34 +46,21 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
             </div>
             <div className="collapse-content">
               <div className="flex flex-col gap-3">
-                <div>
-                  <InputForm
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    values={values.contents[0].topic}
-                    name="Epic content"
-                    label="contents[0].topic"
-                  />
-                </div>
-                <div>
-                  <AreaForm
-                    rows="5"
-                    values={values.contents[0].plot}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    label="contents[0].plot"
-                    name="Paraphrase"
-                  />
-                </div>
-                <div>
-                  <InputForm
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    values={values.contents[0].srcImg}
-                    name="Link Image"
-                    label="contents[0].srcImg"
-                  />
-                </div>
+                <InputForm
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  values={values.contents[0].topic}
+                  name="Epic content"
+                  label="contents[0].topic"
+                />
+                <CkEditorField label="contents[0].plot" name="Paraphrase" />
+                <InputForm
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  values={values.contents[0].srcImg}
+                  name="Link Image"
+                  label="contents[0].srcImg"
+                />
               </div>
             </div>
           </div>
@@ -93,34 +73,21 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
             </div>
             <div className="collapse-content">
               <div className="flex flex-col gap-3">
-                <div>
-                  <InputForm
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    values={values.contents[1].topic}
-                    name="Epic content"
-                    label="contents[1].topic"
-                  />
-                </div>
-                <div>
-                  <AreaForm
-                    rows="5"
-                    values={values.contents[1].plot}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    label="contents[1].plot"
-                    name="Paraphrase"
-                  />
-                </div>
-                <div>
-                  <InputForm
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    values={values.contents[1].srcImg}
-                    name="Link Image"
-                    label="contents[1].srcImg"
-                  />
-                </div>
+                <InputForm
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  values={values.contents[1].topic}
+                  name="Epic content"
+                  label="contents[1].topic"
+                />
+                <CkEditorField label="contents[1].plot" name="Paraphrase" />
+                <InputForm
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  values={values.contents[1].srcImg}
+                  name="Link Image"
+                  label="contents[1].srcImg"
+                />
               </div>
             </div>
           </div>
@@ -133,34 +100,21 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
             </div>
             <div className="collapse-content">
               <div className="flex flex-col gap-3">
-                <div>
-                  <InputForm
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    values={values.contents[2].topic}
-                    name="Epic content"
-                    label="contents[2].topic"
-                  />
-                </div>
-                <div>
-                  <AreaForm
-                    rows="5"
-                    values={values.contents[2].plot}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    label="contents[2].plot"
-                    name="Paraphrase"
-                  />
-                </div>
-                <div>
-                  <InputForm
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    values={values.contents[2].srcImg}
-                    name="Link Image"
-                    label="contents[2].srcImg"
-                  />
-                </div>
+                <InputForm
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  values={values.contents[2].topic}
+                  name="Epic content"
+                  label="contents[2].topic"
+                />
+                <CkEditorField label="contents[2].plot" name="Paraphrase" />
+                <InputForm
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  values={values.contents[2].srcImg}
+                  name="Link Image"
+                  label="contents[2].srcImg"
+                />
               </div>
             </div>
           </div>
@@ -189,11 +143,7 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
         </div>
         <div className="mt-6 flex gap-5 items-center justify-end">
           <Link to="/manager-your-blogs/">
-            <p
-              className="cursor-pointer"
-            >
-              Cancel
-            </p>
+            <p className="cursor-pointer">Cancel</p>
           </Link>
 
           <button
