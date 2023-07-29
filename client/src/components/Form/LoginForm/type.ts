@@ -8,4 +8,6 @@ export interface ILoginFormProps {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   errors: FormikErrors<IAuth>;
   touched: FormikTouched<IAuth>;
+  isActive: boolean;
+  toggleActive: React.Dispatch<React.SetStateAction<boolean>>;
 }

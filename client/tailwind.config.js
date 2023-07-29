@@ -1,10 +1,33 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        marquee: "marquee 50s linear infinite",
+        marquee2: "marquee2 50s linear infinite",
+        marquee3: "marquee3 50s linear infinite",
+        marquee4: "marquee4 50s linear infinite",
+      },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateY(0%)" },
+          "100%": { transform: "translateY(-100%)" },
+        },
+        marquee2: {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0%)" },
+        },
+        marquee3: {
+          "0%": { transform: "translateY(0%)" },
+          "100%": { transform: "translateY(100%)" },
+        },
+        marquee4: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(0%)" },
+        },
+      },
+    },
     fontFamily: {
       sans: ["Montserrat", "sans-serif"],
     },
@@ -22,4 +45,4 @@ module.exports = {
     prefix: "", // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
     logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
   },
-}
+};
