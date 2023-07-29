@@ -3,6 +3,7 @@ import HomePage from "../pages/home";
 import Dashboard from "../pages/manager/dashboard";
 import UserBlogs from "../pages/manager/workplace";
 import CreateBlog from "../pages/manager/workplace/create-blog";
+import UpdateBlogPost from "../pages/manager/workplace/update-blog";
 
 const publicRoutes = [
   {
@@ -19,12 +20,16 @@ const publicRoutes = [
   },
   {
     path: `/manager-your-blogs`,
-    component: UserBlogs
+    component: UserBlogs,
   },
   {
     path: `/manager-your-blogs/create-new-blog`,
-    component: CreateBlog
-  }
+    component: CreateBlog,
+  },
+  {
+    path: `/manager-your-blogs/update-blog/:id`,
+    component: UpdateBlogPost,
+  },
 ];
 
 export default publicRoutes;

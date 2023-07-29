@@ -4,7 +4,7 @@ function FooterPublic() {
       <div className=" w-full py-5 bg-black/95 text-white">
         <div className="py-10 px-5 lg:px-20 flex flex-col gap-y-5">
           <h3 className="font-bold text-base lg:text-[20px]">
-            Subcribe to newsletter
+            Subscribe to newsletter
           </h3>
           <p>Pick the blog emails you want to receive</p>
           <p className="text-[13px] w-full lg:w-[50%] font-thin text-justify">

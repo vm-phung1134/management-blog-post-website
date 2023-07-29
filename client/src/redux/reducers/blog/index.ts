@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BlogState, user } from "./type";
-import { createBlog, getBlogs, getBlog } from "./api";
+import { createBlog, getBlogs, getBlog, getAllBlogsAuthor } from "./api";
 
 const initialState: BlogState = {
   blogs: [],
+  blogAuthors: [],
   blog: {
     title: "",
     img: "",
@@ -35,6 +36,19 @@ const blogSlice = createSlice({
       state.blogs = action.payload;
     });
     builder.addCase(getBlogs.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message ?? "Something went wrong.";
+    });
+    // GET ALL BLOGS AUTHOR
+    builder.addCase(getAllBlogsAuthor.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+    builder.addCase(getAllBlogsAuthor.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.blogAuthors = action.payload;
+    });
+    builder.addCase(getAllBlogsAuthor.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error.message ?? "Something went wrong.";
     });

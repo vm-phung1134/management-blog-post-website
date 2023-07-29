@@ -26,6 +26,17 @@ export class BlogModel{
         const docRef = await this.blogDoc.get();
         return docRef.docs.map(doc => ({id: doc.id, ...doc.data()}) as IBlog)
     }
+
+    // GET ALL BLOGS AUTHOR
+    static async getAllBlogsByAuthor (id: string): Promise<IBlog[]> {
+        const docRef = await this.blogDoc.where("author.uid", "==", id).get();
+        const blogs: IBlog[] = [];
+        docRef.forEach((doc) => {
+          blogs.push({ id: doc.id, ...doc.data() } as IBlog);
+        });
+        return blogs;
+    }
+
     // UPDATE BLOG
     static async updateBlog(blog: IBlog) : Promise <void> {
         const {id, ...docRef} = blog;

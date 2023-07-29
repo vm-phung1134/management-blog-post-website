@@ -3,7 +3,7 @@ import LineTitle from "../../../../components/Elements/LineUnderTitle";
 
 function BlogViewEdit({ values }: { values: IBlog }) {
   return (
-    <div className="col-span-1 h-[133vh] bg-white rounded-lg shadow-lg overflow-y-scroll my-[150px] lg:my-[40px]">
+    <div className="col-span-1 h-[135vh] bg-white rounded-lg shadow-lg overflow-y-scroll my-[150px] lg:my-[40px]">
       <div className="flex max-h-full text-justify  flex-col justify-start items-center text-sm">
         <div className="relative mb-5">
           <figure>

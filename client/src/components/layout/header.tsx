@@ -3,17 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase-config";
+import { useUserFromCookies } from "../../hooks/useUserFromCookies";
 
 function HeaderPublic() {
   const [activeSideBar, setActiveSideBar] = useState("-300px");
   const navigator = useNavigate();
+  const [userCookies] = useUserFromCookies();
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        Cookies.remove("userName");
-        Cookies.remove("email");
-        Cookies.remove("profilePic");
-        Cookies.remove("token");
+        Cookies.remove("user");
         navigator("/login");
       })
       .catch((error) => {
@@ -21,9 +20,9 @@ function HeaderPublic() {
       });
   };
   const checkCookie = (): boolean => {
-    const userName: string | undefined = Cookies.get("userName");
-    return userName !== undefined;
+    return userCookies.token !== undefined ? true : false;
   };
+
   // useEffect(() => {
   //   const token: string | undefined = Cookies.get("token");
   //   if (!token) {
@@ -92,10 +91,10 @@ function HeaderPublic() {
                   tabIndex={0}
                   className="btn mx-1 border-none text-[12px] font-bold bg-white"
                 >
-                  {Cookies.get("userName")}
+                  {userCookies.name}
                   <div className="avatar online">
                     <div className="w-9 rounded-full">
-                      <img src={`${Cookies.get("profilePic")}`} alt="Avatar" />
+                      <img src={userCookies.avt} alt="Avatar" />
                     </div>
                   </div>
                 </label>
@@ -180,13 +179,7 @@ function HeaderPublic() {
                   policy
                 </li>
               </ul>
-              {checkCookie() === false ? (
-                <div className="flex flex-col justify-between items-center mt-5 bg-orange-600 text-white py-2 rounded-md text-sm lg:hidden">
-                  <Link className="text-[15px] font-bold" to="/login">
-                    Login
-                  </Link>
-                </div>
-              ) : (
+              {checkCookie() ? (
                 <div className="dropdown dropdown-left lg:hidden">
                   <label
                     tabIndex={0}
@@ -221,6 +214,12 @@ function HeaderPublic() {
                       <Link to="#">Sign Out</Link>
                     </li>
                   </ul>
+                </div>
+              ) : (
+                <div className="flex flex-col justify-between items-center mt-5 bg-orange-600 text-white py-2 rounded-md text-sm lg:hidden">
+                  <Link className="text-[15px] font-bold" to="/login">
+                    Login
+                  </Link>
                 </div>
               )}
 

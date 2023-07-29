@@ -1,16 +1,13 @@
 import Cookies from "js-cookie";
-import { IUser } from "../../../Interface/auth";
 import { IBlog } from "../../../Interface/blog";
+import { IUser } from "../../../Interface/auth";
 
 export interface BlogState {
   blogs: IBlog[];
+  blogAuthors: IBlog[];
   blog: IBlog;
   isLoading: boolean;
   error: string | null;
 }
-export const user: IUser = {
-  email: Cookies.get("email"),
-  name: Cookies.get("userName"),
-  token: Cookies.get("token"),
-  avt: Cookies.get("profilePic"),
-};
+const userJson = Cookies.get('user');
+export const user: IUser = userJson ? JSON.parse(userJson) : null;

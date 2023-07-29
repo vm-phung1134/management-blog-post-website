@@ -12,16 +12,29 @@ const getBlogs = createAsyncThunk("blog/getBlogs", async () => {
   throw new Error("Failed to create blog post");
 });
 
-const getBlog = createAsyncThunk(
-  "blog/getBlog",
-  async (id: string) => {
-    const response = await axios.get(`http://localhost:5000/blogs/${id}`);
+// GET ALL BLOGS AUTHOR
+const getAllBlogsAuthor = createAsyncThunk(
+  "blog/getAllBlogsAuthor",
+  async (authorId: string | undefined) => {
+    const response = await axios.get(
+      `http://localhost:5000/blogs/author/${authorId}`
+    );
     if (response.status === 200) {
       return response.data;
     }
     throw new Error("Failed to create blog post");
   }
 );
+
+// GET ONE BLOG
+
+const getBlog = createAsyncThunk("blog/getBlog", async (blogId: string) => {
+  const response = await axios.get(`http://localhost:5000/blogs/${blogId}`);
+  if (response.status === 200) {
+    return response.data;
+  }
+  throw new Error("Failed to create blog post");
+});
 
 // CREATE BLOG
 const createBlog = createAsyncThunk(
@@ -43,4 +56,4 @@ const createBlog = createAsyncThunk(
   }
 );
 
-export { getBlogs, createBlog, getBlog };
+export { getBlogs, createBlog, getBlog, getAllBlogsAuthor };

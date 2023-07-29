@@ -33,6 +33,17 @@ export const BlogController = {
       res.status(200).json(blogs);
     } catch (error) {}
   },
+  async getAllBlogsByAuthor(req: Request, res: Response) {
+    try {
+      const id = req.params.id;
+      const blogs = await BlogModel.getAllBlogsByAuthor(id);
+      if (!blogs) {
+        res.sendStatus(404).json("Blog is empty");
+        return;
+      }
+      res.status(200).json(blogs);
+    } catch (error) {}
+  },
   async updateBlog(req: Request, res: Response) {
     const blog = req.body;
     const id = req.params.id;
