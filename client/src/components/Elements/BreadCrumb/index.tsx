@@ -7,9 +7,8 @@ function BreadCrumbs({ items }: IBreadCrumbProps) {
         {items.map((item) => {
           return (
             <li
-              className={`${
-                item.active ? "text-orange-500" : ""
-              } my-1`}
+              key={item.name}
+              className={`${item.active ? "text-orange-500" : ""} my-1`}
             >
               <a href={item.link}>{item.name}</a>
             </li>

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState,useMemo } from "react";
 import Cookies from "js-cookie";
-import { IUser } from "../Interface/auth";
+import { IUser } from "../interface/auth";
 
 export const useUserFromCookies = (): [IUser, (user: IUser) => void] => {
   const [user, setUser] = useState<IUser>({
@@ -11,7 +11,7 @@ export const useUserFromCookies = (): [IUser, (user: IUser) => void] => {
     avt: "",
   });
 
-  useEffect(() => {
+  useMemo(() => {
     const cookiesUserData = Cookies.get("user");
 
     if (cookiesUserData) {
@@ -20,8 +20,8 @@ export const useUserFromCookies = (): [IUser, (user: IUser) => void] => {
   }, []);
 
   const updateUser = (newUser: IUser) => {
-    setUser(newUser);
     Cookies.set("user", JSON.stringify(newUser), { expires: 1 });
+    setUser(newUser);
   };
 
   return [user, updateUser];

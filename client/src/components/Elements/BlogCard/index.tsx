@@ -19,10 +19,10 @@ function CardBlog(props: IBlogCardProps) {
                 {blog.title}
               </h2>
             </Link>
-
-            <p className="text-gray-200 py-1 text-[12px] lg:text-[13px] font-thin text-justify line-clamp-2">
-              {blog.description}
-            </p>
+            <p
+              className="text-gray-200 py-1 text-[12px] lg:text-[13px] font-thin text-justify line-clamp-2"
+              dangerouslySetInnerHTML={{ __html: blog.description }}
+            />
             <div className="flex justify-end px-4">
               <button className="text-orange-500 font-thin text-sm">
                 Read Blog

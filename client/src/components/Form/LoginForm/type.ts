@@ -1,5 +1,5 @@
 import { FormikErrors, FormikTouched } from "formik";
-import { IAuth } from "../../../Interface/auth";
+import { IAuth } from "../../../interface/auth";
 
 export interface ILoginFormProps {
   values: IAuth;

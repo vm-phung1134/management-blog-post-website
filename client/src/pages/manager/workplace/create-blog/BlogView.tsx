@@ -1,4 +1,4 @@
-import { IBlog } from "../../../../Interface/blog";
+import { IBlog } from "../../../../interface/blog";
 import LineTitle from "../../../../components/Elements/LineUnderTitle";
 
 function BlogViewEdit({ values }: { values: IBlog }) {

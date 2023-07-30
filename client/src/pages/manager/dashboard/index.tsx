@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Dashboard() {
   return (
     <>
@@ -270,21 +269,21 @@ function Dashboard() {
                 </div>
                 <div className="flex flex-col justify-between">
                   <ul className="flex gap-2 text-[12px]">
-                    <li>
-                      <FontAwesomeIcon icon={["far", "heart"]} />{" "}
+                    <li className="flex gap-x-2 items-center">
+                      <i className="fas fa-heart"></i>
                       <span className="font-medium">1.034</span>
                     </li>
-                    <li>
-                      <FontAwesomeIcon icon={["far", "comment"]} />{" "}
+                    <li className="flex gap-x-2 items-center">
+                      <i className="fas fa-comment"></i>
                       <span className="font-medium">10</span>
                     </li>
-                    <li>
-                      <FontAwesomeIcon icon={["far", "share-square"]} />{" "}
+                    <li className="flex gap-x-2 items-center">
+                      <i className="fas fa-share"></i>
                       <span className="font-medium">3</span>
                     </li>
                   </ul>
                   <button className="text-[#f05129] text-[13px] text-end">
-                    View
+                  Read more
                   </button>
                 </div>
               </div>
@@ -298,21 +297,21 @@ function Dashboard() {
                 </div>
                 <div className="flex flex-col justify-between">
                   <ul className="flex gap-2 text-[12px]">
-                    <li>
-                      <FontAwesomeIcon icon={["far", "heart"]} />{" "}
+                    <li className="flex gap-x-2 items-center">
+                      <i className="fas fa-heart"></i>
                       <span className="font-medium">1.034</span>
                     </li>
-                    <li>
-                      <FontAwesomeIcon icon={["far", "comment"]} />{" "}
+                    <li className="flex gap-x-2 items-center">
+                      <i className="fas fa-comment"></i>
                       <span className="font-medium">10</span>
                     </li>
-                    <li>
-                      <FontAwesomeIcon icon={["far", "share-square"]} />{" "}
+                    <li className="flex gap-x-2 items-center">
+                      <i className="fas fa-share"></i>
                       <span className="font-medium">3</span>
                     </li>
                   </ul>
                   <button className="text-[#f05129] text-[13px] text-end">
-                    View
+                    Read more
                   </button>
                 </div>
               </div>
@@ -326,21 +325,21 @@ function Dashboard() {
                 </div>
                 <div className="flex flex-col justify-between">
                   <ul className="flex gap-2 text-[12px]">
-                    <li>
-                      <FontAwesomeIcon icon={["far", "heart"]} />{" "}
+                    <li className="flex gap-x-2 items-center">
+                      <i className="fas fa-heart"></i>
                       <span className="font-medium">1.034</span>
                     </li>
-                    <li>
-                      <FontAwesomeIcon icon={["far", "comment"]} />{" "}
+                    <li className="flex gap-x-2 items-center">
+                      <i className="fas fa-comment"></i>
                       <span className="font-medium">10</span>
                     </li>
-                    <li>
-                      <FontAwesomeIcon icon={["far", "share-square"]} />{" "}
+                    <li className="flex gap-x-2 items-center">
+                      <i className="fas fa-share"></i>
                       <span className="font-medium">3</span>
                     </li>
                   </ul>
                   <button className="text-[#f05129] text-[13px] text-end">
-                    View
+                    Read more
                   </button>
                 </div>
               </div>
@@ -354,21 +353,21 @@ function Dashboard() {
                 </div>
                 <div className="flex flex-col justify-between">
                   <ul className="flex gap-2 text-[12px]">
-                    <li>
-                      <FontAwesomeIcon icon={["far", "heart"]} />{" "}
+                    <li className="flex gap-x-2 items-center">
+                      <i className="fas fa-heart"></i>
                       <span className="font-medium">1.034</span>
                     </li>
-                    <li>
-                      <FontAwesomeIcon icon={["far", "comment"]} />{" "}
+                    <li className="flex gap-x-2 items-center">
+                      <i className="fas fa-comment"></i>
                       <span className="font-medium">10</span>
                     </li>
-                    <li>
-                      <FontAwesomeIcon icon={["far", "share-square"]} />{" "}
+                    <li className="flex gap-x-2 items-center">
+                      <i className="fas fa-share"></i>
                       <span className="font-medium">3</span>
                     </li>
                   </ul>
                   <button className="text-[#f05129] text-[13px] text-end">
-                    View
+                    Read more
                   </button>
                 </div>
               </div>

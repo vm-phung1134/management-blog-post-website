@@ -23,7 +23,7 @@ export class BlogModel{
     }
     // GET ALL BLOGS
     static async getAllBlog() : Promise<IBlog[]>{
-        const docRef = await this.blogDoc.get();
+        const docRef = await this.blogDoc.orderBy("createdAt", "desc").get();
         return docRef.docs.map(doc => ({id: doc.id, ...doc.data()}) as IBlog)
     }
 

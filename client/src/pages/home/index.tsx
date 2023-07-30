@@ -13,6 +13,7 @@ function HomePage() {
   const [loading, setLoading] = useState(true);
   const { blogs } = useAppSelector((state) => state.blogReducer);
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(getBlogs());
     const timeoutLoading = setTimeout(() => {
       setLoading(false);

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { getAllBlogsAuthor } from "../../../redux/reducers/blog/api";
@@ -19,44 +18,44 @@ function UserBlogs() {
   return (
     <>
       <div className="mt-[80px] p-10 bg-slate-100 min-h-screen max-h-full">
-        <div className="my-5">
+        <div>
           <MenuListNavigate />
           <BreadCrumbs items={BREAD_CRUMBS_CREATE_BLOG} />
           <hr />
-          <button className="py-2 px-5 text-sm text-gray-600 font-thin border shadow-md rounded-lg my-5 bg-white">
-            Filter category <FontAwesomeIcon icon={["fas", "chevron-down"]} />
-          </button>
-          <div className="flex justify-between">
-            <ul className="flex gap-3">
-              <li className="py-2 px-5 font-thin text-[13px] border rounded-lg hover:text-orange-600 cursor-pointer hover:border-orange-500 ease-in-out duration-300 bg-white w-[100px] text-center">
-                Business
-              </li>
-              <li className="py-2 px-5 font-thin text-[13px] border rounded-lg hover:text-orange-600 cursor-pointer hover:border-orange-500 ease-in-out duration-300 bg-white w-[100px] text-center">
-                Travel
-              </li>
-              <li className="py-2 px-5 font-thin text-[13px] border rounded-lg hover:text-orange-600 cursor-pointer hover:border-orange-500 ease-in-out duration-300 bg-white w-[100px] text-center">
-                Fashion
-              </li>
-              <li className="py-2 px-5 font-thin text-[13px] border rounded-lg hover:text-orange-600 cursor-pointer hover:border-orange-500 ease-in-out duration-300 bg-white w-[100px] text-center">
-                Style
-              </li>
-              <li className="py-2 px-5 font-thin text-[13px] border rounded-lg hover:text-orange-600 cursor-pointer hover:border-orange-500 ease-in-out duration-300 bg-white w-[100px] text-center">
-                Magazine
-              </li>
-              <li className="py-2 px-5 font-thin text-[13px] border rounded-lg hover:text-orange-600 cursor-pointer hover:border-orange-500 ease-in-out duration-300 bg-white w-[100px] text-center">
-                Pet
-              </li>
-            </ul>
+          <div className="flex justify-between w-full items-center">
+            <button className="py-2 px-5 text-sm text-gray-600 font-thin border shadow-md rounded-lg my-5 bg-white">
+              Filter category
+            </button>
             <Link to="create-new-blog">
               <button className="font-medium text-sm px-5 flex gap-3 items-center py-2 bg-orange-600 rounded-lg text-white">
-                <FontAwesomeIcon icon={["fas", "check"]} />
+                <i className="fas fa-check"></i>
                 <p>Create New Blog</p>
               </button>
             </Link>
           </div>
+          <ul className="flex gap-3">
+            <li className="py-1 font-thin text-[13px] border rounded-lg hover:text-orange-600 cursor-pointer hover:border-orange-500 ease-in-out duration-300 bg-white w-[100px] text-center">
+              Business
+            </li>
+            <li className="py-1 font-thin text-[13px] border rounded-lg hover:text-orange-600 cursor-pointer hover:border-orange-500 ease-in-out duration-300 bg-white w-[100px] text-center">
+              Travel
+            </li>
+            <li className="py-1 font-thin text-[13px] border rounded-lg hover:text-orange-600 cursor-pointer hover:border-orange-500 ease-in-out duration-300 bg-white w-[100px] text-center">
+              Fashion
+            </li>
+            <li className="py-1 font-thin text-[13px] border rounded-lg hover:text-orange-600 cursor-pointer hover:border-orange-500 ease-in-out duration-300 bg-white w-[100px] text-center">
+              Style
+            </li>
+            <li className="py-1 font-thin text-[13px] border rounded-lg hover:text-orange-600 cursor-pointer hover:border-orange-500 ease-in-out duration-300 bg-white w-[100px] text-center">
+              Magazine
+            </li>
+            <li className="py-1 font-thin text-[13px] border rounded-lg hover:text-orange-600 cursor-pointer hover:border-orange-500 ease-in-out duration-300 bg-white w-[100px] text-center">
+              Pet
+            </li>
+          </ul>
         </div>
 
-        <div className="w-full grid grid-cols-4 gap-5">
+        <div className="w-full grid grid-cols-4 gap-5 mt-5">
           <div className="relative cursor-pointer h-fit">
             <img
               src="https://images.pexels.com/photos/17152635/pexels-photo-17152635/free-photo-of-the-arc-de-triomphe-in-paris-france.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
@@ -66,7 +65,7 @@ function UserBlogs() {
               <div className="text-white text-sm">
                 <div className="flex justify-between p-3">
                   <p className="text-xl absolute top-2 right-3">
-                    <FontAwesomeIcon icon={["fas", "heart"]} />
+                    <i className="fas fa-heart"></i>
                   </p>
                 </div>
                 <div>
@@ -99,49 +98,6 @@ function UserBlogs() {
               </div>
             </div>
           </div>
-
-          {/* <div className="col-span-1 flex flex-col gap-5">
-            <div className="">
-              <img
-                src="https://images.pexels.com/photos/267389/pexels-photo-267389.jpeg?auto=compress&cs=tinysrgb&w=600"
-                alt=""
-              />
-            </div>
-            <div className="">
-              <img
-                src="https://images.pexels.com/photos/1068640/pexels-photo-1068640.jpeg?auto=compress&cs=tinysrgb&w=600"
-                alt=""
-              />
-            </div>
-          </div>
-          <div className="col-span-1 flex flex-col gap-5">
-            <div className="">
-              <img
-                src="https://images.pexels.com/photos/3194523/pexels-photo-3194523.jpeg?auto=compress&cs=tinysrgb&w=600"
-                alt=""
-              />
-            </div>
-            <div className="">
-              <img
-                src="https://images.pexels.com/photos/17224379/pexels-photo-17224379/free-photo-of-palm-trees.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
-                alt=""
-              />
-            </div>
-          </div>
-          <div className="col-span-1 flex flex-col gap-5">
-            <div className="">
-              <img
-                src="https://images.pexels.com/photos/4240493/pexels-photo-4240493.jpeg?auto=compress&cs=tinysrgb&w=600"
-                alt=""
-              />
-            </div>
-            <div className="">
-              <img
-                src="https://images.pexels.com/photos/384555/pexels-photo-384555.jpeg?auto=compress&cs=tinysrgb&w=600"
-                alt=""
-              />
-            </div>
-          </div> */}
         </div>
       </div>
     </>

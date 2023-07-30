@@ -1,4 +1,4 @@
-import { IBlog } from "../../../Interface/blog";
+import { IBlog } from "../../../interface/blog";
 
 export interface ICreateBlogFormProps {
   values: IBlog;

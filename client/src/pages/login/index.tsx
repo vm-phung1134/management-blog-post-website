@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../config/firebase-config";
 import Spinner from "../../components/Elements/Spinner";
-import { IAuth, IUser } from "../../Interface/auth";
+import { IAuth, IUser } from "../../interface/auth";
 import LoginForm from "../../components/Form/LoginForm";
 import { useUserFromCookies } from "../../hooks/useUserFromCookies";
 import LineTitle from "../../components/Elements/LineUnderTitle";

@@ -3,6 +3,7 @@
         "fontawesome",
         "Formik",
         "fortawesome",
+        "reduxjs",
         "toastify"
     ]
 }

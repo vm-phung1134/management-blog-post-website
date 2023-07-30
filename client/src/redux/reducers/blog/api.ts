@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IBlog } from "../../../Interface/blog";
+import { IBlog } from "../../../interface/blog";
 import axios from "axios";
 import { user } from "./type";
 

@@ -2,7 +2,7 @@ import CreateBlogForm from "../../../../components/Form/CreateBlog";
 import { Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 import React, { useState } from "react";
-import { IBlog } from "../../../../Interface/blog";
+import { IBlog } from "../../../../interface/blog";
 import { createBlog } from "../../../../redux/reducers/blog/api";
 import ModalConfirm from "../../../../components/Elements/ModalAction";
 import BlogViewEdit from "./BlogView";
@@ -58,7 +58,7 @@ function CreateBlog() {
     handleToggle();
   };
   const validate = () => {};
-
+  console.log("re-render")
   return (
     <Formik
       initialValues={initialValues}
