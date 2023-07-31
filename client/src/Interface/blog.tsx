@@ -15,7 +15,7 @@ export interface IBlog {
 }
 
 export interface IBlogContent {
-  id: string;
+  id?: string;
   topic: string;
   plot: string;
   srcImg: string;

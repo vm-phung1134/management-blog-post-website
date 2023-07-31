@@ -56,4 +56,24 @@ const createBlog = createAsyncThunk(
   }
 );
 
-export { getBlogs, createBlog, getBlog, getAllBlogsAuthor };
+const updateBlog = createAsyncThunk(
+  "blog/updateBlog",
+  async (postData: IBlog) => {
+    console.log(postData.id)
+    const response = await axios.put(
+      `http://localhost:5000/blogs/${postData.id}`,
+      postData,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+    if (response.status === 200) {
+      return response.data;
+    }
+    throw new Error("Failed to update blog post");
+  }
+);
+
+export { getBlogs, createBlog, getBlog, getAllBlogsAuthor, updateBlog };

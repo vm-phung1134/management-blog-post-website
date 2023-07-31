@@ -15,7 +15,7 @@ function CardBlog(props: IBlogCardProps) {
           <div className="p-2 text-white absolute bottom-0 min-h-32 max-h-fit right-0 rounded-lg left-0 bg-black/60">
             <h1 className="font-medium text-[12px]">Business</h1>
             <Link to={`/blogs/${blog.id}`}>
-              <h2 className="lg:text-[18px] text-sm font-bold cursor-pointer py-1">
+              <h2 className="lg:text-[18px] truncate text-sm font-bold cursor-pointer py-1">
                 {blog.title}
               </h2>
             </Link>

@@ -1,4 +1,3 @@
-import CreateBlogForm from "../../../../components/Form/CreateBlog";
 import { Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 import React, { useState } from "react";
@@ -10,10 +9,7 @@ import { useUserFromCookies } from "../../../../hooks/useUserFromCookies";
 import BreadCrumbs from "../../../../components/Elements/BreadCrumb";
 import { BREAD_CRUMBS_CREATE_BLOG } from "./mock-data";
 import MenuListNavigate from "../../../../components/Elements/MenuListNavigate";
-
-export interface IContentTypeProps {
-  content: string | TrustedHTML;
-}
+import BlogForm from "../../../../components/Form/BlogForm";
 
 function CreateBlog() {
   const [open, setOpen] = useState(false);
@@ -58,7 +54,7 @@ function CreateBlog() {
     handleToggle();
   };
   const validate = () => {};
-  console.log("re-render")
+  console.log("re-render");
   return (
     <Formik
       initialValues={initialValues}
@@ -82,7 +78,8 @@ function CreateBlog() {
               <hr />
               <div className="grid grid-cols-2 gap-5 mb-20">
                 <div className="col-span-1">
-                  <CreateBlogForm
+                  <BlogForm
+                    titleForm="Create your new blog"
                     handleBlur={handleBlur}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}

@@ -1,34 +1,32 @@
 import { Link } from "react-router-dom";
 import { memo } from "react";
-import { ICreateBlogFormProps } from "./type";
+import { IBlogFormProps } from "./type";
 import InputForm from "../../Elements/InputForm";
 import CkEditorField from "../../Elements/CKEditorArea";
 
-function CreateBlogForm(props: ICreateBlogFormProps) {
-  const { handleBlur, handleSubmit, handleChange, values } = props;
+function BlogForm(props: IBlogFormProps) {
+  const { handleBlur, handleSubmit, handleChange, values, titleForm } = props;
   return (
     <>
       <form
         className="mt-10 p-10 text-sm flex flex-col gap-5 bg-white rounded-lg shadow-lg"
         onSubmit={handleSubmit}
       >
-        <h3 className="font-bold text-xl pt-5 text-orange-600">
-          Create Your New Blog
-        </h3>
+        <h3 className="font-bold text-xl pt-5 text-orange-600">{titleForm}</h3>
         <p className="font-light text-[12px] text-orange-600">
           * Here your description about your blog
         </p>
         <InputForm
           handleBlur={handleBlur}
           handleChange={handleChange}
-          values={values.title}
+          values={values?.title ?? ""}
           name="Blog title"
           label="title"
         />
         <InputForm
           handleBlur={handleBlur}
           handleChange={handleChange}
-          values={values.img}
+          values={values?.img ?? ""}
           name="Image topic"
           label="img"
         />
@@ -49,7 +47,7 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
                 <InputForm
                   handleBlur={handleBlur}
                   handleChange={handleChange}
-                  values={values.contents[0].topic}
+                  values={values?.contents[0]?.topic ?? ""}
                   name="Epic content"
                   label="contents[0].topic"
                 />
@@ -57,7 +55,7 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
                 <InputForm
                   handleBlur={handleBlur}
                   handleChange={handleChange}
-                  values={values.contents[0].srcImg}
+                  values={values?.contents[0]?.srcImg ?? ""}
                   name="Link Image"
                   label="contents[0].srcImg"
                 />
@@ -76,7 +74,7 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
                 <InputForm
                   handleBlur={handleBlur}
                   handleChange={handleChange}
-                  values={values.contents[1].topic}
+                  values={values?.contents[1]?.topic ?? ""}
                   name="Epic content"
                   label="contents[1].topic"
                 />
@@ -84,7 +82,7 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
                 <InputForm
                   handleBlur={handleBlur}
                   handleChange={handleChange}
-                  values={values.contents[1].srcImg}
+                  values={values?.contents[1]?.srcImg ?? ""}
                   name="Link Image"
                   label="contents[1].srcImg"
                 />
@@ -103,7 +101,7 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
                 <InputForm
                   handleBlur={handleBlur}
                   handleChange={handleChange}
-                  values={values.contents[2].topic}
+                  values={values?.contents[2]?.topic ?? ""}
                   name="Epic content"
                   label="contents[2].topic"
                 />
@@ -111,7 +109,7 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
                 <InputForm
                   handleBlur={handleBlur}
                   handleChange={handleChange}
-                  values={values.contents[2].srcImg}
+                  values={values?.contents[2]?.srcImg ?? ""}
                   name="Link Image"
                   label="contents[2].srcImg"
                 />
@@ -124,7 +122,7 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
             <InputForm
               handleBlur={handleBlur}
               handleChange={handleChange}
-              values={values.author.name as string}
+              values={values?.author?.name ?? ""}
               name="Author"
               label="author"
               disabled={true}
@@ -134,7 +132,7 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
             <InputForm
               handleBlur={handleBlur}
               handleChange={handleChange}
-              values={values.author.email as string}
+              values={values?.author?.email ?? ""}
               name="Email"
               label="email"
               disabled={true}
@@ -157,4 +155,4 @@ function CreateBlogForm(props: ICreateBlogFormProps) {
     </>
   );
 }
-export default memo(CreateBlogForm);
+export default memo(BlogForm);

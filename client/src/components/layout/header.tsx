@@ -20,7 +20,7 @@ function HeaderPublic() {
       });
   };
   const checkCookie = (): boolean => {
-    return userCookies.token !== undefined ? true : false;
+    return userCookies.token !== "" ? true : false;
   };
 
   // useEffect(() => {
