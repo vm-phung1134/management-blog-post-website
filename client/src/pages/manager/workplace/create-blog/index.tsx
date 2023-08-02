@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import { IBlog } from "../../../../interface/blog";
 import { createBlog } from "../../../../redux/reducers/blog/api";
 import ModalConfirm from "../../../../components/Elements/ModalAction";
-import BlogViewEdit from "./BlogView";
 import { useUserFromCookies } from "../../../../hooks/useUserFromCookies";
 import BreadCrumbs from "../../../../components/Elements/BreadCrumb";
 import { BREAD_CRUMBS_CREATE_BLOG } from "./mock-data";
 import MenuListNavigate from "../../../../components/Elements/MenuListNavigate";
 import BlogForm from "../../../../components/Form/BlogForm";
+import BlogReview from "../../../../components/Elements/BlogReview";
 
 function CreateBlog() {
   const [open, setOpen] = useState(false);
@@ -95,7 +95,7 @@ function CreateBlog() {
                     errorMessage="Blog has been cancel"
                   />
                 </div>
-                <BlogViewEdit values={values} />
+                <BlogReview values={values} />
               </div>
               <ToastContainer
                 className="font-sans"

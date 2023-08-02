@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useUserFromCookies } from "../../../hooks/useUserFromCookies";
 
 function MenuListNavigate() {
+  const [userCookies] = useUserFromCookies();
   return (
     <div className="flex justify-center w-full">
       <ul className="flex gap-10 text-sm font-medium">
@@ -8,7 +10,7 @@ function MenuListNavigate() {
           <Link to="/personal-dashboard">Dashboard</Link>
         </li>
         <li>
-          <Link to="/manager-your-blogs">Your blogs</Link>
+          `<Link to={`/manager-your-blogs/${userCookies.uid}`}>Your blogs</Link>
         </li>
         <li>
           <Link to="#">Account</Link>

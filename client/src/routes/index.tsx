@@ -19,7 +19,7 @@ const publicRoutes = [
     component: Dashboard,
   },
   {
-    path: `/manager-your-blogs`,
+    path: `/manager-your-blogs/:id`,
     component: UserBlogs,
   },
   {

@@ -1,30 +1,26 @@
-import React, { useEffect, useState } from "react";
 import { MOCK_BLOG } from "../../data/mockData";
-import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { useAppDispatch} from "../../redux/store";
 import { getBlogs } from "../../redux/reducers/blog/api";
 import LineTitle from "../../components/Elements/LineUnderTitle";
 import ButtonViewMore from "../../components/Elements/ButtonViewMore";
 import CardBlog from "../../components/Elements/BlogCard";
 import Spinner from "../../components/Elements/Spinner";
 import Carousel from "../../components/Layout/Carousel";
+import { useQuery } from "@tanstack/react-query";
+import { IBlog } from "../../interface/blog";
 
 function HomePage() {
   const dispatch = useAppDispatch();
-  const [loading, setLoading] = useState(true);
-  const { blogs } = useAppSelector((state) => state.blogReducer);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    dispatch(getBlogs());
-    const timeoutLoading = setTimeout(() => {
-      setLoading(false);
-    }, 1300);
-    return () => {
-      clearTimeout(timeoutLoading);
-    };
-  }, [dispatch]);
+  const { data, isLoading} = useQuery({
+    queryKey: ["blogs"],
+    queryFn: async () => {
+      const action = await dispatch(getBlogs());
+      return action.payload;
+    },
+  });
   return (
     <>
-      {loading === true ? (
+      {isLoading === true ? (
         <Spinner />
       ) : (
         <div>
@@ -138,7 +134,7 @@ function HomePage() {
               <h3 className="font-bold py-3 text-lg">All blog posts</h3>
               <LineTitle />
               <div className="grid lg:grid-cols-3 grid-cols-2 gap-x-5 gap-y-16">
-                {blogs.map((blog) => (
+                {data.map((blog: IBlog) => (
                   <CardBlog key={blog.id} blog={blog} />
                 ))}
               </div>

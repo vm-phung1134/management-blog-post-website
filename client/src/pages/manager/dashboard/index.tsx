@@ -1,26 +1,10 @@
-import { Link } from "react-router-dom";
+import MenuListNavigate from "../../../components/Elements/MenuListNavigate";
 function Dashboard() {
   return (
     <>
       <div className="mt-[80px] p-10 bg-slate-100 h-screen">
         <div className="flex justify-center w-full">
-          <ul className="flex gap-10 text-sm font-medium">
-            <li>
-              <Link to="/personal-dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/manager-your-blogs">Your blogs</Link>
-            </li>
-            <li>
-              <Link to="#">Account</Link>
-            </li>
-            <li>
-              <Link to="#">Plugins</Link>
-            </li>
-            <li>
-              <Link to="#">Settings</Link>
-            </li>
-          </ul>
+          <MenuListNavigate />
         </div>
         <div className="flex justify-between my-5 mx-10 bg-white px-7 py-5 rounded-full">
           <div className="flex gap-10 text-[13px] text-gray-600 font-thin">
@@ -283,7 +267,7 @@ function Dashboard() {
                     </li>
                   </ul>
                   <button className="text-[#f05129] text-[13px] text-end">
-                  Read more
+                    Read more
                   </button>
                 </div>
               </div>
