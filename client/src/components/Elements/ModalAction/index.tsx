@@ -14,6 +14,7 @@ function ModalConfirmAction(props: IModalConfirmProps) {
     action,
     successMessage,
     errorMessage,
+    className
   } = props;
   const handleDispatch = async () => {
     const resolveAfter3Sec = new Promise((resolve) =>
@@ -71,7 +72,7 @@ function ModalConfirmAction(props: IModalConfirmProps) {
           </button>
           <button
             onClick={handleDispatch}
-            className="btn capitalize bg-green-600 text-white hover:bg-green-700 font-thin"
+            className={`btn capitalize ${className} font-thin`}
           >
             Accept
           </button>

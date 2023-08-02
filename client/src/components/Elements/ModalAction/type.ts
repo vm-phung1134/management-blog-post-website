@@ -6,6 +6,7 @@ export interface IModalConfirmProps {
   message: string;
   successMessage: string;
   errorMessage: string;
+  className: string;
   open: boolean;
   action: ThunkAction<void, RootState, undefined, AnyAction>;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;

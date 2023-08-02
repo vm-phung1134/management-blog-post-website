@@ -6,6 +6,7 @@ import {
   getBlog,
   getAllBlogsAuthor,
   updateBlog,
+  deleteBlog,
 } from "./api";
 
 const initialState: BlogState = {
@@ -95,6 +96,19 @@ const blogSlice = createSlice({
       state.blog = action.payload;
     });
     builder.addCase(updateBlog.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message ?? "Something went wrong.";
+    });
+
+    // DELETE BLOG
+    builder.addCase(deleteBlog.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteBlog.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.blogAuthors = action.payload;
+    });
+    builder.addCase(deleteBlog.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error.message ?? "Something went wrong.";
     });

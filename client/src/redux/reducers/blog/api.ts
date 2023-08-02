@@ -59,7 +59,6 @@ const createBlog = createAsyncThunk(
 const updateBlog = createAsyncThunk(
   "blog/updateBlog",
   async (postData: IBlog) => {
-    console.log(postData.id)
     const response = await axios.put(
       `http://localhost:5000/blogs/${postData.id}`,
       postData,
@@ -76,4 +75,29 @@ const updateBlog = createAsyncThunk(
   }
 );
 
-export { getBlogs, createBlog, getBlog, getAllBlogsAuthor, updateBlog };
+const deleteBlog = createAsyncThunk(
+  "blog/deleteBlog",
+  async (postData: IBlog) => {
+    const response = await axios.delete(
+      `http://localhost:5000/blogs/${postData.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+    if (response.status === 200) {
+      return response.data;
+    }
+    throw new Error("Failed to delete blog post");
+  }
+);
+
+export {
+  getBlogs,
+  createBlog,
+  getBlog,
+  getAllBlogsAuthor,
+  updateBlog,
+  deleteBlog,
+};

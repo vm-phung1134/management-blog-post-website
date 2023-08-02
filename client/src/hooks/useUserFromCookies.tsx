@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Cookies from "js-cookie";
 import { IUser } from "../interface/auth";
 
@@ -11,7 +11,7 @@ export const useUserFromCookies = (): [IUser, (user: IUser) => void] => {
     avt: "",
   });
 
-  useEffect(() => {
+  useMemo(() => {
     const cookiesUserData = Cookies.get("user");
 
     if (cookiesUserData) {

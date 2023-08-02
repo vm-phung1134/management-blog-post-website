@@ -1,23 +1,45 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../redux/store";
-import { getAllBlogsAuthor } from "../../../redux/reducers/blog/api";
+import {
+  deleteBlog,
+  getAllBlogsAuthor,
+} from "../../../redux/reducers/blog/api";
 import BreadCrumbs from "../../../components/Elements/BreadCrumb";
 import { BREAD_CRUMBS_CREATE_BLOG } from "./mock-data";
 import MenuListNavigate from "../../../components/Elements/MenuListNavigate";
 import { useQuery } from "@tanstack/react-query";
 import { IBlog } from "../../../interface/blog";
 import Spinner from "../../../components/Elements/Spinner";
+import { useEffect, useState } from "react";
+import ModalConfirmAction from "../../../components/Elements/ModalAction";
+import { DEFAULT_VALUES } from "./create-blog/mock-data";
 
 function UserBlogs() {
   const dispatch = useAppDispatch();
-  const blog_id = useParams();
-  const { data, isLoading } = useQuery<IBlog[]>({
+  const blog_id = useParams<string>();
+  const [open, setOpen] = useState<boolean>(false);
+  const [blogPost, setBlogPost] = useState<IBlog>();
+  const { data = [], isLoading } = useQuery<IBlog[]>({
     queryKey: ["blogs-author"],
     queryFn: async () => {
-      const action = await dispatch(getAllBlogsAuthor(blog_id.id || ""));
+      const action = await dispatch(getAllBlogsAuthor(blog_id.id));
       return action.payload || [];
     },
   });
+  const [arrNewBlogs = data, setArrNewBlog] = useState<IBlog[]>();
+  const handleOpenModal = (blog: IBlog) => {
+    setOpen(!open);
+    setBlogPost(blog);
+  };
+  const handleDeleteBlog = async (blog: IBlog) => {
+    const newBlogs = data?.filter((item) => item.id !== blog.id);
+    await dispatch(deleteBlog(blog));
+    return setArrNewBlog(newBlogs);
+  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       {isLoading ? (
@@ -32,7 +54,7 @@ function UserBlogs() {
               <button className="py-2 px-5 text-sm text-gray-600 font-thin border shadow-md rounded-lg my-5 bg-white">
                 Filter category
               </button>
-              <Link to="create-new-blog">
+              <Link to="/manager-your-blogs/create-new-blog">
                 <button className="font-medium text-sm px-5 flex gap-3 items-center py-2 bg-orange-600 rounded-lg text-white">
                   <i className="fas fa-check"></i>
                   <p>Create New Blog</p>
@@ -61,7 +83,7 @@ function UserBlogs() {
             </ul>
           </div>
           <div className="w-full grid grid-cols-3 gap-5 mt-5">
-            {data?.map((blog) => {
+            {arrNewBlogs?.map((blog) => {
               return (
                 <div key={blog?.id} className="relative cursor-pointer h-fit">
                   <figure className="w-auto">
@@ -76,12 +98,14 @@ function UserBlogs() {
                         <button>
                           <i className="fas fa-edit"></i>
                         </button>
-                        <button>
+                        <button onClick={() => handleOpenModal(blog)}>
                           <i className="fas fa-remove"></i>
                         </button>
                       </div>
                       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <Link to={`/manager-your-blogs/update-blog/${blog?.id}`}>
+                        <Link
+                          to={`/manager-your-blogs/update-blog/${blog?.id}`}
+                        >
                           <button className="btn flex gap-2 items-center p-3 bg-transparent border-none outline-none hover:bg-transparent">
                             <img
                               className="w-20"
@@ -124,6 +148,16 @@ function UserBlogs() {
               );
             })}
           </div>
+          <ModalConfirmAction
+            open={open}
+            action={() => handleDeleteBlog(blogPost || DEFAULT_VALUES)}
+            setOpen={setOpen}
+            title="Message"
+            className="bg-red-600 text-white hover:bg-red-600"
+            message="Are you sure you want to delete this blog post ?"
+            successMessage="New blog has been created"
+            errorMessage="Blog has been cancel"
+          />
           <div className="flex justify-center my-5">
             <div className="btn-group flex gap-2">
               <button className="btn font-thin normal-case">

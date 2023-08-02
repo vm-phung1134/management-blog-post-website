@@ -87,6 +87,7 @@ function CreateBlog() {
                   />
                   <ModalConfirm
                     open={open}
+                    className="bg-green-700 text-white hover:bg-green-700"
                     action={createBlog(values)}
                     setOpen={setOpen}
                     title="Message"

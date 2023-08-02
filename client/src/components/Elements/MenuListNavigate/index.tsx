@@ -10,7 +10,7 @@ function MenuListNavigate() {
           <Link to="/personal-dashboard">Dashboard</Link>
         </li>
         <li>
-          `<Link to={`/manager-your-blogs/${userCookies.uid}`}>Your blogs</Link>
+          <Link to={`/manager-your-blogs/${userCookies.uid}`}>Your blogs</Link>
         </li>
         <li>
           <Link to="#">Account</Link>
