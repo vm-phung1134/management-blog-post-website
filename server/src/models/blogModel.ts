@@ -27,15 +27,31 @@ export class BlogModel {
     return docRef.docs.map((doc) => ({ id: doc.id, ...doc.data() } as IBlog));
   }
 
-  // GET ALL BLOGS AUTHOR
-  static async getAllBlogsByAuthor(id: string): Promise<IBlog[]> {
-    const docRef = await this.blogDoc
+  // GET ALL BLOGS AUTHOR WITH LIMIT BLOGS
+  static async getAllBlogsByAuthor(
+    id: string,
+    limit: number,
+    startAfter: any,
+    page: number
+  ): Promise<IBlog[]> {
+    let query = this.blogDoc
       .where("author.uid", "==", id)
-      .get();
+      .limit(limit);
+
+    if (startAfter) {
+      query = query.startAfter(startAfter);
+    }
+    if (page > 1) {
+      const skip = (page - 1) * limit;
+      query = query.offset(skip);
+    }
+    const docRef = await query.get();
     const blogs: IBlog[] = [];
+
     docRef.forEach((doc) => {
       blogs.push({ id: doc.id, ...doc.data() } as IBlog);
     });
+
     return blogs;
   }
 

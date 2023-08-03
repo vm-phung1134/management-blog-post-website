@@ -1,5 +1,9 @@
 import MenuListNavigate from "../../../components/Elements/MenuListNavigate";
+import { useEffect } from "react";
 function Dashboard() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div className="mt-[80px] p-10 bg-slate-100 h-screen">

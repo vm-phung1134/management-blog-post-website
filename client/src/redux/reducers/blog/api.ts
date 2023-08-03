@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IBlog } from "../../../interface/blog";
 import axios from "axios";
-import { user } from "./type";
+import { IAuthorBlogsLimit, user } from "./type";
 
 // GET ALL BLOGS
 const getBlogs = createAsyncThunk("blog/getBlogs", async () => {
@@ -15,9 +15,9 @@ const getBlogs = createAsyncThunk("blog/getBlogs", async () => {
 // GET ALL BLOGS AUTHOR
 const getAllBlogsAuthor = createAsyncThunk(
   "blog/getAllBlogsAuthor",
-  async (authorId: string | undefined) => {
+  async (params: IAuthorBlogsLimit) => {
     const response = await axios.get(
-      `http://localhost:5000/blogs/author/${authorId}`
+      `http://localhost:5000/blogs/author/${params.authorId}?page=${params.page}&limit=${params.limit}&startAfter=${params.startAfter}`
     );
     if (response.status === 200) {
       return response.data;

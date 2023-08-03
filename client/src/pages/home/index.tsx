@@ -1,5 +1,5 @@
 import { MOCK_BLOG } from "../../data/mockData";
-import { useAppDispatch} from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { getBlogs } from "../../redux/reducers/blog/api";
 import LineTitle from "../../components/Elements/LineUnderTitle";
 import ButtonViewMore from "../../components/Elements/ButtonViewMore";
@@ -11,11 +11,11 @@ import { IBlog } from "../../interface/blog";
 
 function HomePage() {
   const dispatch = useAppDispatch();
-  const { data, isLoading} = useQuery({
+  const { data = [], isLoading } = useQuery<IBlog[]>({
     queryKey: ["blogs"],
     queryFn: async () => {
       const action = await dispatch(getBlogs());
-      return action.payload;
+      return action.payload || [];
     },
   });
   return (
@@ -134,7 +134,7 @@ function HomePage() {
               <h3 className="font-bold py-3 text-lg">All blog posts</h3>
               <LineTitle />
               <div className="grid lg:grid-cols-3 grid-cols-2 gap-x-5 gap-y-16">
-                {data.map((blog: IBlog) => (
+                {data.map((blog) => (
                   <CardBlog key={blog.id} blog={blog} />
                 ))}
               </div>

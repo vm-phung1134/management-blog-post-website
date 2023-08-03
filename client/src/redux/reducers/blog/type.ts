@@ -9,5 +9,11 @@ export interface BlogState {
   isLoading: boolean;
   error: string | null;
 }
+export interface IAuthorBlogsLimit {
+  authorId: string;
+  page: number;
+  limit: number;
+  startAfter: any;
+}
 const userJson = Cookies.get("user");
 export const user: IUser = userJson ? JSON.parse(userJson) : null;

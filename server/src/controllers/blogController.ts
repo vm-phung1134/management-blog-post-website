@@ -12,6 +12,7 @@ export const BlogController = {
       res.sendStatus(500);
     }
   },
+
   async getBlog(req: Request, res: Response) {
     const id = req.params.id;
     try {
@@ -33,17 +34,30 @@ export const BlogController = {
       res.status(200).json(blogs);
     } catch (error) {}
   },
+
   async getAllBlogsByAuthor(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const blogs = await BlogModel.getAllBlogsByAuthor(id);
+      const limit = Number(req.query.limit);
+      const page = Number(req.query.page);
+      const startAfter = req.query.startAfter;
+      const blogs = await BlogModel.getAllBlogsByAuthor(
+        id,
+        limit,
+        startAfter,
+        page
+      );
       if (!blogs) {
         res.sendStatus(404).json("Blog is empty");
         return;
       }
       res.status(200).json(blogs);
-    } catch (error) {}
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
   },
+
   async updateBlog(req: Request, res: Response) {
     const blog = req.body;
     const id = req.params.id;

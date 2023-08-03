@@ -1,32 +1,38 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../redux/store";
-import {
-  deleteBlog,
-  getAllBlogsAuthor,
-} from "../../../redux/reducers/blog/api";
+import { deleteBlog } from "../../../redux/reducers/blog/api";
 import BreadCrumbs from "../../../components/Elements/BreadCrumb";
 import { BREAD_CRUMBS_CREATE_BLOG } from "./mock-data";
 import MenuListNavigate from "../../../components/Elements/MenuListNavigate";
-import { useQuery } from "@tanstack/react-query";
 import { IBlog } from "../../../interface/blog";
 import Spinner from "../../../components/Elements/Spinner";
 import { useEffect, useState } from "react";
 import ModalConfirmAction from "../../../components/Elements/ModalAction";
 import { DEFAULT_VALUES } from "./create-blog/mock-data";
+import { usePagination } from "../../../hooks/usePagination";
 
 function UserBlogs() {
   const dispatch = useAppDispatch();
   const blog_id = useParams<string>();
   const [open, setOpen] = useState<boolean>(false);
   const [blogPost, setBlogPost] = useState<IBlog>();
-  const { data = [], isLoading } = useQuery<IBlog[]>({
-    queryKey: ["blogs-author"],
-    queryFn: async () => {
-      const action = await dispatch(getAllBlogsAuthor(blog_id.id));
-      return action.payload || [];
-    },
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages] = useState<number>(10);
+
+  const { data = [], isLoading } = usePagination({
+    authorId: blog_id.id || "",
+    page: currentPage,
+    limit: 6,
+    startAfter: "",
   });
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
   const [arrNewBlogs = data, setArrNewBlog] = useState<IBlog[]>();
   const handleOpenModal = (blog: IBlog) => {
     setOpen(!open);
@@ -45,7 +51,7 @@ function UserBlogs() {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="mt-[80px] p-10 bg-slate-100 min-h-[150vh] max-h-full">
+        <div className="mt-[80px] flex flex-col justify-evenly p-10 bg-slate-100 min-h-[150vh] max-h-full">
           <div>
             <MenuListNavigate />
             <BreadCrumbs items={BREAD_CRUMBS_CREATE_BLOG} />
@@ -158,15 +164,23 @@ function UserBlogs() {
             successMessage="New blog has been created"
             errorMessage="Blog has been cancel"
           />
-          <div className="flex justify-center my-5">
+          <div className="flex justify-center my-5 mt-auto">
             <div className="btn-group flex gap-2">
-              <button className="btn font-thin normal-case">
+              <button
+                disabled={currentPage === 1}
+                onClick={handlePrevPage}
+                className="btn bg-white font-thin normal-case"
+              >
                 <i className="fas fa-chevron-left"></i> Prev
               </button>
-              <button className="btn text-orange-700 border-2 border-orange-600">
-                1
+              <button className="btn bg-white text-orange-500">
+                {currentPage}
               </button>
-              <button className="btn font-thin normal-case">
+              <button
+                disabled={currentPage === totalPages}
+                onClick={handleNextPage}
+                className="btn btn-md bg-white font-thin normal-case"
+              >
                 Next <i className="fas fa-chevron-right"></i>
               </button>
             </div>
