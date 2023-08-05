@@ -1,51 +1,16 @@
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { IModalActionProps } from "./type";
 import cn from "classnames";
-import { useMutationAPI } from "../../../hooks/useMutationAPI";
+import { IModalConfirmProps } from "./type";
 
-function ModalAction(props: IModalActionProps) {
+function ModalConfirm(props: IModalConfirmProps) {
   const {
     title,
     message,
     open,
     setOpen,
     action,
-    successMessage,
-    errorMessage,
     className,
   } = props;
-  const mutation = useMutationAPI(action);
-  const handleDispatch = async () => {
-    const resolveAfter3Sec = new Promise((resolve) =>
-      setTimeout(resolve, 1300)
-    );
-    try {
-      mutation.mutate();
-      setOpen((prev) => !prev);
-      toast.promise(
-        resolveAfter3Sec,
-        {
-          pending: "Wait a second",
-          success: successMessage,
-        },
-        {
-          position: toast.POSITION.BOTTOM_LEFT,
-        }
-      );
-    } catch (error) {
-      toast.promise(
-        resolveAfter3Sec,
-        {
-          pending: "Wait a second",
-          error: errorMessage,
-        },
-        {
-          position: toast.POSITION.BOTTOM_LEFT,
-        }
-      );
-    }
-  };
   const modalClass = cn({
     "modal modal-bottom sm:modal-middle": true,
     "modal-open": open,
@@ -69,7 +34,7 @@ function ModalAction(props: IModalActionProps) {
             Cancel
           </button>
           <button
-            onClick={handleDispatch}
+            onClick={action}
             className={`btn capitalize ${className} font-thin`}
           >
             Accept
@@ -80,4 +45,4 @@ function ModalAction(props: IModalActionProps) {
   );
 }
 
-export default ModalAction;
+export default ModalConfirm;

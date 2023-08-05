@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import React, { useState } from "react";
 import { IBlog } from "../../../../interface/blog";
 import { createBlog } from "../../../../redux/reducers/blog/api";
-import ModalConfirm from "../../../../components/Elements/ModalAction";
+import ModalAction from "../../../../components/Elements/ModalAction";
 import { useUserFromCookies } from "../../../../hooks/useUserFromCookies";
 import BreadCrumbs from "../../../../components/Elements/BreadCrumb";
 import { BREAD_CRUMBS_CREATE_BLOG } from "./mock-data";
@@ -54,7 +54,6 @@ function CreateBlog() {
     handleToggle();
   };
   const validate = () => {};
-  console.log("re-render");
   return (
     <Formik
       initialValues={initialValues}
@@ -85,7 +84,7 @@ function CreateBlog() {
                     handleSubmit={handleSubmit}
                     values={values}
                   />
-                  <ModalConfirm
+                  <ModalAction
                     open={open}
                     className="bg-green-700 text-white hover:bg-green-700"
                     action={createBlog(values)}

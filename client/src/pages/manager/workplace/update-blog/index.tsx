@@ -7,13 +7,13 @@ import { Formik } from "formik";
 import MenuListNavigate from "../../../../components/Elements/MenuListNavigate";
 import BreadCrumbs from "../../../../components/Elements/BreadCrumb";
 import { BREAD_CRUMBS_UPDATE_BLOG } from "./mock-data";
-import ModalConfirm from "../../../../components/Elements/ModalAction";
 import { ToastContainer } from "react-toastify";
 import BlogForm from "../../../../components/Form/BlogForm";
 import { useQuery } from "@tanstack/react-query";
 import { DEFAULT_VALUES } from "../create-blog/mock-data";
 import BlogReview from "../../../../components/Elements/BlogReview";
 import Spinner from "../../../../components/Elements/Spinner";
+import ModalAction from "../../../../components/Elements/ModalAction";
 
 function UpdateBlogPost() {
   const blog_id = useParams();
@@ -67,7 +67,7 @@ function UpdateBlogPost() {
                       handleSubmit={handleSubmit}
                       values={values}
                     />
-                    <ModalConfirm
+                    <ModalAction
                       open={open}
                       className="bg-green-700 text-white hover:bg-green-700"
                       action={updateBlog({ id: blog_id.id, ...values })}

@@ -1,7 +1,7 @@
 import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../redux/store";
 
-export interface IModalConfirmProps {
+export interface IModalActionProps {
   title: string;
   message: string;
   successMessage: string;
