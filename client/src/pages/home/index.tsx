@@ -24,7 +24,54 @@ function HomePage() {
         <Spinner />
       ) : (
         <div>
-          <div className="lg:mt-[100px] my-3 md:my-8 px-5 lg:mx-20">
+          <div className="h-screen mt-[50px] px-24 flex items-center">
+            <div className="grid grid-cols-2 ">
+              <div className="col-span-1">
+                <div className="flex flex-col gap-10 w-[80%]">
+                  <h1 className="text-[3.2rem] font-bold uppercase">
+                    travel with us from the comport of your{" "}
+                    <span className="text-orange-500">home</span>
+                  </h1>
+                  <p className="font-thin text-sm pr-10">
+                    DaisyUI components come with many variants necessary for
+                    design systems and you won't usually need to customize
+                    anything.
+                  </p>
+                  <div className="flex gap-5">
+                    <button className="btn outline-none px-10 text-white bg-gradient-to-r from-orange-700 to-orange-400">
+                      Get started
+                    </button>
+                    <button className="btn outline-none px-10 border-orange-500 bg-transparent text-orange-600">
+                      About us
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="col-span-1">
+                <div className="flex justify-end">
+                  <div className="card w-96 rounded-lg shadow-xl">
+                    <figure>
+                      <img
+                        src="https://images.pexels.com/photos/4353813/pexels-photo-4353813.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        alt="Shoes"
+                        className="rounded-2xl h-[25rem]  object-cover w-full"
+                      />
+                    </figure>
+                  </div>
+                </div>
+                <div className="card w-80 -mt-[30%] ml-[10%] rounded-lg bg-base-100 shadow-xl">
+                  <figure>
+                    <img
+                      src="https://images.pexels.com/photos/2827374/pexels-photo-2827374.jpeg?auto=compress&cs=tinysrgb&w=600"
+                      alt="Shoes"
+                      className="rounded-xl h-[21rem] object-cover w-full"
+                    />
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="px-5 lg:mx-20">
             <div className="text-center pt-10 flex flex-col justify-center">
               <h1 className="text-black font-bold text-[30px] lg:text-[40px]">
                 Top Blog Trending
@@ -127,18 +174,19 @@ function HomePage() {
                   )}
                 </div>
               </div>
-              <ButtonViewMore />
+              <ButtonViewMore linkSrc="" />
             </div>
             {/* ALL BLOG */}
-            <div className="lg:py-[30px] py-[25px]">
+            <div className="lg:py-[30px] mb-[10%] py-[25px]">
               <h3 className="font-bold py-3 text-lg">All blog posts</h3>
               <LineTitle />
               <div className="grid lg:grid-cols-3 grid-cols-2 gap-x-5 gap-y-16">
-                {data.map((blog) => (
-                  <CardBlog key={blog.id} blog={blog} />
-                ))}
+                {data.map(
+                  (blog, index) =>
+                    index < 6 && <CardBlog key={blog.id} blog={blog} />
+                )}
               </div>
-              <ButtonViewMore />
+              <ButtonViewMore linkSrc="/all-blogs-page" />
             </div>
           </div>
         </div>

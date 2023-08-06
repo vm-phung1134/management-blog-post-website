@@ -66,7 +66,7 @@ function Carousel() {
       <Slider className="mx-[5px] lg:mx-0" {...settings}>
         {contentCarousel.map((slide) => (
           <div key={slide.id}>
-            <div className="grid grid-cols-1 lg:grid-cols-10 gap-5 lg:gap-8 mt-20 rounded-md">
+            <div className="grid grid-cols-1 lg:grid-cols-10 gap-5 lg:gap-8 mt-10 rounded-md">
               <div className="lg:col-span-4">
                 <img
                   className="bg-cover w-full object-cover shadow-xl h-[200px] lg:h-[390px]"

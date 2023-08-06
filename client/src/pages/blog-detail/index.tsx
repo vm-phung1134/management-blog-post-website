@@ -75,7 +75,7 @@ function InfoBlog() {
       {isLoading === true ? (
         <Spinner />
       ) : (
-        <div className="bg-[url('https://support.honorofkings.com/assets/home_intro_bg.4b1332d7.png')] lg:bg-cover bg-contain bg-no-repeat">
+        <div>
           <div className="mx-20 py-[150px] lg:py-[100px]">
             <div className="text-[13px] breadcrumbs px-10 my-5">
               <ul>
@@ -157,7 +157,7 @@ function InfoBlog() {
                         <p className="text-4xl font-bold w-full text-orange-400">
                           {data?.title}
                         </p>
-                        <ButtonViewMore />
+                        <ButtonViewMore linkSrc="" />
                       </div>
                     </div>
                     <div className="absolute bottom-0 left-0 right-0">

@@ -1,3 +1,4 @@
+import AllBlogsPage from "../pages/all-blogs";
 import InfoBlog from "../pages/blog-detail";
 import HomePage from "../pages/home";
 import Dashboard from "../pages/manager/dashboard";
@@ -29,6 +30,10 @@ const publicRoutes = [
   {
     path: `/manager-your-blogs/update-blog/:id`,
     component: UpdateBlogPost,
+  },
+  {
+    path: "/all-blogs-page",
+    component: AllBlogsPage,
   },
 ];
 
