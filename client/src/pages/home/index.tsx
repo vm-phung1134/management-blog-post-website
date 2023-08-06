@@ -8,6 +8,7 @@ import Spinner from "../../components/Elements/Spinner";
 import Carousel from "../../components/Layout/Carousel";
 import { useQuery } from "@tanstack/react-query";
 import { IBlog } from "../../interface/blog";
+import CategoriesBlog from "../../components/Elements/CategoriesBLog";
 
 function HomePage() {
   const dispatch = useAppDispatch();
@@ -73,8 +74,8 @@ function HomePage() {
           </div>
           <div className="px-5 lg:mx-20">
             <div className="text-center pt-10 flex flex-col justify-center">
-              <h1 className="text-black font-bold text-[30px] lg:text-[40px]">
-                Top Blog Trending
+              <h1 className="text-black font-bold text-[30px] lg:text-[40px] uppercase">
+                Top Blog <span className="text-orange-600">trending</span>
               </h1>
               <LineTitle />
               <p className="text-base font-thin">
@@ -84,7 +85,9 @@ function HomePage() {
             <Carousel />
             {/* RECENT BLOG */}
             <div className="mt-20">
-              <h3 className="font-bold py-3 text-lg">Recent blog posts</h3>
+              <h3 className="font-bold py-3 text-2xl uppercase">
+                Recent blog <span className="text-orange-600">posts</span>
+              </h3>
               <LineTitle />
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
                 <div className="flex flex-col gap-5">
@@ -176,9 +179,18 @@ function HomePage() {
               </div>
               <ButtonViewMore linkSrc="" />
             </div>
+            <div className="my-24">
+              <h3 className="font-bold py-3 text-2xl uppercase">
+                Popular <span className="text-orange-600">topics</span>
+              </h3>
+              <LineTitle />
+              <CategoriesBlog />
+            </div>
             {/* ALL BLOG */}
             <div className="lg:py-[30px] mb-[10%] py-[25px]">
-              <h3 className="font-bold py-3 text-lg">All blog posts</h3>
+              <h3 className="font-bold py-3 text-2xl uppercase">
+                All blog <span className="text-orange-600">posts</span>
+              </h3>
               <LineTitle />
               <div className="grid lg:grid-cols-3 grid-cols-2 gap-x-5 gap-y-16">
                 {data.map(
