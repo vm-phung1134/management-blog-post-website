@@ -7,6 +7,7 @@ import ButtonViewMore from "../../components/Elements/ButtonViewMore";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../components/Elements/Spinner";
 import { IBlogContent } from "../../interface/blog";
+import CreateCommentForm from "../../components/Form/CommentForm";
 
 export const SideBarBlogCardHorizon = () => {
   return (
@@ -254,6 +255,8 @@ function InfoBlog() {
                       </div>
                       <div className="w-20 border border-orange-600"></div>
                     </div>
+                    {/* COMMENT POST */}
+                    <CreateCommentForm />
                   </div>
                 </div>
               </div>

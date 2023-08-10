@@ -1,14 +1,14 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch } from 'react-redux';
-import logger from 'redux-logger';
-import blogSlice from './reducers/blog';
-import { useSelector } from 'react-redux';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch } from "react-redux";
+import logger from "redux-logger";
+import { useSelector } from "react-redux";
+import blogSlice from "./reducers/blog";
+import commentSlice from "./reducers/comment";
 
 // Import reducers
-
-
 const rootReducer = combineReducers({
   blogReducer: blogSlice,
+  commentReducer: commentSlice,
 });
 
 const store = configureStore({

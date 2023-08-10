@@ -22,7 +22,7 @@ const initialState: BlogState = {
     tags: [],
     likes: 0,
     views: 0,
-    comments: 0,
+    comments: [],
   },
   isLoading: false,
   error: null,

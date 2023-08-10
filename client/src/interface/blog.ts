@@ -1,4 +1,5 @@
 import { IUser } from "./auth";
+import { ICommentItem } from "./comment";
 
 export interface IBlog {
   id?: string;
@@ -11,7 +12,7 @@ export interface IBlog {
   tags: string[];
   likes: number;
   views: number;
-  comments: number;
+  comments?: ICommentItem[];
 }
 
 export interface IBlogContent {

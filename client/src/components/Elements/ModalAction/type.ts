@@ -4,8 +4,8 @@ import { RootState } from "../../../redux/store";
 export interface IModalActionProps {
   title: string;
   message: string;
-  successMessage: string;
-  errorMessage: string;
+  successMessage?: string;
+  errorMessage?: string;
   className: string;
   open: boolean;
   action: ThunkAction<void, RootState, undefined, AnyAction>;

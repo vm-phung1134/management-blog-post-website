@@ -48,7 +48,7 @@ function CreateBlog() {
     tags: ["Business", "Travel", "Technology"],
     likes: 0,
     views: 0,
-    comments: 0,
+    comments: [],
   };
   const submitForm = () => {
     handleToggle();
