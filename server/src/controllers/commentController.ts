@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { CommentModel } from "../models/commentModel";
 
 export const CommentController = {
-  async createBlog(req: Request, res: Response) {
+  async createComment(req: Request, res: Response) {
     const comment = req.body;
     try {
       await CommentModel.createComment(comment);

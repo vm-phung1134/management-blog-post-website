@@ -69,13 +69,16 @@ export const BlogController = {
       res.sendStatus(500);
     }
   },
+
   async deleteBlog(req: Request, res: Response) {
     const id = req.params.id;
     try {
-      await BlogModel.deleteBlog(id);
-      res.status(200).json({
-        message: "Blog has been deleted successfully",
-      });
+      const blogs = await BlogModel.deleteBlog(id);
+      if (!blogs) {
+        res.sendStatus(404);
+        return false;
+      }
+      return res.status(200).json(blogs);
     } catch (err) {
       console.error(err);
       res.sendStatus(500);

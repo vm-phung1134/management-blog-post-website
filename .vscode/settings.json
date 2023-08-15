@@ -4,6 +4,7 @@
         "Formik",
         "fortawesome",
         "reduxjs",
-        "toastify"
+        "toastify",
+        "TYPEAUTHOR"
     ]
 }

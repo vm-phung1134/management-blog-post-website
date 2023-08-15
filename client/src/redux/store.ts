@@ -4,11 +4,15 @@ import logger from "redux-logger";
 import { useSelector } from "react-redux";
 import blogSlice from "./reducers/blog";
 import commentSlice from "./reducers/comment";
+import followerSlice from "./reducers/follower";
+import followingSlice from "./reducers/following";
 
 // Import reducers
 const rootReducer = combineReducers({
   blogReducer: blogSlice,
   commentReducer: commentSlice,
+  followerReducer: followerSlice,
+  followingReducer: followingSlice,
 });
 
 const store = configureStore({

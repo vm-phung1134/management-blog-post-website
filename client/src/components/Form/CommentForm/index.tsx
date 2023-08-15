@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Formik } from "formik";
 import { useUserFromCookies } from "../../../hooks/useUserFromCookies";
@@ -11,32 +12,30 @@ import {
 } from "../../../redux/reducers/comment/api";
 import { useQuery } from "@tanstack/react-query";
 import { useAppDispatch } from "../../../redux/store";
+import { useCheckUserCookies } from "../../../hooks/useCheckUserCookies";
 
 function CreateCommentForm() {
   const navigator = useNavigate();
   const [userCookies] = useUserFromCookies();
+  const isEmptyUserCookies = useCheckUserCookies(userCookies);
   const [stateLogin, setStateLogin] = useState(false);
-  const [newDataComment, setNewDataComment] = useState<ICommentItem[]>([]);
   const blog_id = useParams();
   const dispatch = useAppDispatch();
   const { data = [] } = useQuery<ICommentItem[]>({
     queryKey: ["comments", blog_id.id],
     queryFn: async () => {
       const action = await dispatch(getAllComments(blog_id.id || ""));
-      return action.payload || [];
+      return action.payload;
     },
   });
+  const [newDataComment, setNewDataComment] = useState<ICommentItem[]>([]);
   const initialValues: ICommentItem = {
     author: userCookies,
     content: "",
     postID: blog_id?.id || "",
   };
   const submitForm = (values: ICommentItem) => {
-    if (
-      userCookies.token === "" &&
-      userCookies.email === "" &&
-      userCookies.uid === ""
-    ) {
+    if (isEmptyUserCookies) {
       setStateLogin(!stateLogin);
     } else {
       setNewDataComment((prev) => [values, ...prev]);
@@ -45,7 +44,9 @@ function CreateCommentForm() {
   };
   const validate = () => {};
   useEffect(() => {
-    setNewDataComment(data);
+    if (data && data.length > 0) {
+      setNewDataComment(data);
+    }
   }, [data]);
   return (
     <Formik
@@ -144,7 +145,10 @@ function CreateCommentForm() {
               })}
             </div>
             <div>
-              <button className="btn normal-case font-medium w-full text-orange-600"> View more comments</button>
+              <button className="btn normal-case font-medium w-full text-orange-600">
+                {" "}
+                View more comments
+              </button>
             </div>
           </div>
         );

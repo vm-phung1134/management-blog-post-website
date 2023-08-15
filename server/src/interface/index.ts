@@ -32,3 +32,23 @@ export interface ICommentItem {
   content: string;
   postID: string;
 }
+
+export interface IFollower {
+  id: string;
+  uid: string;
+  email: string;
+  name: string;
+  token: string;
+  avt: string;
+  authorID: string;
+}
+
+export interface IFollowing {
+  id: string;
+  uid: string;
+  email: string;
+  name: string;
+  token: string;
+  avt: string;
+  authorID: string;
+}

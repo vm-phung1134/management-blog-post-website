@@ -1,9 +1,9 @@
 export interface IUser {
-  uid: string | undefined;
-  email: string | undefined;
-  name: string | undefined;
-  token: string | undefined;
-  avt: string | undefined;
+  uid: string;
+  email: string;
+  name: string;
+  token: string;
+  avt: string;
 }
 
 export interface IAuth {

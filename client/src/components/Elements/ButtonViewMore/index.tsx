@@ -9,7 +9,7 @@ function ButtonViewMore(props: IButtonViewProps) {
     <>
       <div className=" flex justify-end mt-10">
         <Link to={props.linkSrc}>
-          <button className="py-3 border flex gap-x-3 items-center bg-transparent text-sm border-gray-400 px-10">
+          <button className="btn w-40 text-[12px] font-medium">
             <p>VIEW MORE</p>
             <i className="fas fa-arrow-right"></i>
           </button>

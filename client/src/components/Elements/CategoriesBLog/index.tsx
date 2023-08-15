@@ -16,7 +16,7 @@ function CategoriesBlog() {
         <Slider {...settings}>
           {CATEGORIES_DATA.map((cate) => {
             return (
-              <div className="cursor-pointer py-5">
+              <div key={cate.id} className="cursor-pointer py-5">
                 <div className="card mx-2 w-auto bg-base-100 shadow-xl">
                   <figure>
                     <img src={cate.img} alt="Shoes" />
