@@ -6,9 +6,9 @@ import { useAppDispatch } from "../redux/store";
 
 export const usePagination = (props: IAuthorBlogsLimit) => {
   const dispatch = useAppDispatch();
-  const { page, limit, startAfter} = props;
+  const { page, limit, authorId } = props;
   return useQuery<IBlog[]>({
-    queryKey: ["blogs-author", page, limit, startAfter],
+    queryKey: ["blogs-author", page, limit, authorId],
     queryFn: async () => {
       const action = await dispatch(getAllBlogsAuthor(props));
       return action.payload || [];

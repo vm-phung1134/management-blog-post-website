@@ -24,7 +24,7 @@ function CardBlog(props: IBlogCardProps) {
               dangerouslySetInnerHTML={{ __html: blog?.description }}
             />
           </div>
-          <div className="top-3 left-5 right-5 absolute text-green-500 text-2xl">
+          <div className="top-3 left-5 right-5 absolute text-gray-500 text-2xl">
             <div className="flex items-center justify-between">
               <div>
                 {blog?.tags.map(

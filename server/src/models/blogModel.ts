@@ -31,16 +31,12 @@ export class BlogModel {
   static async getAllBlogsByAuthor(
     id: string,
     limit: number,
-    startAfter: any,
     page: number
   ): Promise<IBlog[]> {
     let query = this.blogDoc
       .where("author.uid", "==", id)
       .limit(limit);
 
-    if (startAfter) {
-      query = query.startAfter(startAfter);
-    }
     if (page > 1) {
       const skip = (page - 1) * limit;
       query = query.offset(skip);

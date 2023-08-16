@@ -1,9 +1,9 @@
 export interface IUser {
-  id: string;
+  uid: string;
   email: string;
   name: string;
-  position?: string;
-  profilePic: string;
+  token: string;
+  avt: string;
 }
 
 export interface IBlog {

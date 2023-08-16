@@ -6,9 +6,11 @@ import blogSlice from "./reducers/blog";
 import commentSlice from "./reducers/comment";
 import followerSlice from "./reducers/follower";
 import followingSlice from "./reducers/following";
+import authSlice from "./reducers/auth";
 
 // Import reducers
 const rootReducer = combineReducers({
+  authReducer: authSlice,
   blogReducer: blogSlice,
   commentReducer: commentSlice,
   followerReducer: followerSlice,

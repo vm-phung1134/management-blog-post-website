@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Link, useParams } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useAppDispatch } from "../../../redux/store";
 import { deleteBlog } from "../../../redux/reducers/blog/api";
 import BreadCrumbs from "../../../components/Elements/BreadCrumb";
@@ -14,20 +14,20 @@ import { usePagination } from "../../../hooks/usePagination";
 // import { toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import ModalConfirm from "../../../components/Elements/ModalConfirm";
+import { useUserFromCookies } from "../../../hooks/useUserFromCookies";
 
 function UserBlogs() {
   const dispatch = useAppDispatch();
-  const blog_id = useParams<string>();
+  const [userCookies] = useUserFromCookies();
   const [open, setOpen] = useState<boolean>(false);
   const [blogPost = DEFAULT_VALUES, setBlogPost] = useState<IBlog>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages] = useState<number>(10);
 
   const { data = [], isLoading } = usePagination({
-    authorId: blog_id.id || "",
+    authorId: userCookies.uid || "",
     page: currentPage,
     limit: 6,
-    startAfter: "",
   });
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);

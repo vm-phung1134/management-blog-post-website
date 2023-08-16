@@ -44,7 +44,6 @@ export const BlogController = {
       const blogs = await BlogModel.getAllBlogsByAuthor(
         id,
         limit,
-        startAfter,
         page
       );
       if (!blogs) {

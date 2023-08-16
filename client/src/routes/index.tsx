@@ -5,6 +5,7 @@ import Dashboard from "../pages/manager/dashboard";
 import UserBlogs from "../pages/manager/workplace";
 import CreateBlog from "../pages/manager/workplace/create-blog";
 import UpdateBlogPost from "../pages/manager/workplace/update-blog";
+import MultiSearchPage from "../pages/search";
 
 const publicRoutes = [
   {
@@ -34,6 +35,10 @@ const publicRoutes = [
   {
     path: "/all-blogs-page",
     component: AllBlogsPage,
+  },
+  {
+    path: "/all-blogs-page/search-result",
+    component: MultiSearchPage,
   },
 ];
 

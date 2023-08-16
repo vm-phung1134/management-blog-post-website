@@ -16,8 +16,10 @@ import blogRoute from "./src/routes/blogRoute";
 import commentRoute from "./src/routes/commentRoute";
 import followerRoute from "./src/routes/followerRoute";
 import followingRoute from "./src/routes/followingRoute";
+import authRoute from "./src/routes/authRoute";
 
 // Mouting the route
+app.use("/authors", authRoute);
 app.use("/blogs", blogRoute);
 app.use("/blog/comments", commentRoute);
 app.use("/follower", followerRoute);

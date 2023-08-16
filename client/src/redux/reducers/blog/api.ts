@@ -17,7 +17,7 @@ const getAllBlogsAuthor = createAsyncThunk(
   "blog/getAllBlogsAuthor",
   async (params: IAuthorBlogsLimit) => {
     const response = await axios.get(
-      `http://localhost:5000/blogs/author/${params.authorId}?page=${params.page}&limit=${params.limit}&startAfter=${params.startAfter}`
+      `http://localhost:5000/blogs/author/${params.authorId}?page=${params.page}&limit=${params.limit}`
     );
     if (response.status === 200) {
       return response.data;
