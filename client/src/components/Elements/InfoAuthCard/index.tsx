@@ -22,18 +22,12 @@ function InfoAuthCard(props: IInfoAuthCardProps) {
               />
             </div>
             <div>
-              <h2 className="lg:text-sm group-hover:text-orange-200 truncate text-sm font-medium uppercase cursor-pointer">
+              <h2 className="lg:text-sm group-hover:text-orange-200 truncate text-sm font-medium normal-case cursor-pointer">
                 {auth?.name}
               </h2>
-              <p className="text-sm font-thin">{auth?.email}</p>
+              <p className="text-[13px] font-thin">{auth?.email}</p>
             </div>
           </div>
-          {/* <div className="top-3 left-5 right-5 absolute text-gray-500 text-2xl">
-            <div className="flex items-center justify-between">
-
-              <i className="fas fa-share-nodes"></i>
-            </div>
-          </div> */}
         </div>
       </div>
     </>

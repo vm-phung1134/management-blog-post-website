@@ -8,6 +8,7 @@ import store from "./redux/store";
 import { AccessTokenProvider } from "./contexts/accessToken";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
+import { SearchProvider } from "./contexts/searchValue";
 
 const queryClient = new QueryClient();
 
@@ -21,7 +22,9 @@ root.render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <AccessTokenProvider>
-          <App />
+          <SearchProvider>
+            <App />
+          </SearchProvider>
         </AccessTokenProvider>
       </QueryClientProvider>
     </BrowserRouter>

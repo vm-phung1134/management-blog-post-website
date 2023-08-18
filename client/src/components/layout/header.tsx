@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase-config";
 import { useUserFromCookies } from "../../hooks/useUserFromCookies";
+import SearchFormBox from "../Form/SearchForm";
 
 function HeaderPublic() {
   const [activeSideBar, setActiveSideBar] = useState("-300px");
@@ -40,17 +41,7 @@ function HeaderPublic() {
             alt="LOGO"
           />
         </div>
-        <div className="flex items-center relative justify-center lg:justify-start">
-          <input
-            className="px-4 w-[80%] py-[6px]  focus:outline-none text-sm border border-gray-300 rounded-2xl placeholder:text-sm"
-            type="text"
-            name="search"
-            placeholder="Search..."
-          />
-          <div className="absolute right-[15%] lg:right-[25%]">
-            <i className="fas fa-magnifying-glass"></i>
-          </div>
-        </div>
+        <SearchFormBox />
         <div className="lg:flex justify-center items-center hidden">
           <Link to="/" className="flex justify-center w-full">
             <img
