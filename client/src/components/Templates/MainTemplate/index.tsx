@@ -1,14 +1,14 @@
 import React from "react";
-import HeaderPublic from "../../Layout/Header";
 import FooterPublic from "../../Layout/Footer";
+import Navbar from "../../Layout/Navbar";
 
 const MainTemplate = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
-      <HeaderPublic />
+    <>
+      <Navbar />
       {children}
       <FooterPublic />
-    </div>
+    </>
   );
 };
 

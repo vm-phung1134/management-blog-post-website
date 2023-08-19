@@ -41,7 +41,9 @@ function AllBlogsPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setFilteredData(data);
+    if (data && data.length > 0) {
+      setFilteredData(data);
+    }
   }, [data]);
   return (
     <>
@@ -82,13 +84,6 @@ function AllBlogsPage() {
                 >
                   Clear filter
                 </button>
-                {/* <select className="select focus:outline-none select-bordered font-medium w-full max-w-xs">
-                  <option disabled>
-                    Other Tags
-                  </option>
-                  <option>Han Solo</option>
-                  <option>Greeds</option>
-                </select> */}
               </div>
             </div>
 

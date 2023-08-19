@@ -48,7 +48,7 @@ function FooterPublic() {
               />
             </div>
             <div className="lg:col-span-3 text-center">
-              <button className="py-4 bg-[#e84d1d] text-white px-10 lg:px-20 font-medium uppercase rounded-full text-[12px] lg:text-sm">
+              <button className="py-4 bg-gradient-to-r from-orange-800 to-orange-500 text-white px-10 lg:px-20 font-medium uppercase rounded-full text-[12px] lg:text-sm">
                 Subscribe
               </button>
             </div>

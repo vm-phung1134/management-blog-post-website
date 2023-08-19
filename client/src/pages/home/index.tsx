@@ -9,6 +9,7 @@ import Carousel from "../../components/Layout/Carousel";
 import { useQuery } from "@tanstack/react-query";
 import { IBlog } from "../../interface/blog";
 import CategoriesBlog from "../../components/Elements/CategoriesBLog";
+import { useEffect } from "react";
 
 function HomePage() {
   const dispatch = useAppDispatch();
@@ -19,9 +20,12 @@ function HomePage() {
       return action.payload || [];
     },
   });
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
-      {isLoading === true ? (
+      {isLoading && data.length === 0 ? (
         <Spinner />
       ) : (
         <div>
