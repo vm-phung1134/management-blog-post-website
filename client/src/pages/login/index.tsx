@@ -1,25 +1,20 @@
 // IMPORT HOOKS
 import { memo, useEffect, useState } from "react";
 import { Formik } from "formik";
-import { useNavigate } from "react-router-dom";
-import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../../config/firebase-config";
 import Spinner from "../../components/Elements/Spinner";
-import { IAuth, IUser } from "../../interface/auth";
+import { IAuth} from "../../interface/auth";
 import LoginForm from "../../components/Form/LoginForm";
-import { useUserFromCookies } from "../../hooks/useUserFromCookies";
 import LineTitle from "../../components/Elements/LineUnderTitle";
+import { useAuth } from "../../contexts/authLoginState";
 
 function Login() {
-  // DEFINE
-  const navigator = useNavigate();
-  const [, setUserCookies] = useUserFromCookies();
+  const { signInWithGoogle } = useAuth();
   const [loading, setLoading] = useState(true);
   const [isActive, toggleActive] = useState(false);
   useEffect(() => {
     const timeoutLoading = setTimeout(() => {
       setLoading(false);
-    }, 0);
+    }, 1000);
     return () => {
       clearTimeout(timeoutLoading);
     };
@@ -29,24 +24,6 @@ function Login() {
     password: "",
   };
   const submitForm = () => {};
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then(async (result) => {
-        const token = await result.user.getIdToken();
-        const userInfo: IUser = {
-          uid: result.user.uid ?? "",
-          email: result.user.email ?? "",
-          name: result.user.displayName ?? "",
-          token: token,
-          avt: result.user.photoURL ?? "",
-        };
-        setUserCookies(userInfo);
-        navigator("/");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
   const validate = (values: IAuth) => {
     let errors: any = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;

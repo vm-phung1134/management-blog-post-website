@@ -13,9 +13,20 @@ const publicRoutes = [
     component: HomePage,
   },
   {
+    path: "/all-blogs-page",
+    component: AllBlogsPage,
+  },
+  {
     path: `/blogs/:id`,
     component: InfoBlog,
   },
+  {
+    path: "/all-blogs-page/search-result",
+    component: MultiSearchPage,
+  },
+];
+
+const privateRoutes = [
   {
     path: `/personal-dashboard`,
     component: Dashboard,
@@ -32,14 +43,6 @@ const publicRoutes = [
     path: `/manager-your-blogs/update-blog/:id`,
     component: UpdateBlogPost,
   },
-  {
-    path: "/all-blogs-page",
-    component: AllBlogsPage,
-  },
-  {
-    path: "/all-blogs-page/search-result",
-    component: MultiSearchPage,
-  },
 ];
 
-export default publicRoutes;
+export { publicRoutes, privateRoutes };

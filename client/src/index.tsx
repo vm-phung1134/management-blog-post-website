@@ -9,6 +9,7 @@ import { AccessTokenProvider } from "./contexts/accessToken";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import { SearchProvider } from "./contexts/searchValue";
+import { AuthProvider } from "./contexts/authLoginState";
 
 const queryClient = new QueryClient();
 
@@ -20,13 +21,15 @@ const root = createRoot(rootElement as any);
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <AccessTokenProvider>
-          <SearchProvider>
-            <App />
-          </SearchProvider>
-        </AccessTokenProvider>
-      </QueryClientProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <AccessTokenProvider>
+            <SearchProvider>
+              <App />
+            </SearchProvider>
+          </AccessTokenProvider>
+        </QueryClientProvider>
+      </AuthProvider>
     </BrowserRouter>
   </Provider>
 );

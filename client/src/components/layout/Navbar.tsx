@@ -1,26 +1,14 @@
-import { Link, useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
-import { signOut } from "firebase/auth";
-import { auth } from "../../config/firebase-config";
+import { Link } from "react-router-dom";
 import { useUserFromCookies } from "../../hooks/useUserFromCookies";
 import SearchFormBox from "../Form/SearchForm";
 import { useCheckUserCookies } from "../../hooks/useCheckUserCookies";
 import SideBar from "./SideBar";
+import { useAuth } from "../../contexts/authLoginState";
 
 function Navbar() {
-  const navigator = useNavigate();
+  const { logout } = useAuth();
   const [userCookies] = useUserFromCookies();
   const isEmptyUserCookies = useCheckUserCookies(userCookies);
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        Cookies.remove("user");
-        navigator("/login");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-0 gap-y-1 px-5 lg:px-20 py-5 border-b shadow-md border-gray-300 lg:fixed lg:top-0 w-full z-10 bg-white/95">
@@ -95,7 +83,7 @@ function Navbar() {
                   <li>
                     <Link to="#">Settings</Link>
                   </li>
-                  <li onClick={handleLogout}>
+                  <li onClick={logout}>
                     <Link to="#">Sign Out</Link>
                   </li>
                 </ul>

@@ -12,7 +12,7 @@ function CardBlog(props: IBlogCardProps) {
             src={blog?.img}
             alt=""
           />
-          <div className="p-2 text-white absolute group-hover:pt-1/2 bottom-0 right-0 rounded-lg left-0 bg-black/70">
+          <div className="px-5 py-2 text-white absolute group-hover:pt-1/2 bottom-0 right-0 rounded-lg left-0 bg-black/70">
             <p className="text-sm font-thin">Now 15, 2023</p>
             <Link to={`/blogs/${blog?.id}`}>
               <h2 className="lg:text-[17px] group-hover:text-orange-200 truncate text-sm font-medium uppercase cursor-pointer py-3">
@@ -30,7 +30,7 @@ function CardBlog(props: IBlogCardProps) {
                 {blog?.tags.map(
                   (item, index) =>
                     index < 2 && (
-                      <button key={item} className="btn btn-xs mr-2 rounded-none text-[10px] bg-orange-500 border-none text-white">
+                      <button key={item} className="btn btn-xs mr-2 rounded-md capitalize text-[10px] bg-orange-500 border-none text-white">
                         {item}
                       </button>
                     )

@@ -8,7 +8,7 @@ function CategoriesBlog() {
     autoplaySpeed: 3000,
     infinite: true,
     speed: 1500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
   };
   return (
