@@ -32,7 +32,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [userCookies, setUserCookies] = useUserFromCookies();
   const isEmptyUserCookies = useCheckUserCookies(userCookies);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  console.log(isAuthenticated, isEmptyUserCookies);
   useMemo(() => {
     setIsAuthenticated(isEmptyUserCookies ? false : true);
   }, [isEmptyUserCookies]);

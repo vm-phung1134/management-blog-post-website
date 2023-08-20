@@ -1,3 +1,4 @@
+import { ICategoriesItem } from "../components/Elements/CategoriesBLog/type";
 import { IUser } from "./auth";
 import { ICommentItem } from "./comment";
 
@@ -9,7 +10,7 @@ export interface IBlog {
   author: IUser;
   description: string;
   contents: IBlogContent[];
-  tags: string[];
+  tags?: ICategoriesItem[];
   likes: number;
   views: number;
   comments?: ICommentItem[];

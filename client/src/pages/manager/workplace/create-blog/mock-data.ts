@@ -57,7 +57,7 @@ export const DEFAULT_VALUES: IBlog = {
         "https://images.pexels.com/photos/2563681/pexels-photo-2563681.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
   ],
-  tags: ["Business", "Travel", "Technology"],
+  tags: [],
   likes: 0,
   views: 0,
   comments: [],

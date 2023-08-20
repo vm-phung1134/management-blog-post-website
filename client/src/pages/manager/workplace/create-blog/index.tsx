@@ -10,11 +10,13 @@ import { BREAD_CRUMBS_CREATE_BLOG } from "./mock-data";
 import MenuListNavigate from "../../../../components/Elements/MenuListNavigate";
 import BlogForm from "../../../../components/Form/BlogForm";
 import BlogReview from "../../../../components/Elements/BlogReview";
+import { ICategoriesItem } from "../../../../components/Elements/CategoriesBLog/type";
 
 function CreateBlog() {
   const [open, setOpen] = useState(false);
   const handleToggle = () => setOpen((prev) => !prev);
   const [userCookies] = useUserFromCookies();
+  const [selectedValues, setSelectedValues] = useState<ICategoriesItem[]>([]);
   const initialValues: IBlog = {
     title: "Top 25 Free & Premium Headless",
     releaseDate: "",
@@ -45,7 +47,6 @@ function CreateBlog() {
           "https://images.pexels.com/photos/2563681/pexels-photo-2563681.jpeg?auto=compress&cs=tinysrgb&w=600",
       },
     ],
-    tags: ["Business", "Travel", "Technology"],
     likes: 0,
     views: 0,
     comments: [],
@@ -83,11 +84,13 @@ function CreateBlog() {
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
                     values={values}
+                    selectedValues={selectedValues}
+                    setSelectedValues={setSelectedValues}
                   />
                   <ModalAction
                     open={open}
                     className="bg-green-700 text-white hover:bg-green-700"
-                    action={createBlog(values)}
+                    action={createBlog({ tags: selectedValues, ...values })}
                     setOpen={setOpen}
                     title="Message"
                     message="Are you sure you want to create this new blog post ?"
@@ -95,13 +98,13 @@ function CreateBlog() {
                     errorMessage="Blog has been cancel"
                   />
                 </div>
-                <div className="col-span-1 pt-10 h-[135vh] bg-white rounded-lg shadow-lg overflow-y-scroll hide-scrollbar my-[150px] lg:my-[40px]">
+                <div className="col-span-1 pt-10 h-[151vh] bg-white rounded-lg shadow-lg overflow-y-scroll hide-scrollbar my-[150px] lg:my-[40px]">
                   <div className="flex flex-col justify-between py-3 px-10 w-full text-sm">
                     <p className="pb-5 font-bold text-xl text-orange-600">
                       Review
                     </p>
                   </div>
-                  <BlogReview values={values} />
+                  <BlogReview values={{ tags: selectedValues, ...values }} />
                 </div>
               </div>
               <ToastContainer

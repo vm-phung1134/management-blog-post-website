@@ -27,14 +27,14 @@ function CardBlog(props: IBlogCardProps) {
           <div className="top-3 left-5 right-5 absolute text-gray-500 text-2xl">
             <div className="flex items-center justify-between">
               <div>
-                {blog?.tags.map(
+                {/* {blog?.tags.map(
                   (item, index) =>
                     index < 2 && (
                       <button key={item} className="btn btn-xs mr-2 rounded-md capitalize text-[10px] bg-orange-500 border-none text-white">
                         {item}
                       </button>
                     )
-                )}
+                )} */}
               </div>
               <i className="fas fa-share-nodes"></i>
             </div>

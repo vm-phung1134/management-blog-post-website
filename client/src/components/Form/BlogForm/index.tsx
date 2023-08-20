@@ -3,10 +3,26 @@ import { memo } from "react";
 import { IBlogFormProps } from "./type";
 import InputForm from "../../Elements/InputForm";
 import CkEditorField from "../../Elements/CKEditorArea";
-
+import Select, { ActionMeta, MultiValue } from "react-select";
+import { ICategoriesItem } from "../../Elements/CategoriesBLog/type";
+import { CATEGORIES_DATA } from "../../Elements/CategoriesBLog/mock-data";
 function BlogForm(props: IBlogFormProps) {
-  const { handleBlur, handleSubmit, handleChange, values, titleForm } = props;
+  const {
+    handleBlur,
+    handleSubmit,
+    handleChange,
+    values,
+    titleForm,
+    setSelectedValues,
+    selectedValues,
+  } = props;
   const arrMockData = [1, 2, 3];
+  const handleMultiSelect = (
+    newValue: MultiValue<ICategoriesItem>,
+    actionMeta: ActionMeta<ICategoriesItem>
+  ) => {
+    setSelectedValues(newValue as ICategoriesItem[]);
+  };
   return (
     <>
       <form
@@ -35,7 +51,7 @@ function BlogForm(props: IBlogFormProps) {
           <CkEditorField label="description" name="Blog description" />
         </div>
         <p className="text-[12px] font-thin text-orange-600">
-          * Here your content{" "}
+          * Here your content
         </p>
         <div className="join join-vertical w-full">
           {arrMockData.map((_, index) => {
@@ -74,6 +90,22 @@ function BlogForm(props: IBlogFormProps) {
             );
           })}
         </div>
+        <div>
+          <p className="font-medium">Select tags</p>
+          <p className="text-[12px] py-3 font-thin text-orange-600">
+            * You can choose multiple tags
+          </p>
+          <Select
+            defaultValue={selectedValues}
+            isMulti
+            onChange={handleMultiSelect}
+            name="tags"
+            options={CATEGORIES_DATA}
+            className="basic-multi-select"
+            classNamePrefix="select"
+          />
+        </div>
+
         <div className="flex gap-5">
           <div className="flex-grow">
             <InputForm

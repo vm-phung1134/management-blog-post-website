@@ -23,7 +23,7 @@ function CategoriesBlog() {
                   </figure>
                   <div className="p-5">
                     <div className="flex justify-between items-center">
-                      <h2 className="card-title text-base">{cate.title}</h2>
+                      <h2 className="card-title text-base">{cate.label}</h2>
                       <p className="text-sm">{cate.blogQuantity} Article</p>
                     </div>
                   </div>

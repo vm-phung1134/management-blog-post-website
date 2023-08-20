@@ -30,7 +30,7 @@ function AllBlogsPage() {
   };
   const filterBlogByCategory = () => {
     const filteredBlogs = data.filter((blog) =>
-      blog.tags.map((item) => item).includes(selectedCategory)
+      (blog.tags || []).map((item) => item.label).includes(selectedCategory)
     );
     setFilteredData(filteredBlogs);
   };

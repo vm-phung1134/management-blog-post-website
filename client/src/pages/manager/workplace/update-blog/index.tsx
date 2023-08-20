@@ -66,6 +66,8 @@ function UpdateBlogPost() {
                       handleChange={handleChange}
                       handleSubmit={handleSubmit}
                       values={values}
+                      selectedValues={[]}
+                      setSelectedValues={() => {}}
                     />
                     <ModalAction
                       open={open}
@@ -78,7 +80,14 @@ function UpdateBlogPost() {
                       errorMessage="Blog has been canceled"
                     />
                   </div>
-                  <BlogReview values={values} />
+                  <div className="col-span-1 pt-10 h-[151vh] bg-white rounded-lg shadow-lg overflow-y-scroll hide-scrollbar my-[150px] lg:my-[40px]">
+                    <div className="flex flex-col justify-between py-3 px-10 w-full text-sm">
+                      <p className="pb-5 font-bold text-xl text-orange-600">
+                        After update review
+                      </p>
+                    </div>
+                    <BlogReview values={values} />
+                  </div>
                 </div>
                 <ToastContainer
                   className="font-sans"

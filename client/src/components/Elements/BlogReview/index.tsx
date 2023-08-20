@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { IBlog, IBlogContent } from "../../../interface/blog";
+import { IBlogContent } from "../../../interface/blog";
 import LineTitle from "../LineUnderTitle";
 import { useUserFromCookies } from "../../../hooks/useUserFromCookies";
 import { useEffect, useState } from "react";
@@ -13,8 +13,11 @@ import {
 } from "../../../redux/reducers/following/api";
 import { useQuery } from "@tanstack/react-query";
 import { useAppDispatch } from "../../../redux/store";
+import { ICategoriesItem } from "../CategoriesBLog/type";
+import { IBlogViewProps } from "./type";
 
-function BlogReview({ values }: { values: IBlog }) {
+function BlogReview(props: IBlogViewProps) {
+  const { values } = props;
   const navigator = useNavigate();
   const dispatch = useAppDispatch();
   const { data = false } = useQuery<boolean>({
@@ -168,14 +171,16 @@ function BlogReview({ values }: { values: IBlog }) {
           <div className="text-black text-sm py-5">
             <div className=" flex gap-2 items-center">
               <span className="font-bold">Tags:</span>
-              {values?.tags?.map((tag: string, index: number) => (
-                <button
-                  className="btn-sx text-[12px] py-1 px-2 bg-orange-600 text-white flex items-center shadow-md rounded-md"
-                  key={index}
-                >
-                  {tag}
-                </button>
-              ))}
+              {(values?.tags || []).map(
+                (tag: ICategoriesItem, index: number) => (
+                  <button
+                    className="btn-sx text-[12px] py-1 px-2 bg-orange-600 text-white flex items-center shadow-md rounded-md"
+                    key={index}
+                  >
+                    {tag.label}
+                  </button>
+                )
+              )}
             </div>
           </div>
         </div>
