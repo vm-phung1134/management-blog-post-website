@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../../redux/store";
 import { deleteBlog } from "../../../redux/reducers/blog/api";
 import BreadCrumbs from "../../../components/Elements/BreadCrumb";
@@ -15,6 +15,8 @@ import { usePagination } from "../../../hooks/usePagination";
 // import "react-toastify/dist/ReactToastify.css";
 import ModalConfirm from "../../../components/Elements/ModalConfirm";
 import { useUserFromCookies } from "../../../hooks/useUserFromCookies";
+import PaginationNav from "../../../components/Elements/Pagination";
+import BlogUpdateCard from "../../../components/Elements/BlogUpdateCard";
 
 function UserBlogs() {
   const dispatch = useAppDispatch();
@@ -25,7 +27,7 @@ function UserBlogs() {
   const [totalPages] = useState<number>(10);
 
   const { data = [], isLoading } = usePagination({
-    authorId: userCookies.uid || "",
+    authorId: userCookies.uid,
     page: currentPage,
     limit: 6,
   });
@@ -36,7 +38,7 @@ function UserBlogs() {
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
-  const [arrNewBlogs = data, setArrNewBlog] = useState<IBlog[]>();
+  const [arrNewBlogs, setArrNewBlog] = useState<IBlog[]>([]);
   const handleOpenModal = (blog: IBlog) => {
     setOpen(!open);
     setBlogPost(blog);
@@ -48,7 +50,10 @@ function UserBlogs() {
   };
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    if (data && data.length > 0) {
+      setArrNewBlog(data);
+    }
+  }, [data]);
   return (
     <>
       {isLoading ? (
@@ -94,66 +99,7 @@ function UserBlogs() {
           <div className="w-full grid grid-cols-3 gap-5 mt-5">
             {arrNewBlogs?.map((blog) => {
               return (
-                <div key={blog?.id} className="relative cursor-pointer h-fit">
-                  <figure className="w-auto">
-                    <img src={blog?.img} alt="" />
-                  </figure>
-                  <div className="absolute ease-in-out duration-500 opacity-0 hover:opacity-100 top-0 right-0 left-0 bottom-0 overflow-hidden bg-fixed bg-black/80">
-                    <div className="text-white text-sm">
-                      <div className="top-5 flex flex-col gap-3 right-5 absolute text-white text-2xl">
-                        <button>
-                          <i className="fas fa-share-nodes"></i>
-                        </button>
-                        <button>
-                          <i className="fas fa-edit"></i>
-                        </button>
-                        <button onClick={() => handleOpenModal(blog)}>
-                          <i className="fas fa-remove"></i>
-                        </button>
-                      </div>
-                      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <Link
-                          to={`/manager-your-blogs/update-blog/${blog?.id}`}
-                        >
-                          <button className="btn flex gap-2 items-center p-3 bg-transparent border-none outline-none hover:bg-transparent">
-                            <img
-                              className="w-20"
-                              src="https://img.icons8.com/?size=1x&id=111136&format=png"
-                              alt="open-blog"
-                            />
-                            <p className="text-orange-500 normal-case">
-                              Update blog
-                            </p>
-                          </button>
-                        </Link>
-                      </div>
-                      <div className="absolute bottom-2 left-3 right-3">
-                        <p className="text-[13px]">Travel | Business</p>
-                        <h3 className="uppercase text-orange-500 mt-2 mb-5 text-[17px]">
-                          {blog?.title}
-                        </h3>
-                        <div className="flex justify-between flex-grow">
-                          <div className="hidden lg:block">
-                            <p className="font-bold text-sm">
-                              {blog?.author?.name}
-                            </p>
-                            <small className="text-gray-100 text-[12px]">
-                              {blog?.author?.email}
-                            </small>
-                          </div>
-                          <div className="text-end">
-                            <p className="font-medium text-[10px] lg:text-[13px]">
-                              Updated: May 30, 2023
-                            </p>
-                            <p className="font-thin text-[8px] lg:text-[12px]">
-                              Published: May 29, 2023
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <BlogUpdateCard key={blog.id} blog={blog} handleOpenModal={handleOpenModal} />
               );
             })}
           </div>
@@ -165,27 +111,12 @@ function UserBlogs() {
             className="bg-red-600 text-white hover:bg-red-600"
             message="Are you sure you want to delete this blog post ?"
           />
-          <div className="flex justify-center my-5 mt-auto">
-            <div className="btn-group flex gap-2">
-              <button
-                disabled={currentPage === 1}
-                onClick={handlePrevPage}
-                className="btn bg-white font-thin normal-case"
-              >
-                <i className="fas fa-chevron-left"></i> Prev
-              </button>
-              <button className="btn bg-white text-orange-500">
-                {currentPage}
-              </button>
-              <button
-                disabled={currentPage === totalPages}
-                onClick={handleNextPage}
-                className="btn btn-md bg-white font-thin normal-case"
-              >
-                Next <i className="fas fa-chevron-right"></i>
-              </button>
-            </div>
-          </div>
+          <PaginationNav
+            handleNextPage={handleNextPage}
+            handlePrevPage={handlePrevPage}
+            totalPages={totalPages}
+            currentPage={currentPage}
+          />
           {/* <ToastContainer
             className="font-sans"
             toastStyle={{ color: "black" }}

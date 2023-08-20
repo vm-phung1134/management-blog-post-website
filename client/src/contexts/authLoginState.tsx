@@ -1,10 +1,11 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, provider } from "../config/firebase-config";
 import { IUser } from "../interface/auth";
 import { useUserFromCookies } from "../hooks/useUserFromCookies";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useCheckUserCookies } from "../hooks/useCheckUserCookies";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -27,9 +28,14 @@ export const useAuth = () => {
 };
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigator = useNavigate();
-  const [, setUserCookies] = useUserFromCookies();
+  const [userCookies, setUserCookies] = useUserFromCookies();
+  const isEmptyUserCookies = useCheckUserCookies(userCookies);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  console.log(isAuthenticated, isEmptyUserCookies);
+  useMemo(() => {
+    setIsAuthenticated(isEmptyUserCookies ? false : true);
+  }, [isEmptyUserCookies]);
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then(async (result) => {

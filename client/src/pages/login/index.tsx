@@ -173,7 +173,7 @@ function Login() {
                     </div>
                   </div>
                 </div>
-                <div className="flex col-span-1 justify-center items-center h-screen bg-[url('https://www.honorofkings.com/img/bg1.jpg')] bg-cover bg-bottom">
+                <div className={`flex col-span-1 justify-center items-center h-screen bg-[url('https://www.honorofkings.com/img/bg1.jpg')] bg-cover bg-bottom`}>
                   <div className="lg:w-1/2 md:w-[70%] w-full lg:p-0 p-10 flex flex-col gap-y-5">
                     <h3 className="font-bold text-xl text-center">
                       Start building your blog
