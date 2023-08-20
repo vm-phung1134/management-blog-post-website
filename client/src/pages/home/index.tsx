@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { IBlog } from "../../interface/blog";
 import CategoriesBlog from "../../components/Elements/CategoriesBLog";
 import { useEffect } from "react";
+import { SideBarFeaturedPost } from "../blog-detail";
 
 const IntroPageComponent = () => {
   return (
@@ -166,7 +167,7 @@ function HomePage() {
     },
   });
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }, []);
   return (
     <>
@@ -197,7 +198,7 @@ function HomePage() {
               <CategoriesBlog />
             </div>
             {/* ALL BLOG */}
-            <div className="lg:py-[30px] mb-[10%] py-[25px]">
+            <div className="lg:py-[30px] py-[25px]">
               <h3 className="font-bold py-3 text-2xl uppercase">
                 All blog <span className="text-orange-600">posts</span>
               </h3>
@@ -209,6 +210,48 @@ function HomePage() {
                 )}
               </div>
               <ButtonViewMore linkSrc="/all-blogs-page" />
+            </div>
+            <div className="mb-[10%] py-[25px]">
+              <h3 className="font-bold py-3 text-2xl uppercase">
+                Featured <span className="text-orange-600">Articles</span>
+              </h3>
+              <LineTitle />
+              <div className="grid grid-cols-3 gap-5">
+                <div className="col-span-2 mt-3">
+                  <iframe
+                    height="460"
+                    width="100%"
+                    src={"https://www.youtube.com/embed/NC9KlaxtfLg"}
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    title="YouTube Video Player"
+                  ></iframe>
+                  <div className="bg-orange-200">
+                    <div className="p-3">
+                      <h4 className="font-medium text-3xl py-5">
+                        The HubSpot Blog's 2023 Marketing Strategy & Trends
+                        Report: Data from 1,200+ Global Marketers
+                      </h4>
+                      <p className="text-sm font-thin">
+                        Discover the trends and winning tactics brands should
+                        focus on in 2023, and what will change after 2022 with
+                        data from 1,200+ global B2B and B2C marketers.
+                      </p>
+                      <div className="flex text-sm justify-between font-light py-5 ">
+                        <p>Tristen Taylor</p>
+                        <p>July, 09 2023</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-3">
+                  <SideBarFeaturedPost />
+                  <SideBarFeaturedPost />
+                  <SideBarFeaturedPost />
+                  <SideBarFeaturedPost />
+                  <SideBarFeaturedPost />
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -61,6 +61,21 @@ export const SideBarBlogCardVertical = () => {
   );
 };
 
+export const SideBarFeaturedPost = () => {
+  return (
+    <div>
+      <h4 className="font-bold mt-2">
+        The Top Types of AI-Generated Content in Marketing [New Data, Examples &
+        Tips]
+      </h4>
+      <div className="flex text-sm justify-between font-light text-gray-400 py-5 border-b border-gray-400">
+        <p>Tristen Taylor</p>
+        <p>July, 09 2023</p>
+      </div>
+    </div>
+  );
+};
+
 function InfoBlog() {
   const blog_id = useParams();
   const dispatch = useAppDispatch();
@@ -119,15 +134,30 @@ function InfoBlog() {
               </div>
             </div>
             <div className="col-span-4">
-              <h3 className="text-lg font-bold pb-5">Latest Blogs</h3>
+              <h3 className="text-md font-bold pb-5 text-[#213b6c]">
+                Latest Blogs
+              </h3>
+              <div className="h-[1px] w-full bg-orange-500 mb-3"></div>
               <SideBarBlogCardHorizon />
               <SideBarBlogCardHorizon />
               <SideBarBlogCardHorizon />
               <SideBarBlogCardHorizon />
-              <h3 className="text-lg font-bold pb-5">Related Blogs</h3>
+              <h3 className="text-md font-bold pb-5 text-[#213b6c]">
+                Related Blogs
+              </h3>
+              <div className="h-[1px] w-full bg-orange-500 mb-3"></div>
               <SideBarBlogCardVertical />
               <SideBarBlogCardVertical />
-              <h3 className="text-lg font-bold pb-5">Popular Tags</h3>
+              <h3 className="text-md font-bold pb-5 text-[#213b6c]">
+                Featured Posts
+              </h3>
+              <div className="h-[1px] w-full bg-orange-500 mb-3"></div>
+              <SideBarFeaturedPost />
+              <SideBarFeaturedPost />
+              <SideBarFeaturedPost />
+              <h3 className="text-md font-bold py-5 text-[#213b6c]">
+                Popular Tags
+              </h3>
               <ul className="flex flex-wrap text-sm gap-5">
                 <li className="rounded-md px-3 py-1 bg-gray-200">
                   Headless Loyalty
@@ -140,6 +170,26 @@ function InfoBlog() {
                 <li className="rounded-md px-3 py-1 bg-gray-200">Technology</li>
                 <li className="rounded-md px-3 py-1 bg-gray-200">Travel</li>
               </ul>
+              <div className="py-10 flex flex-col items-center justify-center gap-3">
+                <p className="font-bold text-[#213b6c]">Don't forget to share this post!</p>
+                <div className="flex gap-3">
+                  <img
+                    className="w-14"
+                    src="https://img.icons8.com/?size=1x&id=64151&format=png"
+                    alt=""
+                  />
+                  <img
+                    className="w-14"
+                    src="https://img.icons8.com/?size=1x&id=hFoVFpm6gl9A&format=png"
+                    alt=""
+                  />
+                  <img
+                    className="w-14"
+                    src="https://img.icons8.com/?size=1x&id=108650&format=png"
+                    alt=""
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

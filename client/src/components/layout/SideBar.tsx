@@ -99,11 +99,11 @@ function SideBar() {
             </div>
             {NAVBAR_MENU_LINK.map((item) => {
               return (
-                <li key={item.title} className="px-4 mb-3">
+                <li key={item.title} className="px-4 mb-3 w-fit">
                   <Link
                     to={item.linkSrc}
                     className="hover:text-orange-600 hover:bg-transparent relative after:absolute after:bg-orange-600 
-                    after:h-[2px] after:w-0 after:bottom-0 after:left-4 hover:after:w-1/2 after:transition-all after:duration-500
+                    after:h-[2px] after:w-0 after:bottom-0 after:left-4 hover:after:w-[70%] after:transition-all after:duration-500
                     cursor-pointer"
                   >
                     {item.title}

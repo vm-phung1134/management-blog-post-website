@@ -6,6 +6,14 @@ export interface IUser {
   avt: string;
 }
 
+export interface ICategoriesItem {
+  id?: string;
+  img?: string;
+  label: string;
+  value: string;
+  blogQuantity?: number;
+}
+
 export interface IBlog {
   id: string;
   title: string;
@@ -14,7 +22,7 @@ export interface IBlog {
   author: IUser;
   description: string;
   contents: IBlogContent[];
-  tags: string[];
+  tags: ICategoriesItem[];
   likes: number;
   views: number;
   comments: number;

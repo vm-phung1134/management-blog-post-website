@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link } from "react-router-dom";
 import { memo } from "react";
 import { IBlogFormProps } from "./type";
@@ -23,6 +24,7 @@ function BlogForm(props: IBlogFormProps) {
   ) => {
     setSelectedValues(newValue as ICategoriesItem[]);
   };
+  console.log(values?.tags)
   return (
     <>
       <form

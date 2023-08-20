@@ -13,9 +13,16 @@ function CardBlog(props: IBlogCardProps) {
             alt=""
           />
           <div className="px-5 py-2 text-white absolute group-hover:pt-1/2 bottom-0 right-0 rounded-lg left-0 bg-black/70">
-            <p className="text-sm font-thin">Now 15, 2023</p>
+            <div className="flex justify-between items-center">
+              <p className="text-sm font-thin">Now 15, 2023</p>
+              <p className="text-[12px] font-thin">5 min watch</p>
+            </div>
             <Link to={`/blogs/${blog?.id}`}>
-              <h2 className="lg:text-[17px] group-hover:text-orange-200 truncate text-sm font-medium uppercase cursor-pointer py-3">
+              <h2
+                className="group-hover:bg-transparent relative after:absolute after:bg-orange-600 
+                    after:h-[2px] after:w-0 after:bottom-0 after:left-0 group-hover:after:w-1/2 after:transition-all after:duration-500
+                    lg:text-[17px] group-hover:text-orange-200 truncate text-sm font-medium uppercase cursor-pointer py-3 "
+              >
                 {blog?.title}
               </h2>
             </Link>
@@ -27,14 +34,17 @@ function CardBlog(props: IBlogCardProps) {
           <div className="top-3 left-5 right-5 absolute text-gray-500 text-2xl">
             <div className="flex items-center justify-between">
               <div>
-                {/* {blog?.tags.map(
+                {(blog?.tags || []).map(
                   (item, index) =>
                     index < 2 && (
-                      <button key={item} className="btn btn-xs mr-2 rounded-md capitalize text-[10px] bg-orange-500 border-none text-white">
-                        {item}
+                      <button
+                        key={item.id}
+                        className="btn btn-xs mr-2 rounded-md capitalize text-[10px] bg-orange-500 border-none text-white"
+                      >
+                        {item.label}
                       </button>
                     )
-                )} */}
+                )}
               </div>
               <i className="fas fa-share-nodes"></i>
             </div>

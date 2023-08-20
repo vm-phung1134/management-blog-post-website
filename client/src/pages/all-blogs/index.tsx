@@ -6,11 +6,13 @@ import BreadCrumbs from "../../components/Elements/BreadCrumb";
 import LineTitle from "../../components/Elements/LineUnderTitle";
 import Carousel from "../../components/Layout/Carousel";
 import { useAppDispatch } from "../../redux/store";
-import { BREAD_CRUMBS_ALL_BLOGS, CATEGORIES_FILTER } from "./mock-data";
+import { BREAD_CRUMBS_ALL_BLOGS } from "./mock-data";
 import { IBlog } from "../../interface/blog";
 import { getBlogs } from "../../redux/reducers/blog/api";
 import Spinner from "../../components/Elements/Spinner";
 import ButtonLoadMore from "../../components/Elements/ButtonLoadMore";
+import EmptyMessage from "../../components/Elements/EmptyMessage";
+import { CATEGORIES_DATA } from "../../components/Elements/CategoriesBLog/mock-data";
 
 function AllBlogsPage() {
   const dispatch = useAppDispatch();
@@ -30,7 +32,9 @@ function AllBlogsPage() {
   };
   const filterBlogByCategory = () => {
     const filteredBlogs = data.filter((blog) =>
-      (blog.tags || []).map((item) => item.label).includes(selectedCategory)
+      (blog.tags || [])
+        .map((item) => item.value)
+        .includes(selectedCategory.toLowerCase())
     );
     setFilteredData(filteredBlogs);
   };
@@ -70,10 +74,10 @@ function AllBlogsPage() {
                   <option value="" disabled>
                     Other Categories
                   </option>
-                  {CATEGORIES_FILTER.map((item) => {
+                  {CATEGORIES_DATA.map((item) => {
                     return (
-                      <option key={item.name} value={item.label}>
-                        {item.name}
+                      <option key={item.id} value={item.value}>
+                        {item.label}
                       </option>
                     );
                   })}
@@ -88,10 +92,16 @@ function AllBlogsPage() {
             </div>
 
             <LineTitle />
-            <div className="grid lg:grid-cols-3 grid-cols-2 gap-x-5 gap-y-16">
-              {filteredData?.map((blog) => (
-                <CardBlog key={blog.id} blog={blog} />
-              ))}
+            <div>
+              {filteredData.length > 0 ? (
+                <div className="grid lg:grid-cols-3 grid-cols-2 gap-x-5 gap-y-16">
+                  {filteredData?.map((blog) => (
+                    <CardBlog key={blog.id} blog={blog} />
+                  ))}
+                </div>
+              ) : (
+                <EmptyMessage message="Sorry, No suitable article found !!!" />
+              )}
             </div>
             <div className="flex justify-center w-full my-5">
               <ButtonLoadMore />

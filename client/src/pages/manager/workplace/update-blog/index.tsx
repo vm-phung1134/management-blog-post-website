@@ -32,7 +32,6 @@ function UpdateBlogPost() {
     handleToggle();
   };
   const validate = () => {};
-
   return (
     <Formik
       initialValues={initialValues}

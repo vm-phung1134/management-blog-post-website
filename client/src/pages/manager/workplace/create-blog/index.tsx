@@ -83,7 +83,7 @@ function CreateBlog() {
                     handleBlur={handleBlur}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
-                    values={values}
+                    values={{ tags: selectedValues, ...values }}
                     selectedValues={selectedValues}
                     setSelectedValues={setSelectedValues}
                   />
