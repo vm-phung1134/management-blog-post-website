@@ -38,7 +38,7 @@ function CardBlog(props: IBlogCardProps) {
                   (item, index) =>
                     index < 2 && (
                       <button
-                        key={item.id}
+                        key={index}
                         className="btn btn-xs mr-2 rounded-md capitalize text-[10px] bg-orange-500 border-none text-white"
                       >
                         {item.label}
