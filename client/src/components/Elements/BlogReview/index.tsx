@@ -15,11 +15,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useAppDispatch } from "../../../redux/store";
 import { ICategoriesItem } from "../CategoriesBLog/type";
 import { IBlogViewProps } from "./type";
+import { useSocket } from "../../../contexts/useSocket";
 
 function BlogReview(props: IBlogViewProps) {
   const { values } = props;
   const navigator = useNavigate();
   const dispatch = useAppDispatch();
+  const socket = useSocket();
+  const [user] = useUserFromCookies();
   const { data = false } = useQuery<boolean>({
     queryKey: ["following", values],
     queryFn: async () => {
@@ -28,9 +31,10 @@ function BlogReview(props: IBlogViewProps) {
     },
   });
   const [activeFollow, setActiveFollow] = useState<boolean>(data);
+  const [stateLogin, setStateLogin] = useState(false);
+  const [arrNotifi, setArrNotifi] = useState<any[]>([]);
   const [userCookies] = useUserFromCookies();
   const isEmptyUserCookies = useCheckUserCookies(userCookies);
-  const [stateLogin, setStateLogin] = useState(false);
   const handleCheckRoleFollow = () => {
     isEmptyUserCookies && setStateLogin(!stateLogin);
   };
@@ -43,9 +47,21 @@ function BlogReview(props: IBlogViewProps) {
     setActiveFollow(!activeFollow);
     dispatch(unFollowing(id));
   };
+
+  const handleNotification = (type: number) => {
+    socket?.emit("sendNotification", {
+      senderUser: user,
+      receiverAuthor: values.author,
+      type,
+    });
+  };
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    socket?.on("getNotification", (data) => {
+      setArrNotifi((prev) => [data, ...prev]);
+    });
+  }, [socket]);
+  console.log(arrNotifi);
   return (
     <div className="w-full p-12">
       <div className="flex justify-between">
@@ -123,7 +139,7 @@ function BlogReview(props: IBlogViewProps) {
             <i className="fas fa-comment"></i> {values?.comments?.length}{" "}
             Comments
           </li>
-          <li>
+          <li className="cursor-pointer" onClick={() => handleNotification(1)}>
             <i className="fas fa-share"></i> Share
           </li>
         </ul>

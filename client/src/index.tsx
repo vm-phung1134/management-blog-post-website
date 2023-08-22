@@ -5,11 +5,11 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import { AccessTokenProvider } from "./contexts/accessToken";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import { SearchProvider } from "./contexts/searchValue";
 import { AuthProvider } from "./contexts/authLoginState";
+import { SocketProvider } from "./contexts/useSocket";
 
 const queryClient = new QueryClient();
 
@@ -23,11 +23,11 @@ root.render(
     <BrowserRouter>
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
-          <AccessTokenProvider>
+          <SocketProvider>
             <SearchProvider>
               <App />
             </SearchProvider>
-          </AccessTokenProvider>
+          </SocketProvider>
         </QueryClientProvider>
       </AuthProvider>
     </BrowserRouter>

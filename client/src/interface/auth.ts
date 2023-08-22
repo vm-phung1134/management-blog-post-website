@@ -4,6 +4,7 @@ export interface IUser {
   name: string;
   token: string;
   avt: string;
+  socketId?: string;
 }
 
 export interface IAuth {
