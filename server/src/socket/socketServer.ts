@@ -1,6 +1,7 @@
 import { Server, Socket } from "socket.io";
 import http from "http";
-import { IUser } from "../interface";
+import { ISendNotificationProps, IUser } from "../interface";
+import axios from "axios";
 
 export function configureSocket(server: http.Server): Server {
   const io = new Server(server, {
@@ -9,21 +10,26 @@ export function configureSocket(server: http.Server): Server {
       methods: ["GET", "POST"],
     },
   });
-
   // EVENT SOCKET.IO
-  interface ISendNotificationProps {
-    senderUser: IUser;
-    receiverAuthor: IUser;
-    type: number;
-  }
+
   let onlineUsers: IUser[] = [];
 
   const addNewUser = (user: IUser) => {
-    if (onlineUsers.length > 0) {
-      !onlineUsers.some((prevUser: IUser) => prevUser.uid === user.uid) &&
-        onlineUsers.push(user);
+    const foundIndex = onlineUsers.findIndex(
+      (prevUser: IUser) => prevUser.uid === user.uid
+    );
+
+    if (foundIndex !== -1) {
+      onlineUsers.splice(foundIndex, 1);
     }
-    onlineUsers.push(user);
+
+    if (
+      !onlineUsers.some(
+        (prevUser: IUser) => prevUser.socketId === user.socketId
+      )
+    ) {
+      onlineUsers.push(user);
+    }
   };
   const removeUser = (socketId: string) => {
     return onlineUsers.filter((nextUser) => nextUser.socketId !== socketId);
@@ -35,21 +41,59 @@ export function configureSocket(server: http.Server): Server {
   io.on("connect", (socket: Socket) => {
     socket.on("newUser", (user: IUser) => {
       addNewUser(user);
+      if (onlineUsers.some((prevUser: IUser) => prevUser.uid === user.uid)) {
+        axios
+          .get(`http://localhost:5000/notifications/${user.uid}`)
+          .then((response) => {
+            io.to(user.socketId || "").emit(
+              "getAllNotifications",
+              response.data
+            );
+          })
+          .catch((error) => {
+            console.error("Error", error);
+          });
+      }
     });
 
     socket.on(
       "sendNotification",
       ({ senderUser, receiverAuthor, type }: ISendNotificationProps) => {
-        const receiver = getUser(receiverAuthor.uid);
-        if (receiver && receiver.socketId) {
-          io.to(receiver.socketId).emit("getNotification", {
+        const receiver = getUser(receiverAuthor.uid || "");
+        if (receiver && receiver?.socketId) {
+          io.to(receiver?.socketId).emit("updateNotifications", {
             senderUser,
             receiverAuthor,
             type,
           });
+          axios
+            .post(
+              "http://localhost:5000/notifications",
+              {
+                senderUser,
+                receiverAuthor,
+                type,
+              },
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${senderUser.token}`,
+                },
+              }
+            )
+            .then((response) => {
+              io.to(receiver.socketId || "").emit(
+                "updateNotification",
+                response.data.notifications
+              );
+            })
+            .catch((error) => {
+              console.error("Error", error);
+            });
         }
       }
     );
+
     socket.on("disconnect", () => {
       removeUser(socket.id);
     });

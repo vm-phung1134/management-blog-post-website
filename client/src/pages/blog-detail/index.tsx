@@ -129,7 +129,7 @@ function InfoBlog() {
                 </div>
                 <BlogReview values={data} />
                 <div className="w-full px-12">
-                  <CreateCommentForm />
+                  <CreateCommentForm blogValue={data} />
                 </div>
               </div>
             </div>
@@ -171,7 +171,9 @@ function InfoBlog() {
                 <li className="rounded-md px-3 py-1 bg-gray-200">Travel</li>
               </ul>
               <div className="py-10 flex flex-col items-center justify-center gap-3">
-                <p className="font-bold text-[#213b6c]">Don't forget to share this post!</p>
+                <p className="font-bold text-[#213b6c]">
+                  Don't forget to share this post!
+                </p>
                 <div className="flex gap-3">
                   <img
                     className="w-14"

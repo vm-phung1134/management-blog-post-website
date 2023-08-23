@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { IBlogContent } from "../../../interface/blog";
 import LineTitle from "../LineUnderTitle";
 import { useUserFromCookies } from "../../../hooks/useUserFromCookies";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import ModalAction from "../ModalAction";
 import { useCheckUserCookies } from "../../../hooks/useCheckUserCookies";
 import { addFollower } from "../../../redux/reducers/follower/api";
@@ -16,15 +16,16 @@ import { useAppDispatch } from "../../../redux/store";
 import { ICategoriesItem } from "../CategoriesBLog/type";
 import { IBlogViewProps } from "./type";
 import { useSocket } from "../../../contexts/useSocket";
+import { TYPE_ACTION_NOTIFICATION } from "../../../data/mockData";
 
 function BlogReview(props: IBlogViewProps) {
   const { values } = props;
   const navigator = useNavigate();
   const dispatch = useAppDispatch();
-  const socket = useSocket();
+  const { socket } = useSocket();
   const [user] = useUserFromCookies();
   const { data = false } = useQuery<boolean>({
-    queryKey: ["following", values],
+    queryKey: ["following", values?.author?.uid],
     queryFn: async () => {
       const action = await dispatch(checkFollowStatusUser(values?.author?.uid));
       return action.payload || false;
@@ -32,36 +33,52 @@ function BlogReview(props: IBlogViewProps) {
   });
   const [activeFollow, setActiveFollow] = useState<boolean>(data);
   const [stateLogin, setStateLogin] = useState(false);
-  const [arrNotifi, setArrNotifi] = useState<any[]>([]);
   const [userCookies] = useUserFromCookies();
   const isEmptyUserCookies = useCheckUserCookies(userCookies);
   const handleCheckRoleFollow = () => {
     isEmptyUserCookies && setStateLogin(!stateLogin);
   };
-  const handleFollowUser = () => {
+  const handleFollowUser = async () => {
     setActiveFollow(!activeFollow);
-    dispatch(addFollower({ ...userCookies, authorID: values?.author?.uid }));
-    dispatch(addFollowing({ ...values.author, authorID: userCookies.uid }));
+    handleNotificationFollow(TYPE_ACTION_NOTIFICATION.FOLLOWING);
+    await dispatch(
+      addFollower({ ...userCookies, authorID: values?.author?.uid })
+    );
+    await dispatch(
+      addFollowing({ ...values.author, authorID: userCookies.uid })
+    );
   };
   const handleUnfollowUser = (id: string) => {
     setActiveFollow(!activeFollow);
     dispatch(unFollowing(id));
   };
 
-  const handleNotification = (type: number) => {
-    socket?.emit("sendNotification", {
-      senderUser: user,
-      receiverAuthor: values.author,
-      type,
-    });
+  const handleNotification = (type: string) => {
+    if (socket) {
+      socket?.emit("sendNotification", {
+        senderUser: user,
+        receiverAuthor: { ...values.author, socketId: socket.id },
+        type,
+      });
+    }
+  };
+
+  const handleNotificationFollow = (type: string) => {
+    if (socket) {
+      socket?.emit("sendNotification", {
+        senderUser: user,
+        receiverAuthor: { ...values.author, socketId: socket.id },
+        type,
+      });
+    }
   };
 
   useEffect(() => {
-    socket?.on("getNotification", (data) => {
-      setArrNotifi((prev) => [data, ...prev]);
-    });
-  }, [socket]);
-  console.log(arrNotifi);
+    if (data) {
+      setActiveFollow(data);
+    }
+  }, [data]);
+
   return (
     <div className="w-full p-12">
       <div className="flex justify-between">
@@ -136,10 +153,16 @@ function BlogReview(props: IBlogViewProps) {
             <i className="fas fa-calendar-days"></i> July 18, 2023
           </li>
           <li>
-            <i className="fas fa-comment"></i> {values?.comments?.length}{" "}
-            Comments
+            <a href="#comment">
+              <i className="fas fa-comment"></i> Comments
+            </a>
           </li>
-          <li className="cursor-pointer" onClick={() => handleNotification(1)}>
+          <li
+            className="cursor-pointer"
+            onClick={() =>
+              handleNotification(TYPE_ACTION_NOTIFICATION.SHARE_POST)
+            }
+          >
             <i className="fas fa-share"></i> Share
           </li>
         </ul>
@@ -186,7 +209,7 @@ function BlogReview(props: IBlogViewProps) {
         <div className="flex flex-col items-start w-full">
           <div className="text-black text-sm py-5">
             <div className=" flex gap-2 items-center">
-              <span className="font-bold">Tags:</span>
+              <span id="comment" className="font-bold">Tags:</span>
               {(values?.tags || []).map(
                 (tag: ICategoriesItem, index: number) => (
                   <button

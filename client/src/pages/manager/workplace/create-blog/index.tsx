@@ -11,8 +11,13 @@ import MenuListNavigate from "../../../../components/Elements/MenuListNavigate";
 import BlogForm from "../../../../components/Form/BlogForm";
 import BlogReview from "../../../../components/Elements/BlogReview";
 import { ICategoriesItem } from "../../../../components/Elements/CategoriesBLog/type";
+import { useQuery } from "@tanstack/react-query";
+import { getAllFollowers } from "../../../../redux/reducers/follower/api";
+import { IFollower } from "../../../../interface/follower";
+import { useAppDispatch } from "../../../../redux/store";
 
 function CreateBlog() {
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const handleToggle = () => setOpen((prev) => !prev);
   const [userCookies] = useUserFromCookies();
@@ -54,6 +59,14 @@ function CreateBlog() {
   const submitForm = () => {
     handleToggle();
   };
+  const { data = []} = useQuery<IFollower[]>({
+    queryKey: ["follower", userCookies],
+    queryFn: async () => {
+      const action = await dispatch(getAllFollowers(userCookies.uid));
+      return action.payload || [];
+    },
+  });
+  console.log(data)
   const validate = () => {};
   return (
     <Formik
@@ -89,6 +102,7 @@ function CreateBlog() {
                   />
                   <ModalAction
                     open={open}
+                    listFollower = {data}
                     className="bg-green-700 text-white hover:bg-green-700"
                     action={createBlog({ tags: selectedValues, ...values })}
                     setOpen={setOpen}

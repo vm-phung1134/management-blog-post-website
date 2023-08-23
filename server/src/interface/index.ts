@@ -7,6 +7,13 @@ export interface IUser {
   socketId?: string;
 }
 
+export interface ISendNotificationProps {
+  id:string;
+  senderUser: IUser;
+  receiverAuthor: IUser;
+  type: string;
+}
+
 export interface ICategoriesItem {
   id?: string;
   img?: string;

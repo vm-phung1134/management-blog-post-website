@@ -1,20 +1,25 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { io, Socket } from "socket.io-client";
 import { useUserFromCookies } from "../hooks/useUserFromCookies";
+import { INotification } from "../interface/notification";
 
 interface ISocketProviderProps {
   children: React.ReactNode;
 }
 
+interface ISocketContext {
+  socket: Socket | null;
+  allNotifications: INotification[]; // Thay thế any bằng kiểu dữ liệu phù hợp cho allNotifications
+}
 // Create the SocketContext
-const SocketContext = createContext<Socket | null>(null);
+const SocketContext = createContext<ISocketContext | null>(null);
 
 // Create the SocketProvider
 export function SocketProvider({ children }: ISocketProviderProps) {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [user] = useUserFromCookies();
   const [isSocketConnected, setIsSocketConnected] = useState(false);
-
+  const [allNotifications, setAllNotifications] = useState<INotification[]>([]);
   useEffect(() => {
     const newSocket = io("http://localhost:5000");
     setSocket(newSocket);
@@ -28,6 +33,12 @@ export function SocketProvider({ children }: ISocketProviderProps) {
       socket.on("connect", () => {
         setIsSocketConnected(true);
         socket.emit("newUser", { ...user, socketId: socket.id });
+        socket.on("getAllNotifications", (data) => {
+          setAllNotifications([...data]);
+        });
+        socket.on("updateNotifications", (newData) => {
+          setAllNotifications((prev) => [newData, ...prev]);
+        });
       });
       socket.on("disconnect", () => {
         setIsSocketConnected(false);
@@ -36,7 +47,7 @@ export function SocketProvider({ children }: ISocketProviderProps) {
   }, [socket, user]);
 
   return (
-    <SocketContext.Provider value={socket}>
+    <SocketContext.Provider value={{ socket, allNotifications }}>
       {isSocketConnected ? children : null}
     </SocketContext.Provider>
   );
@@ -44,5 +55,9 @@ export function SocketProvider({ children }: ISocketProviderProps) {
 
 // Create the useContext hook for accessing the socket
 export function useSocket() {
-  return useContext(SocketContext);
+  const socketContext = useContext(SocketContext);
+  if (!socketContext) {
+    throw new Error("useSocket must be used within a SocketProvider");
+  }
+  return socketContext;
 }

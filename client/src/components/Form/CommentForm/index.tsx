@@ -13,9 +13,15 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useAppDispatch } from "../../../redux/store";
 import { useCheckUserCookies } from "../../../hooks/useCheckUserCookies";
+import { useSocket } from "../../../contexts/useSocket";
+import { TYPE_ACTION_NOTIFICATION } from "../../../data/mockData";
+import { IUser } from "../../../interface/auth";
+import { ICommentFormProps } from "./type";
 
-function CreateCommentForm() {
+function CreateCommentForm({blogValue} : ICommentFormProps) {
   const navigator = useNavigate();
+  const [user] = useUserFromCookies();
+  const { socket } = useSocket();
   const [userCookies] = useUserFromCookies();
   const isEmptyUserCookies = useCheckUserCookies(userCookies);
   const [stateLogin, setStateLogin] = useState(false);
@@ -41,6 +47,7 @@ function CreateCommentForm() {
       setNewDataComment((prev) => [values, ...prev]);
       dispatch(createComment(values));
     }
+    handleNotification(blogValue.author, TYPE_ACTION_NOTIFICATION.COMMENT_POST);
   };
   const validate = () => {};
   useEffect(() => {
@@ -48,6 +55,16 @@ function CreateCommentForm() {
       setNewDataComment(data);
     }
   }, [data]);
+
+  const handleNotification = (values: IUser, type: string) => {
+    if (socket) {
+      socket?.emit("sendNotification", {
+        senderUser: user,
+        receiverAuthor: { ...values, socketId: socket.id },
+        type,
+      });
+    }
+  };
   return (
     <Formik
       initialValues={initialValues}

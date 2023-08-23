@@ -4,20 +4,48 @@ import SearchFormBox from "../Form/SearchForm";
 import { useCheckUserCookies } from "../../hooks/useCheckUserCookies";
 import SideBar from "./SideBar";
 import { useAuth } from "../../contexts/authLoginState";
+import { useSocket } from "../../contexts/useSocket";
+import { INotification } from "../../interface/notification";
+import { TYPE_ACTION_NOTIFICATION } from "../../data/mockData";
 
-const Notifications = () => {
+const NotificationItem = ({ notify }: { notify: INotification }) => {
+  let action: string;
+  switch (notify.type) {
+    case TYPE_ACTION_NOTIFICATION.SHARE_POST:
+      action = "Has been share your post";
+      break;
+    case TYPE_ACTION_NOTIFICATION.COMMENT_POST:
+      action = "Has been comment your post recently";
+      break;
+    case TYPE_ACTION_NOTIFICATION.LIKE_POST:
+      action = "Has been just like your post";
+      break;
+    case TYPE_ACTION_NOTIFICATION.WELLCOME:
+      action = "Wellcome you to my website";
+      break;
+    case TYPE_ACTION_NOTIFICATION.FOLLOWING:
+      action = "Has been following you";
+      break;
+    case TYPE_ACTION_NOTIFICATION.ADD_POST:
+      action = "Has been added new post";
+      break;
+    default:
+      action = "Say hi to your";
+      break;
+  }
   return (
     <div className="flex justify-between">
       <div className="flex gap-3 items-center">
         <div className="avatar h-10">
           <div className="w-10 rounded-full">
-            <img src={'https://preview.colorlib.com/theme/magdesign/images/img_7.jpg.webp'} alt="Avatar" />
+            <img src={notify?.senderUser.avt} alt="Avatar" />
           </div>
         </div>
         <div className="flex flex-col">
           <small>22, August 2023</small>
           <p className="text-[13px]">
-            <span className="font-medium">Phúc Nguyễn</span> added new photo
+            <span className="font-medium">{notify.senderUser.name}</span>{" "}
+            {action}
           </p>
           <small>Just now</small>
         </div>
@@ -31,6 +59,7 @@ const Notifications = () => {
 
 function Navbar() {
   const { logout } = useAuth();
+  const { allNotifications } = useSocket();
   const [userCookies] = useUserFromCookies();
   const isEmptyUserCookies = useCheckUserCookies(userCookies);
   return (
@@ -119,7 +148,7 @@ function Navbar() {
                     <div className="indicator">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
+                        className="h-6 w-6"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -132,8 +161,10 @@ function Navbar() {
                         />
                       </svg>
 
-                      <span className="badge badge-sm indicator-item text-red-600 bg-transparent border-none">
-                        2
+                      <span className="badge badge-sm w-5 h-5 indicator-item text-white bg-red-500 border-none">
+                        {allNotifications && allNotifications.length > 0
+                          ? allNotifications.length
+                          : "0"}
                       </span>
                     </div>
                   </label>
@@ -143,9 +174,27 @@ function Navbar() {
                   >
                     <div className="card-body">
                       <h3 className="font-bold text-md">Notifications</h3>
-                      <Notifications />
-                      <Notifications />
-                      <Notifications />
+                      {allNotifications.length > 0 ? (
+                        <div>
+                          {allNotifications.map((notify, index) => {
+                            return (
+                              index < 5 && (
+                                <NotificationItem
+                                  key={notify.receiverAuthor.uid}
+                                  notify={notify}
+                                />
+                              )
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <p className="text-gray-300 py-5">Sorry, You don't have any message</p>
+                      )}
+                      <div className="flex justify-end">
+                        <button className="btn border-none normal-case bg-transparent btn-xs hover:bg-transparent">
+                          See all
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

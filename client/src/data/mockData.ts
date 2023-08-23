@@ -1,6 +1,5 @@
 import { Blog } from "./model/blogModel";
 
-
 const BLOG_API = [
   {
     id: "1",
@@ -53,4 +52,13 @@ const BLOG_API = [
   },
 ];
 
-export const MOCK_BLOG = BLOG_API.map(blog => new Blog(blog));
+export enum TYPE_ACTION_NOTIFICATION {
+  SHARE_POST = "share-port",
+  COMMENT_POST = "comment-post",
+  LIKE_POST = "like-post",
+  WELLCOME = "wellcome",
+  FOLLOWING = "following",
+  ADD_POST = "add-post",
+}
+
+export const MOCK_BLOG = BLOG_API.map((blog) => new Blog(blog));

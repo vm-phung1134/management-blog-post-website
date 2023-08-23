@@ -24,7 +24,6 @@ function BlogForm(props: IBlogFormProps) {
   ) => {
     setSelectedValues(newValue as ICategoriesItem[]);
   };
-  console.log(values?.tags)
   return (
     <>
       <form

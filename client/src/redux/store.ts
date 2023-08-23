@@ -7,6 +7,7 @@ import commentSlice from "./reducers/comment";
 import followerSlice from "./reducers/follower";
 import followingSlice from "./reducers/following";
 import authSlice from "./reducers/auth";
+import notificationSlice from "./reducers/notification";
 
 // Import reducers
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   commentReducer: commentSlice,
   followerReducer: followerSlice,
   followingReducer: followingSlice,
+  notificationReducer: notificationSlice,
 });
 
 const store = configureStore({

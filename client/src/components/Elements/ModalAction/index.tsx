@@ -3,10 +3,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { IModalActionProps } from "./type";
 import cn from "classnames";
 import { useMutationAPI } from "../../../hooks/useMutationAPI";
+import { useSocket } from "../../../contexts/useSocket";
+import { useUserFromCookies } from "../../../hooks/useUserFromCookies";
+import { TYPE_ACTION_NOTIFICATION } from "../../../data/mockData";
 
 function ModalAction(props: IModalActionProps) {
   const {
     title,
+    listFollower,
     message,
     open,
     setOpen,
@@ -16,12 +20,26 @@ function ModalAction(props: IModalActionProps) {
     className,
   } = props;
   const mutation = useMutationAPI(action);
+  const { socket } = useSocket();
+  const [user] = useUserFromCookies();
   const handleDispatch = async () => {
+    const handleNotificationListFollower = (type: string) => {
+      if (socket) {
+        listFollower?.map((item) => {
+          return socket?.emit("sendNotification", {
+            senderUser: user,
+            receiverAuthor: { ...item },
+            type,
+          });
+        });
+      }
+    };
     const resolveAfter3Sec = new Promise((resolve) =>
       setTimeout(resolve, 1300)
     );
     try {
       mutation.mutate();
+      handleNotificationListFollower(TYPE_ACTION_NOTIFICATION.ADD_POST);
       setOpen((prev) => !prev);
       toast.promise(
         resolveAfter3Sec,

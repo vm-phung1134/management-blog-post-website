@@ -21,6 +21,7 @@ import commentRoute from "./src/routes/commentRoute";
 import followerRoute from "./src/routes/followerRoute";
 import followingRoute from "./src/routes/followingRoute";
 import authRoute from "./src/routes/authRoute";
+import notificationRoute from "./src/routes/notificationRoute";
 
 // Mouting the route
 app.use("/authors", authRoute);
@@ -28,6 +29,7 @@ app.use("/blogs", blogRoute);
 app.use("/blog/comments", commentRoute);
 app.use("/follower", followerRoute);
 app.use("/following", followingRoute);
+app.use("/notifications", notificationRoute);
 
 const server = http.createServer(app);
 configureSocket(server);
